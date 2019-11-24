@@ -18,7 +18,7 @@
             </Label>
             <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="24.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="17.0" AnchorPane.topAnchor="17.0">
                <image>
-                  <Image url="@/com/pk/electionappclient/resources/Herb_Polski.png" />
+                  <Image url="@/com/pk/electionappclient/resources/img/Herb_Polski.png" />
                </image>
             </ImageView>
             <Label layoutX="351.0" layoutY="49.0" text="Logowanie" textFill="#333236" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="350.0" AnchorPane.topAnchor="49.0">
@@ -27,9 +27,10 @@
                </font>
             </Label>
             <Line endX="-100.0" endY="-58.999996185302734" layoutX="425.0" layoutY="88.0" startX="-100.0" AnchorPane.bottomAnchor="28.0" AnchorPane.topAnchor="28.0" />
+            <Button id="closeButton" layoutX="859.0" layoutY="47.0" mnemonicParsing="false" style="-fx-background-color: #dc143c;" text="X" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="288.0" layoutY="212.0" prefHeight="353.0" prefWidth="413.0" style="-fx-background-color: #f5f5f5;">
+      <AnchorPane layoutX="288.0" layoutY="212.0" prefHeight="353.0" prefWidth="413.0" style="-fx-background-color: #f5f5f5;" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="244.0">
          <children>
             <TextField layoutX="26.0" layoutY="74.0" prefHeight="34.0" prefWidth="357.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" />
             <TextField layoutX="28.0" layoutY="160.0" prefHeight="34.0" prefWidth="357.0" />
@@ -52,7 +53,7 @@
             <Button layoutX="29.0" layoutY="258.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="357.0" style="-fx-background-color: #dc143c;" text="Zaloguj się" textFill="WHITE" />
          </children>
       </AnchorPane>
-      <Label layoutX="279.0" layoutY="165.0" text="Zaloguj się za pomocą nazwy użytkownika">
+      <Label layoutX="235.0" layoutY="161.0" text="Zaloguj się za pomocą nazwy użytkownika" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="235.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

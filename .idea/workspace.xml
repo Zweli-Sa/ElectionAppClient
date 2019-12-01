@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Added resources/img,">
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AdminPanel/AdminPanelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/User/UserPanelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/login/loginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin/adminPanel.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/User/userPanel.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/resources/css/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/login/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/login/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Main.java" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Panel admina/uzytkownika/glosowania">
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/META-INF/ElectionAppClient.kotlin_module" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/AdminPanel/AdminPanelController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/AppController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/User/CurrentElectionsController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/User/UserPanelController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/User/VotePanelController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Controller/login/loginController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/GUI/Admin/adminPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/GUI/User/currentElections.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/GUI/User/userPanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/GUI/User/votePanel.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/GUI/login/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Main$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Main$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/resources/css/login.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AppController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/User/CurrentElectionsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/User/VotePanelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/User/currentElections.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/User/votePanel.fxml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -229,7 +240,7 @@
       <workItem from="1575136317431" duration="238000" />
       <workItem from="1575196232576" duration="247000" />
       <workItem from="1575207637085" duration="1735000" />
-      <workItem from="1575209393982" duration="8495000" />
+      <workItem from="1575209393982" duration="8774000" />
     </task>
     <task id="LOCAL-00001" summary="Login panel">
       <created>1574613078843</created>
@@ -259,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1574633371836</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Panel admina/uzytkownika/glosowania">
+      <created>1575218065373</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1575218065373</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,6 +302,7 @@
     <MESSAGE value="Login panel" />
     <MESSAGE value="Added resources/img" />
     <MESSAGE value="Added resources/img," />
-    <option name="LAST_COMMIT_MESSAGE" value="Added resources/img," />
+    <MESSAGE value="Panel admina/uzytkownika/glosowania" />
+    <option name="LAST_COMMIT_MESSAGE" value="Panel admina/uzytkownika/glosowania" />
   </component>
 </project>

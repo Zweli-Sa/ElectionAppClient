@@ -2,12 +2,10 @@ package com.pk.electionappclient;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -18,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/login/login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/User/userPanel.fxml"));
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.setTitle("Logowanie");
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
@@ -46,3 +44,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

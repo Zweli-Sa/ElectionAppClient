@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="600.0" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="login" maxHeight="600.0" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.login.loginController">
    <children>
       <AnchorPane layoutX="-8.0" layoutY="14.0" prefHeight="114.0" prefWidth="817.0" style="-fx-background-color: #f5f5f5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
          <children>
@@ -27,19 +27,13 @@
                </font>
             </Label>
             <Line endX="-100.0" endY="-58.999996185302734" layoutX="425.0" layoutY="88.0" startX="-100.0" AnchorPane.bottomAnchor="28.0" AnchorPane.topAnchor="28.0" />
-            <Button id="closeButton" layoutX="859.0" layoutY="47.0" mnemonicParsing="false" style="-fx-background-color: #dc143c;" text="X" />
+            <Button id="closeButton" fx:id="exitButton" layoutX="859.0" layoutY="47.0" mnemonicParsing="false" onAction="#closeLoginPanel" style="-fx-background-color: #dc143c;" text="X" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="288.0" layoutY="212.0" prefHeight="353.0" prefWidth="413.0" style="-fx-background-color: #f5f5f5;" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="244.0">
          <children>
-            <TextField layoutX="26.0" layoutY="74.0" prefHeight="34.0" prefWidth="357.0" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" />
-            <TextField layoutX="28.0" layoutY="160.0" prefHeight="34.0" prefWidth="357.0" />
-            <Label layoutX="33.0" layoutY="83.0" text="Wpisz nazwę użytkownika" AnchorPane.leftAnchor="33.0" />
-            <Label layoutX="33.0" layoutY="169.0" text="Wpisz hasło" AnchorPane.leftAnchor="33.0">
-               <opaqueInsets>
-                  <Insets left="15.0" />
-               </opaqueInsets>
-            </Label>
+            <TextField fx:id="peselInput" layoutX="26.0" layoutY="74.0" prefHeight="34.0" prefWidth="357.0" promptText="Wpisz numer PESEL" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" />
+            <TextField fx:id="passwordInput" layoutX="28.0" layoutY="160.0" prefHeight="34.0" prefWidth="357.0" promptText="Wpisz hasło" />
             <Label layoutX="28.0" layoutY="53.0" text="Nazwa użytkownika">
                <font>
                   <Font size="18.0" />
@@ -50,7 +44,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="29.0" layoutY="258.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="357.0" style="-fx-background-color: #dc143c;" text="Zaloguj się" textFill="WHITE" />
+            <Button fx:id="loginButton" layoutX="29.0" layoutY="258.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="357.0" style="-fx-background-color: #dc143c;" text="Zaloguj się" textFill="WHITE" />
          </children>
       </AnchorPane>
       <Label layoutX="235.0" layoutY="161.0" text="Zaloguj się za pomocą nazwy użytkownika" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="235.0">

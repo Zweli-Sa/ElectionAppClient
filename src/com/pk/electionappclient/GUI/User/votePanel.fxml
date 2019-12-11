@@ -6,7 +6,6 @@
 <?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.User.VotePanelController">
-<children>
     <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
             <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
@@ -29,7 +28,7 @@
         <center>
             <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                  <TreeTableView layoutX="229.0" layoutY="32.0" prefHeight="570.0" prefWidth="957.0">
+                  <TreeTableView layoutX="229.0" layoutY="32.0" prefHeight="554.0" prefWidth="954.0">
                     <columns>
                         <TreeTableColumn prefWidth="81.99996948242188" text="Wybierz" />
                       <TreeTableColumn prefWidth="223.0" text="Numer na liście" />
@@ -39,7 +38,7 @@
                         <TreeTableColumn prefWidth="157.0" text="Partia polityczna" />
                     </columns>
                   </TreeTableView>
-                  <ListView layoutX="23.0" layoutY="31.0" prefHeight="572.0" prefWidth="175.0" />
+                  <ListView layoutX="23.0" layoutY="31.0" prefHeight="556.0" prefWidth="175.0" />
                   <Label layoutX="23.0" layoutY="14.0" text="Wybierz listę wyborczą" />
                </children></Pane>
         </center>
@@ -52,6 +51,4 @@
             </Pane>
          </bottom>
     </BorderPane>
-</children>
-
 </AnchorPane>

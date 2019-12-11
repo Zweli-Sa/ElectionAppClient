@@ -1,16 +1,16 @@
-package com.pk.electionappclient.Controller.AdminPanel;
+package com.pk.electionappclient.Controller.Admin.parlimentaryElectionControllers;
 
 import com.pk.electionappclient.Controller.AppController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class AdminPanelController extends AppController {
+public class CreateConstituencyController extends AppController {
 
     @FXML
     Button exitButton;
 
-    public void closeLoginPanel(ActionEvent actionEvent) {
+    public void closePanel(ActionEvent actionEvent) {
         closeLoginPanelOnAction(actionEvent, exitButton);
     }
 }

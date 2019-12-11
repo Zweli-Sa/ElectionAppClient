@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.parlimentaryElectionControllers.CreateConstituencyController">
+    <children>
+        <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button id="closeButton" fx:id="exitButton" layoutX="1150.0" layoutY="50.0" mnemonicParsing="false" onAction="#closePanel" style="-fx-background-color: #dc143c;" text="X" />
+                        <Label layoutX="124.0" layoutY="43.0" text="e-Wybory" textFill="GREY">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="39.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.273582458496094" AnchorPane.topAnchor="23.0">
+                            <image>
+                                <Image url="@/com/pk/electionappclient/resources/img/Herb_Polski.png" />
+                            </image>
+                        </ImageView>
+                        <Pane layoutY="127.0" prefHeight="0.0" prefWidth="1200.0" style="-fx-background-color: #dc143c;" />
+                        <Pane layoutX="-17.0" layoutY="-18.0" prefHeight="29.0" prefWidth="1222.0" style="-fx-background-color: #fff;" />
+                    </children></Pane>
+            </top>
+            <center>
+                <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TableView layoutX="14.0" layoutY="22.0" prefHeight="740.0" prefWidth="796.0">
+                            <columns>
+                                <TableColumn prefWidth="243.0" text="Numer okręgu" />
+                                <TableColumn minWidth="0.0" prefWidth="240.0" text="Nazwa okręgu" />
+                            </columns>
+                        </TableView>
+                    </children></Pane>
+            </center>
+         <left>
+            <Pane prefHeight="772.0" prefWidth="380.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button layoutX="40.0" layoutY="240.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="297.0" style="-fx-background-color: #d32f2f;" text="Usuń" />
+                  <TextField layoutX="39.0" layoutY="81.0" prefHeight="55.0" prefWidth="298.0" promptText="Wpisz nazwę okręgu" />
+                  <TextField layoutX="39.0" layoutY="22.0" prefHeight="49.0" prefWidth="298.0" promptText="Wpisz numer okręgu" />
+                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                  <Button layoutX="39.0" layoutY="143.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="298.0" style="-fx-background-color: #cecece;" text="Edytuj" />
+                  <Button layoutX="39.0" layoutY="194.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="298.0" style="-fx-background-color: #4caf50;" text="Zapisz" />
+               </children>
+            </Pane>
+         </left>
+        </BorderPane>
+    </children>
+
+</AnchorPane>

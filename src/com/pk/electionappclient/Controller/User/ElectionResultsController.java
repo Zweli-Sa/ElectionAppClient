@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class CurrentElectionsController extends AppController {
+public class ElectionResultsController extends AppController {
+
+    com.pk.electionappclient.Controller.login.loginController loginController;
 
     @FXML
     Button exitButton;
@@ -14,4 +16,3 @@ public class CurrentElectionsController extends AppController {
         closeLoginPanelOnAction(actionEvent, exitButton);
     }
 }
-

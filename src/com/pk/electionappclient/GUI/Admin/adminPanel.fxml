@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.AdminPanel.AdminPanelController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.AdminPanelController">
 <children>
     <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <top>
@@ -29,12 +29,12 @@
         <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
-                    <Button layoutX="39.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz dzień wyborczy" />
-                    <Button layoutX="429.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Zarządzaj aktualnymi wyborami" />
+                    <Button layoutX="39.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz wybory parlamentarne" />
+                    <Button layoutX="429.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz wybory prezydenckie" />
                     <Button layoutX="819.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Opublikuj wyniki wyborów" />
-                  <Button layoutX="39.0" layoutY="354.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz okręg wyborczy" />
-                  <Button layoutX="429.0" layoutY="354.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz listy wyborcze" />
-                  <Button layoutX="819.0" layoutY="354.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz konto wyborcy" />
+                  <Button layoutX="819.0" layoutY="346.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Edytuj wybory" />
+                  <Button layoutX="429.0" layoutY="346.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Zarządzaj wyborami prezydenckimi" />
+                  <Button layoutX="39.0" layoutY="346.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Zarządzaj wyborami parlamentarnymi" />
                 </children>
             </Pane>
         </center>

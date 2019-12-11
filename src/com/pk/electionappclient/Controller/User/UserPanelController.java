@@ -12,7 +12,7 @@ public class UserPanelController extends AppController {
     @FXML
     Button exitButton;
 
-    public void closeLoginPanel(ActionEvent actionEvent) {
+    public void closePanel(ActionEvent actionEvent) {
         closeLoginPanelOnAction(actionEvent, exitButton);
     }
 

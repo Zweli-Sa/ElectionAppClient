@@ -5,13 +5,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.User.CurrentElectionsController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.PublishResultsController">
     <children>
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
                     <children>
-                        <Button id="closeButton" fx:id="exitButton" layoutX="843.0" layoutY="51.0" mnemonicParsing="false" style="-fx-background-color: #dc143c;" text="X" />
+                        <Button id="closeButton" fx:id="exitButton" layoutX="1159.0" layoutY="52.0" mnemonicParsing="false" onAction="#closePanel" prefHeight="26.0" prefWidth="27.0" style="-fx-background-color: #dc143c;" text="X" />
                         <Label layoutX="124.0" layoutY="43.0" text="e-Wybory" textFill="GREY">
                             <font>
                                 <Font name="System Bold" size="36.0" />
@@ -28,25 +28,25 @@
             </top>
             <center>
                 <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <TableView layoutX="10.0" layoutY="18.0" prefHeight="565.0" prefWidth="1170.0">
-                    <columns>
-                      <TableColumn prefWidth="524.0" text="Typ wyborów" />
-                        <TableColumn minWidth="0.0" prefWidth="645.0" text="Termin oddania głosu" />
-                    </columns>
-                  </TableView>
-                  <Button layoutX="1003.0" layoutY="604.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="177.0" style="-fx-background-color: #dc143c;" text="Przejdz do wyborów">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <Button layoutX="915.0" layoutY="604.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children></Pane>
+                    <children>
+                        <ComboBox layoutX="188.0" layoutY="81.0" prefHeight="37.0" prefWidth="720.0" promptText="Wybierz wybory by opublikować wyniki" />
+                        <TableView layoutX="188.0" layoutY="141.0" prefHeight="443.0" prefWidth="720.0">
+                            <columns>
+                                <TableColumn prefWidth="181.0" text="idWyborów" />
+                                <TableColumn minWidth="0.0" prefWidth="281.0" text="Nazwa" />
+                        <TableColumn prefWidth="257.0" text="Termin wyborów" />
+                            </columns>
+                        </TableView>
+                    </children></Pane>
             </center>
+            <bottom>
+                <Pane prefHeight="63.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button layoutX="982.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="204.0" style="-fx-background-color: #dc143c;" text="Publikuj" />
+                        <Button layoutX="897.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="79.0" style="-fx-background-color: #dbdbdb;" text="cofnij" />
+                    </children>
+                </Pane>
+            </bottom>
         </BorderPane>
     </children>
 

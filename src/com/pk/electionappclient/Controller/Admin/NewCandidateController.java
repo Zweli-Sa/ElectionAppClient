@@ -1,11 +1,11 @@
-package com.pk.electionappclient.Controller.User;
+package com.pk.electionappclient.Controller.Admin;
 
 import com.pk.electionappclient.Controller.AppController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class CurrentElectionsController extends AppController {
+public class NewCandidateController extends AppController {
 
     @FXML
     Button exitButton;

@@ -16,7 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/User/votePanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/User/currentElections.fxml"));
         primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.setTitle("Logowanie");
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);

@@ -3,7 +3,7 @@ package com.pk.electionappclient.domain;
 import java.io.Serializable;
 import java.util.List;
 
-public class Candidate implements Serializable {
+public class Candidate {
 
     private Long id;
 

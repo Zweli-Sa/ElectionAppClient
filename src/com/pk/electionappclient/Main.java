@@ -6,17 +6,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class Main extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/login/login.fxml"));
-        primaryStage.setScene(new Scene(root, 900, 600));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/User/currentElections.fxml"));
+        primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.setTitle("Logowanie");
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -43,3 +44,4 @@ public class Main extends Application {
         launch(args);
     }
 }
+

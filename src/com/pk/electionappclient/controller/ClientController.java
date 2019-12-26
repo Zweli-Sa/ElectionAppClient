@@ -1,4 +1,4 @@
-package com.pk.electionappclient.Controller;
+package com.pk.electionappclient.controller;
 
 import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.Election;
@@ -7,12 +7,19 @@ import com.pk.electionappclient.domain.User;
 import com.pk.electionappclient.domain.VoteResult;
 import com.pk.electionappclient.httpresponser.HttpResponser;
 import com.pk.electionappclient.mapper.JsonMapper;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientController {
+
+    public static void createCandidate(Candidate candidate) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonString = mapper.writeValueAsString(candidate);
+
+    }
 
     public static List<Candidate> getCandidates() {
         return new ArrayList<>();

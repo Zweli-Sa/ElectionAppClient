@@ -12,4 +12,9 @@ public class JsonMapper {
         T object = objectMapper.readValue(json, new TypeReference<T>(){});
         return object;
     }
+
+    public static <T> String mapToJson(T object) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(object);
+    }
 }

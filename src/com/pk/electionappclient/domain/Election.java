@@ -1,22 +1,14 @@
 package com.pk.electionappclient.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Election {
 
-    private long id;
-
+    private Long id;
     private LocalDateTime startDate;
-
     private LocalDateTime finishDate;
-
-//    private ElectionType electionType;
-
-//    private List<Constituency> constituencies;
-
-    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate) {
-        this.id = id;
-        this.startDate = startDate;
-        this.finishDate = finishDate;
-    }
+    private List<VoteResult> voteResults;
+    private ElectionType electionType;
+    private List<Constituency> constituencies;
 }

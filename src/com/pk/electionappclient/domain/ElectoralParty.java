@@ -1,20 +1,12 @@
 package com.pk.electionappclient.domain;
 
+import java.util.List;
+
 public class ElectoralParty {
 
-    private long id;
-
+    private Long id;
     private String name;
-
     private String description;
-
-//    private List<Candidate> candidates;
-
-//    private ElectoralProgramme electoralProgramme;
-
-    public ElectoralParty(long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
+    private List<Candidate> candidates;
+    private ElectoralProgramme electoralProgramme;
 }

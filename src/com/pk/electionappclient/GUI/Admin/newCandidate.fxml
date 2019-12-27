@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.parlimentaryElectionControllers.ParlementaireCandidatesListController">
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.NewCandidateController">
     <children>
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -31,11 +31,11 @@
                <children>
                   <TableView layoutX="5.0" layoutY="11.0" prefHeight="751.0" prefWidth="811.0">
                     <columns>
-                      <TableColumn prefWidth="126.0" text="id kandydata" />
-                      <TableColumn prefWidth="121.0" text="Imię" />
-                        <TableColumn prefWidth="137.0" text="Nazwisko" />
-                        <TableColumn prefWidth="203.0" text="Wykształcenie" />
-                        <TableColumn prefWidth="223.0" text="Partia" />
+                      <TableColumn fx:id="candidateIdColumn" prefWidth="126.0" text="id kandydata" />
+                      <TableColumn fx:id="candidateNameColumn" prefWidth="121.0" text="Imię" />
+                        <TableColumn fx:id="candidateSurnameColumn" prefWidth="137.0" text="Nazwisko" />
+                        <TableColumn fx:id="candidateEducationColumn" prefWidth="203.0" text="Wykształcenie" />
+                        <TableColumn fx:id="candidatePartyColumn" prefWidth="223.0" text="Partia" />
                     </columns>
                   </TableView>
                </children></Pane>
@@ -43,19 +43,19 @@
          <left>
             <Pane prefHeight="772.0" prefWidth="380.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
                <children>
-                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                        <Button fx:id="backButton" layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="29.0" layoutY="255.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="299.0" style="-fx-background-color: #cecece;" text="Edytuj" />
-                        <Button layoutX="29.0" layoutY="355.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="300.0" style="-fx-background-color: #d32f2f;" text="Usuń" />
-                        <Button layoutX="29.0" layoutY="306.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Zapisz" />
-                        <TextField layoutX="30.0" layoutY="121.0" prefHeight="40.0" prefWidth="297.0" text="Imię" />
+                        <Button fx:id="editButton" layoutX="29.0" layoutY="255.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="299.0" style="-fx-background-color: #cecece;" text="Edytuj" />
+                        <Button fx:id="deleteButton" layoutX="29.0" layoutY="355.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="300.0" style="-fx-background-color: #d32f2f;" text="Usuń" />
+                        <Button fx:id="saveButton" disable="true" layoutX="29.0" layoutY="306.0" mnemonicParsing="false" onAction="#createNewCandidate" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Zapisz" />
+                        <TextField fx:id="candidateNameTextField" layoutX="30.0" layoutY="121.0" prefHeight="40.0" prefWidth="297.0" promptText="Imię" />
                         <Label layoutX="107.0" layoutY="37.0" text="Utwórz Kandydata" />
-                  <TextField layoutX="30.0" layoutY="72.0" prefHeight="40.0" prefWidth="297.0" text="Nazwisko" />
-                  <TextField layoutX="30.0" layoutY="169.0" prefHeight="40.0" prefWidth="297.0" text="Miejscowość" />
-                  <ComboBox layoutX="31.0" layoutY="219.0" prefHeight="26.0" prefWidth="295.0" promptText="Partia" />
+                  <TextField fx:id="candidateSurnameTextField" accessibleText="Nazwisko" layoutX="30.0" layoutY="72.0" prefHeight="40.0" prefWidth="297.0" promptText="Nazwisko" />
+                  <TextField fx:id="candidateCityTextField" layoutX="30.0" layoutY="169.0" prefHeight="40.0" prefWidth="297.0" promptText="Miejscowość" />
+                  <ComboBox fx:id="cPartyBox" layoutX="31.0" layoutY="219.0" prefHeight="26.0" prefWidth="295.0" promptText="Partia" />
                </children>
             </Pane>
          </left>

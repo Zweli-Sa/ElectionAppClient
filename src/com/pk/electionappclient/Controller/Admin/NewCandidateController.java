@@ -28,12 +28,12 @@ public class NewCandidateController extends AppController implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        saveButton.disableProperty().bind(
-//                Bindings.isEmpty(candidateSurnameTextField.textProperty())
-//                        .or(Bindings.isEmpty(candidateNameTextField.textProperty()))
-//                        .or(Bindings.isEmpty(candidateCityTextField.textProperty()))
-//        );
-        disableButton(saveButton, candidateSurnameTextField,candidateNameTextField,candidateCityTextField);
+        saveButton.disableProperty().bind(
+                Bindings.isEmpty(candidateSurnameTextField.textProperty())
+                        .or(Bindings.isEmpty(candidateNameTextField.textProperty()))
+                        .or(Bindings.isEmpty(candidateCityTextField.textProperty()))
+        );
+        //disableButton(saveButton, candidateSurnameTextField,candidateNameTextField,candidateCityTextField);
     }
 
     public void createNewCandidate(ActionEvent actionEvent) {

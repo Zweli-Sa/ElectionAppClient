@@ -36,7 +36,7 @@
                         <TableColumn fx:id="lastNameColumn" prefWidth="125.0" text="Nazwisko" />
                         <TableColumn fx:id="educationColumn" prefWidth="181.0" text="Wykształcenie" />
                         <TableColumn fx:id="placeOfResidenceColumn" prefWidth="174.0" text="Miejscowość" />
-                        <TableColumn fx:id="party" maxWidth="255.0" minWidth="-1.0" prefWidth="165.0" text="Partia" />
+                        <TableColumn fx:id="politicalParty" maxWidth="255.0" minWidth="-1.0" prefWidth="165.0" text="Partia" />
                     </columns>
                   </TableView>
                </children></Pane>
@@ -56,8 +56,8 @@
                   <TextField fx:id="candidateLastNameTextField" accessibleText="Nazwisko" layoutX="20.0" layoutY="72.0" prefHeight="40.0" prefWidth="297.0" promptText="Nazwisko" />
                         <TextField fx:id="candidateNameTextField" layoutX="20.0" layoutY="121.0" prefHeight="40.0" prefWidth="297.0" promptText="Imię" />
                   <TextField fx:id="candidatePlaceOfResidenceTextField" layoutX="20.0" layoutY="169.0" prefHeight="40.0" prefWidth="297.0" promptText="Miejscowość" />
-                  <ComboBox fx:id="cPartyBox" layoutX="21.0" layoutY="217.0" prefHeight="26.0" prefWidth="295.0" promptText="Wykształcenie" />
-                  <ComboBox fx:id="cPartyBox1" layoutX="21.0" layoutY="248.0" prefHeight="26.0" prefWidth="295.0" promptText="Partia" />
+                  <ComboBox fx:id="educationComboBox" layoutX="21.0" layoutY="217.0" prefHeight="26.0" prefWidth="295.0" promptText="Wykształcenie" />
+                  <ComboBox fx:id="partyComboBox" layoutX="21.0" layoutY="248.0" prefHeight="26.0" prefWidth="295.0" promptText="Partia" />
                </children>
             </Pane>
          </left>

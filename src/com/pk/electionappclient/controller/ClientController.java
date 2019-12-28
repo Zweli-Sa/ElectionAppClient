@@ -19,6 +19,8 @@ public class ClientController {
 
     private static List<Candidate> list = new ArrayList<>();
 
+    private static List<ElectoralParty> electoralParties = new ArrayList<>();
+
 
 
     public static void createCandidate(Candidate candidate) throws IOException {
@@ -31,13 +33,10 @@ public class ClientController {
         return list;
     }
 
-    public static List<Candidate> postCandidates(String name, String lastName, String education, String placeOfResidence) {
-        list.add(new Candidate(1l, name, lastName, education,placeOfResidence, pis));
+    public static List<Candidate> addCandidate(String name, String lastName, String education, String placeOfResidence, ElectoralParty electoralParty) {
+        list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
         return list;
     }
-
-
-
 
     public static User getUser(Long id) throws IOException {
         return JsonMapper.mapToObject(HttpResponser.get("/v1/user/getUser/" + id));
@@ -64,5 +63,13 @@ public class ClientController {
         list.add(new Candidate(12l, "Jan", "Kowalski","Wyższe", "Kraków", none));
         list.add(new Candidate(1l, "Jaroslaw", "Kaczynski", "Wyższe", "Warszawa", pis));
         return list;
+    }
+
+    public static List<ElectoralParty> initPartiesList() {
+        electoralParties.add(sld);
+        electoralParties.add(po);
+        electoralParties.add(pis);
+        electoralParties.add(none);
+        return electoralParties;
     }
 }

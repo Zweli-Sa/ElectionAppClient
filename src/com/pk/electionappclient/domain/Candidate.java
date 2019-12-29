@@ -11,7 +11,7 @@ public class Candidate {
 
     private String lastName;
 
-    private String education;
+    private Education education;
 
     private String placeOfResidence;
 
@@ -21,7 +21,7 @@ public class Candidate {
 
     private ElectoralParty electoralParty;
 
-    public Candidate(long l, String name, String lastName, String education, String placeOfResidence, ElectoralParty electoralParty) {
+    public Candidate(long l, String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         this.id = l;
         this.name = name;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public class Candidate {
     }
 
 
-    public Candidate(long id, String name, String lastname, String education, String placeOfResidence,
+    public Candidate(long id, String name, String lastname, Education education, String placeOfResidence,
                      List<VoteResult> voteResults, ElectionList electionList, ElectoralParty electoralParty) {
         this.id = id;
         this.name = name;
@@ -55,7 +55,7 @@ public class Candidate {
         return lastName;
     }
 
-    public String getEducation() {
+    public Education getEducation() {
         return education;
     }
 
@@ -87,7 +87,7 @@ public class Candidate {
         this.lastName = lastname;
     }
 
-    public void setEducation(String education) {
+    public void setEducation(Education education) {
         this.education = education;
     }
 
@@ -105,5 +105,17 @@ public class Candidate {
 
     public void setElectoralParty(ElectoralParty electoralParty) {
         this.electoralParty = electoralParty;
+    }
+
+    @Override
+    public String toString() {
+        return "Candidate{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", education=" + education +
+                ", placeOfResidence='" + placeOfResidence + '\'' +
+                ", electoralParty=" + electoralParty +
+                '}';
     }
 }

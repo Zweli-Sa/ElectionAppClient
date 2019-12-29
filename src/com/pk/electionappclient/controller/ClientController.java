@@ -6,8 +6,7 @@ import com.pk.electionappclient.mapper.JsonMapper;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ClientController {
 
@@ -17,7 +16,7 @@ public class ClientController {
     private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
     private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
 
-    private static List<Candidate> list = new ArrayList<>();
+    private static List<Candidate> list;
 
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
 
@@ -33,8 +32,13 @@ public class ClientController {
         return list;
     }
 
-    public static List<Candidate> addCandidate(String name, String lastName, String education, String placeOfResidence, ElectoralParty electoralParty) {
+    public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
+        return list;
+    }
+
+    public static List<Candidate> removeCadidateFromList(Candidate candidate) {
+        list.remove(candidate);
         return list;
     }
 
@@ -59,9 +63,10 @@ public class ClientController {
     }
 
     public static List<Candidate> initCandidateList() {
-        list.add(new Candidate(12l, "Adam", "Nowak","Podstawowe", "Kraków", sld));
-        list.add(new Candidate(12l, "Jan", "Kowalski","Wyższe", "Kraków", none));
-        list.add(new Candidate(1l, "Jaroslaw", "Kaczynski", "Wyższe", "Warszawa", pis));
+        list = new ArrayList<>();
+        list.add(new Candidate(12l, "Adam", "Nowak",Education.MAGISTER, "Kraków", sld));
+        list.add(new Candidate(12l, "Jan", "Kowalski",Education.PODSTAWOWE, "Kraków", none));
+        list.add(new Candidate(1l, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
         return list;
     }
 

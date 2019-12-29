@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.NewCandidateController">
+<AnchorPane fx:id="newCandidatePane" prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.NewCandidateController">
     <children>
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -44,14 +44,14 @@
          <left>
             <Pane prefHeight="772.0" prefWidth="338.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
                <children>
-                        <Button fx:id="backButton" layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                        <Button fx:id="backButton" layoutX="10.0" layoutY="715.0" mnemonicParsing="false" onAction="#loadAdminPanel" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button fx:id="editButton" layoutX="19.0" layoutY="280.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="299.0" style="-fx-background-color: #cecece;" text="Edytuj" />
-                        <Button fx:id="deleteButton" layoutX="19.0" layoutY="380.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="300.0" style="-fx-background-color: #d32f2f;" text="Usuń" />
-                        <Button fx:id="saveButton" disable="true" layoutX="19.0" layoutY="331.0" mnemonicParsing="false" onAction="#createNewCandidate" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Zapisz" />
+                        <Button fx:id="editButton" layoutX="19.0" layoutY="280.0" mnemonicParsing="false" onAction="#editCandidate" prefHeight="42.0" prefWidth="299.0" style="-fx-background-color: #cecece;" text="Edytuj" />
+                        <Button fx:id="deleteButton" layoutX="19.0" layoutY="380.0" mnemonicParsing="false" onAction="#removeCandidate" prefHeight="42.0" prefWidth="300.0" style="-fx-background-color: #d32f2f;" text="Usuń" />
+                        <Button fx:id="saveButton" disable="true" layoutX="19.0" layoutY="331.0" mnemonicParsing="false" onAction="#createNewCandidate" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Utwórz kandydata" />
                         <Label layoutX="96.0" layoutY="37.0" text="Utwórz Kandydata" />
                   <TextField fx:id="candidateLastNameTextField" accessibleText="Nazwisko" layoutX="20.0" layoutY="72.0" prefHeight="40.0" prefWidth="297.0" promptText="Nazwisko" />
                         <TextField fx:id="candidateNameTextField" layoutX="20.0" layoutY="121.0" prefHeight="40.0" prefWidth="297.0" promptText="Imię" />

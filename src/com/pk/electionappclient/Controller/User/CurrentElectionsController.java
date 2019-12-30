@@ -2,15 +2,12 @@ package com.pk.electionappclient.Controller.User;
 
 import com.pk.electionappclient.Controller.AppController;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 
 import java.net.URL;
@@ -39,7 +36,7 @@ public class CurrentElectionsController extends AppController implements Initial
 
 
     public void closePanel(ActionEvent actionEvent) {
-        closeLoginPanelOnAction(actionEvent, exitButton);
+        closeLoginPanelOnAction(exitButton);
     }
 
 

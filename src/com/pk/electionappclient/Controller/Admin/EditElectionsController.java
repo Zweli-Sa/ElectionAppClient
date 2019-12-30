@@ -11,6 +11,6 @@ public class EditElectionsController extends AppController {
     Button exitButton;
 
     public void closePanel(ActionEvent actionEvent) {
-        closeLoginPanelOnAction(actionEvent, exitButton);
+        closeLoginPanelOnAction(exitButton);
     }
 }

@@ -30,7 +30,7 @@ public class loginController extends AppController {
     }
 
     public void closeLoginPanel(ActionEvent actionEvent) {
-        closeLoginPanelOnAction(actionEvent, exitButton);
+        closeLoginPanelOnAction(exitButton);
     }
 
 

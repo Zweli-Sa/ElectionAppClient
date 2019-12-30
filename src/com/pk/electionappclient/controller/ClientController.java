@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class ClientController {
-
-
     private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
     private static ElectoralParty pis = new ElectoralParty(1, "Prawo i Sprawiedliwość");
     private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
@@ -18,9 +16,9 @@ public class ClientController {
 
     private static List<Candidate> list;
 
+    private static List<Candidate> candidateTempList = new ArrayList<>();
+
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
-
-
 
     public static void createCandidate(Candidate candidate) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
@@ -41,6 +39,27 @@ public class ClientController {
         list.remove(candidate);
         return list;
     }
+
+
+
+    public static List<Candidate> getTempCandidateList() {
+        return candidateTempList;
+    }
+
+
+    public static List<Candidate> addCandidateToTempList(Candidate candidate) {
+        if (!candidateTempList.contains(candidate)) {
+            candidateTempList.add(candidate);
+        }
+        return candidateTempList;
+    }
+
+    public static List<Candidate> clearCandidateTempList() {
+        candidateTempList.clear();
+        return candidateTempList;
+    }
+
+
 
     public static User getUser(Long id) throws IOException {
         return JsonMapper.mapToObject(HttpResponser.get("/v1/user/getUser/" + id));
@@ -64,9 +83,10 @@ public class ClientController {
 
     public static List<Candidate> initCandidateList() {
         list = new ArrayList<>();
-        list.add(new Candidate(12l, "Adam", "Nowak",Education.MAGISTER, "Kraków", sld));
-        list.add(new Candidate(12l, "Jan", "Kowalski",Education.PODSTAWOWE, "Kraków", none));
-        list.add(new Candidate(1l, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
+        list.add(new Candidate(22222l, "Adam", "Nowak",Education.MAGISTER, "Kraków", sld));
+        list.add(new Candidate(33333l, "Jan", "Kowalski",Education.PODSTAWOWE, "Kraków", none));
+        list.add(new Candidate(44444l, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
+
         return list;
     }
 

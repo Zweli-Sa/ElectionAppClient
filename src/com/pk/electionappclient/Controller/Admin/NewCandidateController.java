@@ -73,7 +73,6 @@ public class NewCandidateController extends AppController implements Initializab
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initCandidateList(); // utworzenie listy kandydatów
         validateInputFields(saveButton);
         System.out.println(Education.values().toString());
         populateEducationComboBox();

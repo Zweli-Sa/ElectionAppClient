@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.presidentalElectionControllers.PresidentialCandidatesListController">
+<AnchorPane fx:id="presidentialListPane" prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../../resources/css/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.Admin.presidentalElectionControllers.PresidentialCandidatesListController">
     <children>
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
@@ -29,134 +38,62 @@
             </top>
             <center>
                 <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
-                    <children>
-                        <GridPane layoutX="60.0" layoutY="30.0" prefHeight="500.0" prefWidth="700.0">
-                            <columnConstraints>
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            </columnConstraints>
-                            <rowConstraints>
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            </rowConstraints>
-                            <children>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="396.0" promptText="Kandydat nr 4" GridPane.rowIndex="3">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="387.0" promptText="Kandydat nr 3" GridPane.rowIndex="2">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="369.0" promptText="Kandydat nr 2" GridPane.rowIndex="1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" prefHeight="40.0" prefWidth="400.0" promptText="Kandydat nr 1">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="358.0" promptText="Kandydat nr 5" GridPane.rowIndex="4">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="384.0" promptText="Kandydat nr 6" GridPane.rowIndex="5">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="363.0" promptText="Kandydat nr 7" GridPane.rowIndex="6">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="360.0" promptText="Kandydat nr 8" GridPane.rowIndex="7">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="379.0" promptText="Kandydat nr 9" GridPane.rowIndex="8">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="435.0" promptText="Kandydat nr 10" GridPane.rowIndex="9">
-                                    <GridPane.margin>
-                                        <Insets right="5.0" />
-                                    </GridPane.margin></ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="429.0" promptText="Kandydat nr 11" GridPane.columnIndex="1">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding></ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="365.0" promptText="Kandydat nr 12" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="422.0" promptText="Kandydat nr 13" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="350.0" promptText="Kandydat nr 14" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="395.0" promptText="Kandydat nr 15" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                    <GridPane.margin>
-                                        <Insets />
-                                    </GridPane.margin>
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="358.0" promptText="Kandydat nr 16" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="373.0" promptText="Kandydat nr 17" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="370.0" promptText="Kandydat nr 18" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="361.0" promptText="Kandydat nr 19" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-                                <ComboBox prefHeight="40.0" prefWidth="371.0" promptText="Kandydat nr 20" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                                    <padding>
-                                        <Insets left="5.0" />
-                                    </padding>
-                                </ComboBox>
-
-                            </children>
-                        </GridPane>
-                    </children></Pane>
+               <children>
+                  <TabPane fx:id="TabPane" layoutX="-2.0" layoutY="-1.0" prefHeight="772.0" prefWidth="822.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab fx:id="TabCandidates" text="Pula kandydatów">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="candidatesTable" layoutY="5.0" prefHeight="685.0" prefWidth="821.0">
+                                      <columns>
+                                          <TableColumn fx:id="candidateIdColumn" prefWidth="171.0" text="PESEL" />
+                                        <TableColumn fx:id="candidateNameColumn" minWidth="0.0" prefWidth="214.0" text="Imię" />
+                                          <TableColumn fx:id="candidateLastNameColumn" minWidth="0.0" prefWidth="195.0" text="Naziwsko" />
+                                          <TableColumn fx:id="candidatePoliticalPartyColumn" prefWidth="239.0" text="Partia" />
+                                      </columns>
+                                    </TableView>
+                                    <Button fx:id="addSelectedCandidateToList" layoutX="2.0" layoutY="696.0" mnemonicParsing="false" onAction="#addCandidateElectionList" prefHeight="40.0" prefWidth="816.0" style="-fx-background-color: #d32f2f;" text="Dodaj kandydata do listy" />
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab fx:id="TabAddedCandidates" text="Aktualna lista wyborcza">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="addedCandidatesTable" prefHeight="740.0" prefWidth="820.0">
+                                       <columns>
+                                          <TableColumn fx:id="addedCandidateIdColumn" prefWidth="171.0" text="PESEL" />
+                                          <TableColumn fx:id="addedCandidateNameColumn" minWidth="0.0" prefWidth="214.0" text="Imię" />
+                                          <TableColumn fx:id="addedCandidateLastNameColumn" minWidth="0.0" prefWidth="195.0" text="Naziwsko" />
+                                          <TableColumn fx:id="addedCandidatePoliticalPartyColumn" prefWidth="239.0" text="Partia" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
+               </children></Pane>
             </center>
             <left>
                 <Pane prefHeight="772.0" prefWidth="380.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
                     <children>
-                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" onAction="#loadAdminPanel" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="40.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Zapisz" />
-                        <TextField layoutX="40.0" layoutY="44.0" prefHeight="49.0" prefWidth="300.0" promptText="Wpisz nazwę wyborów" />
+                        <Button fx:id="saveButton" layoutX="38.0" layoutY="224.0" mnemonicParsing="false" onAction="#createPresElectionDay" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="Utwórz" />
                         <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
-                  <DatePicker layoutX="41.0" layoutY="102.0" prefHeight="30.0" prefWidth="299.0" promptText="Podaj datę głosowania" />
+                  <JFXTimePicker fx:id="startTimePres" defaultColor="#393939" layoutX="226.0" layoutY="63.0" prefHeight="37.0" prefWidth="115.0" />
+                  <JFXDatePicker fx:id="startDatePres" defaultColor="#393939" layoutX="46.0" layoutY="62.0" prefHeight="39.0" prefWidth="179.0" />
+                  <JFXTimePicker fx:id="endTimePres" defaultColor="#393939" layoutX="226.0" layoutY="165.0" prefHeight="37.0" prefWidth="115.0" />
+                  <JFXDatePicker fx:id="endDatePres" defaultColor="#393939" layoutX="40.0" layoutY="164.0" prefHeight="39.0" prefWidth="185.0" />
+                  <Label layoutX="41.0" layoutY="48.0" text="Wybierz datę startu głosowania" />
+                  <Label layoutX="41.0" layoutY="149.0" text="Wybierz datę zamknięcia głosowania" />
                     </children></Pane>
             </left>
         </BorderPane>

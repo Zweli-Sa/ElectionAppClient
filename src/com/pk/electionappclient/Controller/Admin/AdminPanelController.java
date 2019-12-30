@@ -24,7 +24,10 @@ public class AdminPanelController extends AppController {
     }
 
     public void loadNewCandidateFXML(ActionEvent actionEvent) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/Admin/newCandidate.fxml"));
-        adminAnchorPane.getChildren().setAll(pane);
+        loadAnchorPane(adminAnchorPane, "Admin/newCandidate.fxml");
+    }
+
+    public void loadCandidatesListFXML(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(adminAnchorPane, "Admin/presidentialElection/presidentialCandidatesList.fxml");
     }
 }

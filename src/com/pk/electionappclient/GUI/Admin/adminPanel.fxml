@@ -30,7 +30,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
                     <Button disable="true" layoutX="39.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz wybory parlamentarne" />
-                    <Button disable="true" layoutX="429.0" layoutY="28.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Utwórz wybory prezydenckie" />
+                    <Button layoutX="429.0" layoutY="28.0" mnemonicParsing="false" onAction="#loadCandidatesListFXML" prefHeight="278.0" prefWidth="342.0" text="Utwórz wybory prezydenckie" />
                   <Button layoutX="819.0" layoutY="29.0" mnemonicParsing="false" onAction="#loadNewCandidateFXML" prefHeight="278.0" prefWidth="342.0" text="Utwórz kandydata" />
                   <Button disable="true" layoutX="429.0" layoutY="346.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Zarządzaj wyborami prezydenckimi" />
                   <Button disable="true" layoutX="39.0" layoutY="346.0" mnemonicParsing="false" prefHeight="278.0" prefWidth="342.0" text="Zarządzaj wyborami parlamentarnymi" />

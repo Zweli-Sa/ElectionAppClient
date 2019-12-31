@@ -16,13 +16,16 @@ public class ElectionController {
 
     private static List<Election> electionsDB = new ArrayList<>();
 
-
     public static List<Election> getElections() {
         return electionsDB;
     }
 
-    public static List<Election> createElectionDay(LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
-        electionsDB.add(new Election(2l,startDate, finishDate, electionType, list));
+
+    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
+        long currentId;
+        if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
+            electionsDB.add(new Election(id, startDate, finishDate, electionType, list));
+        }
         return electionsDB;
     }
 

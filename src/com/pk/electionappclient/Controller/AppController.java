@@ -19,7 +19,7 @@ import java.io.IOException;
 public abstract class AppController {
 
 
-    protected void popUpWindow(String text) {
+    public static void popUpError(String text) {  ///statyczna czy rozszerzyć klasę ClientController?
         final Stage dialog = new Stage();
         dialog.initModality(Modality.APPLICATION_MODAL);
         VBox dialogVbox = new VBox(20);

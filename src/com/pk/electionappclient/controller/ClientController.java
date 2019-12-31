@@ -8,6 +8,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import java.io.IOException;
 import java.util.*;
 
+import static com.pk.electionappclient.Controller.AppController.popUpError;
+
 public class ClientController {
     private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
     private static ElectoralParty pis = new ElectoralParty(1, "Prawo i Sprawiedliwość");
@@ -15,6 +17,7 @@ public class ClientController {
     private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
 
     private static List<Candidate> list;
+
 
     private static List<Candidate> candidateTempList = new ArrayList<>();
 
@@ -41,7 +44,6 @@ public class ClientController {
     }
 
 
-
     public static List<Candidate> getTempCandidateList() {
         return candidateTempList;
     }
@@ -50,6 +52,8 @@ public class ClientController {
     public static List<Candidate> addCandidateToTempList(Candidate candidate) {
         if (!candidateTempList.contains(candidate)) {
             candidateTempList.add(candidate);
+        } else{
+            popUpError("Kandydat jest już na liście");
         }
         return candidateTempList;
     }

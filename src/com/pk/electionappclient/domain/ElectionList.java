@@ -1,5 +1,6 @@
 package com.pk.electionappclient.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ElectionList {
@@ -13,6 +14,7 @@ public class ElectionList {
 //    private Constituency constituency;
 
     private List<Candidate> candidates;
+
 
     public ElectionList(long id, List<Candidate> candidates) {
         this.id = id;

@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.pk.electionappclient.Controller.AppController;
 import com.pk.electionappclient.domain.Candidate;
-import com.pk.electionappclient.domain.ElectionList;
 import com.pk.electionappclient.domain.ElectoralParty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -85,21 +83,27 @@ public class PresidentialCandidatesListController extends AppController implemen
     TableColumn<ElectoralParty, String> addedCandidatePoliticalPartyColumn;
 
 
+    int id = 1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clearCandidateTempList(); //usuwa kandydatów z niezapisanej listy wyborczej
         loadCandidates();
         loadTempList();
-
+        System.out.println(getElections());
     }
 
     public void createPresElectionDay(ActionEvent actionEvent) {
         //newElectionList(getTempCandidateList());
-        createElectionDay(getPresStartDate(), getPresEndDate(), prezydenckie, newElectionList(getTempCandidateList()));
+        try {
+        createElectionDay(id++, PresElectionStartDate(getPresStartDate(), getPresStartTime()),
+                    PresElectionEndDate(getPresEndDate(), getPresEndTime()),
+                    prezydenckie, newElectionList(id, getTempCandidateList()));
+        } catch (NullPointerException e) {
+        }
         System.out.println(getElections());
-        System.out.println();
     }
+
 
     public void addCandidateElectionList(ActionEvent actionEvent) {
         addSelectedCandidateToTempList();
@@ -115,17 +119,36 @@ public class PresidentialCandidatesListController extends AppController implemen
                 addCandidateToTempList(candidate);
             }
         } catch (NullPointerException e) {
-            System.out.println("Blad");
+            popUpError("Zaznacz kadydata by dodać go do listy");
         }
     }
 
-    private LocalDateTime getPresStartDate() {
-        return startDatePres.getValue().atStartOfDay();
+    private LocalDateTime PresElectionStartDate(LocalDate date, LocalTime time) throws NullPointerException {
+        try {
+            date.atTime(time);
+        } catch (NullPointerException e) {
+            popUpError("Popraw datę startu głosowania");
+        }
+        return date.atTime(time);
     }
 
-    private LocalDateTime getPresEndDate() {
-        return endDatePres.getValue().atStartOfDay();
+    private LocalDateTime PresElectionEndDate(LocalDate date, LocalTime time) throws NullPointerException {
+        try {
+            date.atTime(time);
+        } catch (NullPointerException e) {
+            popUpError("Popraw datę zakończenia głosowania");
+        }
+        return date.atTime(time);
     }
+
+    private LocalDate getPresStartDate() {
+        return startDatePres.getValue();
+    }
+
+    private LocalDate getPresEndDate() {
+        return endDatePres.getValue();
+    }
+
     private LocalTime getPresStartTime() {
         return startTimePres.getValue();
     }

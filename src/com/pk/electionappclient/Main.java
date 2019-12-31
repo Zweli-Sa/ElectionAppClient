@@ -14,6 +14,7 @@ import javafx.stage.StageStyle;
 
 import static com.pk.electionappclient.controller.ClientController.initCandidateList;
 
+
 public class Main extends Application {
 
     private double xOffset = 0;
@@ -50,6 +51,7 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         initCandidateList();
+
         launch(args);
 
     }

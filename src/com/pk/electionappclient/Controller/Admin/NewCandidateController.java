@@ -137,7 +137,7 @@ public class NewCandidateController extends AppController implements Initializab
             }
         } catch (NullPointerException e) {
             editButton.setId("editButton");
-            popUpWindow("Zaznacz kadydata by go zedytować");
+            popUpError("Zaznacz kadydata by go zedytować");
         }
 
     }
@@ -150,7 +150,7 @@ public class NewCandidateController extends AppController implements Initializab
                 loadCandidates();
             }
         } catch (NullPointerException e) {
-            popUpWindow("Zaznacz kandydata z listy");
+            popUpError("Zaznacz kandydata z listy");
         } finally {
             changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
             clearFields();

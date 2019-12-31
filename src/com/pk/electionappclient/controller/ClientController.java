@@ -20,6 +20,8 @@ public class ClientController {
 
 
     private static List<Candidate> candidateTempList = new ArrayList<>();
+    private static List<Candidate> candidateFinalList = new ArrayList<>();
+
 
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
 
@@ -29,8 +31,14 @@ public class ClientController {
 
     }
 
+
+
     public static List<Candidate> getCandidates() {
         return list;
+    }
+    public static List<Candidate> setCandidateFinalList() {
+        candidateFinalList.addAll(candidateTempList);
+        return candidateFinalList;
     }
 
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
@@ -46,6 +54,9 @@ public class ClientController {
 
     public static List<Candidate> getTempCandidateList() {
         return candidateTempList;
+    }
+    public static List<Candidate> getCandidateFinalList() {
+        return candidateFinalList;
     }
 
 

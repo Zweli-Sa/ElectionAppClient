@@ -98,10 +98,11 @@ public class PresidentialCandidatesListController extends AppController implemen
         try {
         createElectionDay(id++, PresElectionStartDate(getPresStartDate(), getPresStartTime()),
                     PresElectionEndDate(getPresEndDate(), getPresEndTime()),
-                    prezydenckie, newElectionList(id, getTempCandidateList()));
+                    prezydenckie, newElectionList(id, setCandidateFinalList()));
         } catch (NullPointerException e) {
         }
         System.out.println(getElections());
+        System.out.println("Final: "+getCandidateFinalList());
     }
 
 

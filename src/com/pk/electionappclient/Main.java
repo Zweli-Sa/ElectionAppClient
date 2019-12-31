@@ -1,8 +1,5 @@
 package com.pk.electionappclient;
 
-import com.pk.electionappclient.domain.Candidate;
-import com.pk.electionappclient.domain.ElectionType;
-import com.pk.electionappclient.domain.ElectoralParty;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +16,6 @@ public class Main extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
-
-
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -49,9 +44,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-
         initCandidateList();
-
         launch(args);
 
     }

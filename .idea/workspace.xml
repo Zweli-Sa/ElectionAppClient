@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="886b68af-4f84-4c90-b169-9d47759b7136" name="Default Changelist" comment="`Dodawanie wyborów prezydenckich - do dopracowania`">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfoenix-8.0.8.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/ElectionAppClient/com/pk/electionappclient/domain/Education.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Java_EE_6_Java_EE_6.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ElectionAppClient.iml" beforeDir="false" afterPath="$PROJECT_DIR$/ElectionAppClient.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/Admin/NewCandidateController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/Admin/NewCandidateController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/Admin/presidentalElectionControllers/PresidentialCandidatesListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/Admin/presidentalElectionControllers/PresidentialCandidatesListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ElectionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ElectionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ElectionListController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/controller/ElectionListController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/domain/ElectionList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/domain/ElectionList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/pk/electionappclient/domain/ElectionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/pk/electionappclient/domain/ElectionType.java" afterDir="false" />
-    </list>
+    <list default="true" id="886b68af-4f84-4c90-b169-9d47759b7136" name="Default Changelist" comment="`Dodawanie wyborów prezydenckich - do dopracowania`" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,13 +113,6 @@
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin/parliamentaryElection" />
-      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin/presidentialElection" />
-      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin" />
-      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/User" />
-      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AdminPanel" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.pk.electionappclient.domain" />
       <recent name="com.pk.electionappclient.resources" />
@@ -143,6 +121,13 @@
       <recent name="$PROJECT_DIR$/.idea/libraries" />
       <recent name="$PROJECT_DIR$/src/com/pk/electionappclient" />
       <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/login" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin/parliamentaryElection" />
+      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin/presidentialElection" />
+      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/Admin" />
+      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/GUI/User" />
+      <recent name="$PROJECT_DIR$/src/com/pk/electionappclient/Controller/AdminPanel" />
     </key>
   </component>
   <component name="RunDashboard">

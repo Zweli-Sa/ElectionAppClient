@@ -14,10 +14,32 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 public abstract class AppController {
 
+
+    protected boolean validateDate(LocalDateTime start, LocalDateTime end) {
+        if (start.isBefore(end)) {
+            return true;
+        } else {
+            popUpError("Data zakończenia głosowania musi być późniejsza niż jego startu!");
+        }
+        return false;
+
+    }
+
+    protected LocalDateTime combinesDateTime(LocalDate date, LocalTime time) throws NullPointerException {
+        try {
+            date.atTime(time);
+        } catch (NullPointerException e) {
+            popUpError("Popraw datę startu głosowania");
+        }
+        return date.atTime(time);
+    }
 
     public static void popUpError(String text) {  ///statyczna czy rozszerzyć klasę ClientController?
         final Stage dialog = new Stage();

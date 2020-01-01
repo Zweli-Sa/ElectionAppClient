@@ -20,7 +20,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
@@ -97,9 +96,10 @@ public class PresidentialCandidatesListController extends AppController implemen
     public void createPresElectionDay(ActionEvent actionEvent) {
         id++;
         try {
-        createElectionDay(id, PresElectionStartDate(getPresStartDate(), getPresStartTime()),
-                    PresElectionEndDate(getPresEndDate(), getPresEndTime()),
-                    prezydenckie, newElectionList(id, setCandidateFinalList()));
+            if (validateDate(presElectionStartDate(), presElectionEndDate())) {
+                createElectionDay(id, presElectionStartDate(), presElectionEndDate(),
+                        prezydenckie, newElectionList(id, setCandidateFinalList()));
+            }
         } catch (NullPointerException e) {
         }
         System.out.println(getElections());
@@ -129,34 +129,12 @@ public class PresidentialCandidatesListController extends AppController implemen
     }
 
 
-
-//    private void addSelectedCandidateToTempList() {
-//        try {
-//            Candidate candidate = candidatesTable.getSelectionModel().getSelectedItem();
-//            if (!candidate.equals(null)) {
-//                addCandidateToTempList(candidate);
-//            }
-//        } catch (NullPointerException e) {
-//            popUpError("Zaznacz kadydata by dodać go do listy");
-//        }
-//    }
-
-    private LocalDateTime PresElectionStartDate(LocalDate date, LocalTime time) throws NullPointerException {
-        try {
-            date.atTime(time);
-        } catch (NullPointerException e) {
-            popUpError("Popraw datę startu głosowania");
-        }
-        return date.atTime(time);
+    private LocalDateTime presElectionStartDate() {
+        return combinesDateTime(getPresStartDate(), getPresStartTime());
     }
 
-    private LocalDateTime PresElectionEndDate(LocalDate date, LocalTime time) throws NullPointerException {
-        try {
-            date.atTime(time);
-        } catch (NullPointerException e) {
-            popUpError("Popraw datę zakończenia głosowania");
-        }
-        return date.atTime(time);
+    private LocalDateTime presElectionEndDate() {
+        return combinesDateTime(getPresEndDate(), getPresEndTime());
     }
 
     private LocalDate getPresStartDate() {

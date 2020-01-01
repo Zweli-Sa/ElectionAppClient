@@ -13,6 +13,7 @@ public class ElectionListController {
     public static List<ElectionList> electionList = new ArrayList<>();
 
     public static List<ElectionList> newElectionList(int id, List<Candidate> candidates) throws NullPointerException{
+        electionList = new ArrayList<>();
         if (!candidates.isEmpty()) {
             id++;
             electionList.add(new ElectionList(id, candidates));

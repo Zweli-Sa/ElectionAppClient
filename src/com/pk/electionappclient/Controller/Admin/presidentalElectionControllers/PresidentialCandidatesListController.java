@@ -20,11 +20,11 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ElectionController.createElectionDay;
-import static com.pk.electionappclient.controller.ElectionController.getElections;
+import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.ElectionListController.newElectionList;
 import static com.pk.electionappclient.controller.ElectionTypeController.prezydenckie;
 import static java.sql.Date.valueOf;
@@ -83,10 +83,11 @@ public class PresidentialCandidatesListController extends AppController implemen
     TableColumn<ElectoralParty, String> addedCandidatePoliticalPartyColumn;
 
 
-    int id = 1;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println(id);
         clearCandidateTempList(); //usuwa kandydatów z niezapisanej listy wyborczej
         loadCandidates();
         loadTempList();
@@ -94,15 +95,16 @@ public class PresidentialCandidatesListController extends AppController implemen
     }
 
     public void createPresElectionDay(ActionEvent actionEvent) {
-        //newElectionList(getTempCandidateList());
+        id++;
         try {
-        createElectionDay(id++, PresElectionStartDate(getPresStartDate(), getPresStartTime()),
+        createElectionDay(id, PresElectionStartDate(getPresStartDate(), getPresStartTime()),
                     PresElectionEndDate(getPresEndDate(), getPresEndTime()),
                     prezydenckie, newElectionList(id, setCandidateFinalList()));
         } catch (NullPointerException e) {
         }
         System.out.println(getElections());
-        System.out.println("Final: "+getCandidateFinalList());
+        clearCandidateTempList();
+        show();
     }
 
 
@@ -112,6 +114,8 @@ public class PresidentialCandidatesListController extends AppController implemen
 
 
     }
+
+
 
     private void addSelectedCandidateToTempList() {
         try {
@@ -123,6 +127,19 @@ public class PresidentialCandidatesListController extends AppController implemen
             popUpError("Zaznacz kadydata by dodać go do listy");
         }
     }
+
+
+
+//    private void addSelectedCandidateToTempList() {
+//        try {
+//            Candidate candidate = candidatesTable.getSelectionModel().getSelectedItem();
+//            if (!candidate.equals(null)) {
+//                addCandidateToTempList(candidate);
+//            }
+//        } catch (NullPointerException e) {
+//            popUpError("Zaznacz kadydata by dodać go do listy");
+//        }
+//    }
 
     private LocalDateTime PresElectionStartDate(LocalDate date, LocalTime time) throws NullPointerException {
         try {

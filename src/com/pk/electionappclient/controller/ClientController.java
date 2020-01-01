@@ -11,6 +11,10 @@ import java.util.*;
 import static com.pk.electionappclient.Controller.AppController.popUpError;
 
 public class ClientController {
+
+    public static int id = 0;
+
+
     private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
     private static ElectoralParty pis = new ElectoralParty(1, "Prawo i Sprawiedliwość");
     private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
@@ -19,8 +23,8 @@ public class ClientController {
     private static List<Candidate> list;
 
 
-    private static List<Candidate> candidateTempList = new ArrayList<>();
-    private static List<Candidate> candidateFinalList = new ArrayList<>();
+    public static List<Candidate> candidateTempList = new ArrayList<>();
+    public static List<Candidate> candidateFinalList = new ArrayList<>();
 
 
     private static List<ElectoralParty> electoralParties = new ArrayList<>();

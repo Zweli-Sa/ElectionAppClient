@@ -93,7 +93,7 @@ public class PresidentialCandidatesListController extends AppController implemen
         System.out.println(getElections());
     }
 
-    public void createPresElectionDay(ActionEvent actionEvent) {
+    public void createPresElectionDay(ActionEvent actionEvent) throws IOException {
         id++;
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
@@ -105,6 +105,8 @@ public class PresidentialCandidatesListController extends AppController implemen
         System.out.println(getElections());
         clearCandidateTempList();
         show();
+        popUpError("Wybory zostały utworzone!");
+        loadAdminPanel(actionEvent);
     }
 
 

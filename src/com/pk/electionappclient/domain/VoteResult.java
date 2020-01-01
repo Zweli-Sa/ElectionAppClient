@@ -9,14 +9,27 @@ public class VoteResult {
 
 //    private User user;
 //
-//    private Election election;
+    private Election election;
 //
 //    private Candidate candidate;
 
     private LocalDateTime voteTime;
 
+    public VoteResult(long id, Election election) {
+        this.id = id;
+        this.election = election;
+    }
+
     public VoteResult(long id, LocalDateTime voteTime) {
         this.id = id;
         this.voteTime = voteTime;
+    }
+
+    @Override
+    public String toString() {
+        return "VoteResult{" +
+                "id=" + id +
+                ", election=" + election +
+                '}';
     }
 }

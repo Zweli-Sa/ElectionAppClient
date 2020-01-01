@@ -14,6 +14,8 @@ public class Constituency {
 
     private List<ElectionList> electionLists;
 
+    private List<City> cityList;
+
     public Constituency(long id, String name, String description, Election election, List<ElectionList> electionLists) {
         this.id = id;
         this.name = name;

@@ -71,6 +71,7 @@ public abstract class AppController {
         return textField.getText();
     }
 
+
     protected void closeLoginPanelOnAction(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();
         stage.close();

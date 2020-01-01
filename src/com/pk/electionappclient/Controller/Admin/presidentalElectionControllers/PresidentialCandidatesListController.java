@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
-import static com.pk.electionappclient.controller.ElectionListController.newElectionList;
+import static com.pk.electionappclient.controller.ElectionListController.newPresElectionList;
 import static com.pk.electionappclient.controller.ElectionTypeController.prezydenckie;
 import static java.sql.Date.valueOf;
 
@@ -98,7 +98,7 @@ public class PresidentialCandidatesListController extends AppController implemen
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
                 createElectionDay(id, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newElectionList(id, setCandidateFinalList()));
+                        prezydenckie, newPresElectionList(id, setCandidateFinalList()));
             }
         } catch (NullPointerException e) {
         }

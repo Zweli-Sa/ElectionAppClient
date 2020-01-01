@@ -15,6 +15,13 @@ public class ElectionList {
 
     private List<Candidate> candidates;
 
+    private City city;
+
+    public ElectionList(long id, List<Candidate> candidates, City city) {
+        this.id = id;
+        this.candidates = candidates;
+        this.city = city;
+    }
 
     public ElectionList(long id, List<Candidate> candidates) {
         this.id = id;
@@ -53,9 +60,8 @@ public class ElectionList {
     public String toString() {
         return "ElectionList{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", candidates=" + candidates +
+                ", city=" + city +
                 '}';
     }
 }

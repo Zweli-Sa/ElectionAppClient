@@ -23,6 +23,9 @@ public class AdminPanelController extends AppController {
         closeLoginPanelOnAction(exitButton);
     }
 
+    public void loadConstituencyFXML(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(adminAnchorPane, "Admin/parliamentaryElection/createConstituency.fxml");
+    }
     public void loadNewCandidateFXML(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(adminAnchorPane, "Admin/newCandidate.fxml");
     }

@@ -9,7 +9,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.xml.bind.JAXBContext;
+
+
+import java.io.File;
+
 import static com.pk.electionappclient.controller.ClientController.initCandidateList;
+import static com.pk.electionappclient.controller.ClientController.initCityDB;
 
 
 public class Main extends Application {
@@ -44,6 +50,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        initCityDB();
         initCandidateList();
         launch(args);
 

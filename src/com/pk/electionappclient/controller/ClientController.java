@@ -20,20 +20,53 @@ public class ClientController {
     private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
     private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
 
+    private static City krakow = new City(10l, "Kraków");
+    private static City warszawa = new City(20l, "Warszawa");
+    private static City wroclaw = new City(30l, "Wroclaw");
+
+
     private static List<Candidate> list;
-
-
     public static List<Candidate> candidateTempList = new ArrayList<>();
     public static List<Candidate> candidateFinalList = new ArrayList<>();
-
-
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
+    private static List<City> citiesDB = new ArrayList<>();
+    public static List<City> citiesTempList = new ArrayList<>();
 
     public static void createCandidate(Candidate candidate) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(candidate);
 
     }
+
+
+    public static List<City> getCitiesDB() {
+        return citiesDB;
+    }
+
+    public static List<City> getCitiesTempList() {
+        return citiesTempList;
+    }
+    public static List<City> addCityToTempList(City city) {
+        if (!citiesTempList.contains(city)) {
+            citiesTempList.add(city);
+        } else{
+            popUpError("Miasto jest już na liście");
+        }
+        return citiesTempList;
+    }
+
+    public static List<City> clearCityTempList() {
+        citiesTempList.clear();
+        return citiesTempList;
+    }
+
+    public static List<City> removeCityTempList(City city) {
+        citiesTempList.remove(city);
+        return citiesTempList;
+    }
+
+
+
 
 
 
@@ -65,6 +98,7 @@ public class ClientController {
 
 
     public static List<Candidate> addCandidateToTempList(Candidate candidate) {
+        candidateTempList = new ArrayList<>();
         if (!candidateTempList.contains(candidate)) {
             candidateTempList.add(candidate);
         } else{
@@ -109,11 +143,18 @@ public class ClientController {
         return list;
     }
 
+
     public static List<ElectoralParty> initPartiesList() {
         electoralParties.add(sld);
         electoralParties.add(po);
         electoralParties.add(pis);
         electoralParties.add(none);
         return electoralParties;
+    }
+
+    public static void initCityDB() {
+        citiesDB.add(krakow);
+        citiesDB.add(warszawa);
+        citiesDB.add(wroclaw);
     }
 }

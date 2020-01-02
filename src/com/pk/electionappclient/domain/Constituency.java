@@ -16,6 +16,14 @@ public class Constituency {
 
     private List<City> cityList;
 
+
+    public Constituency(Long id, String name, List<City> cityList) {
+        this.id = id;
+        this.name = name;
+        this.cityList = cityList;
+    }
+
+
     public Constituency(long id, String name, String description, Election election, List<ElectionList> electionLists) {
         this.id = id;
         this.name = name;
@@ -64,5 +72,15 @@ public class Constituency {
 
     public void setElectionLists(List<ElectionList> electionLists) {
         this.electionLists = electionLists;
+    }
+
+    @Override
+    public String toString() {
+        return "Constituency{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", electionLists=" + electionLists +
+                ", cityList=" + cityList +
+                '}';
     }
 }

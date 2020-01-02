@@ -47,6 +47,7 @@ public class ClientController {
         return citiesTempList;
     }
     public static List<City> addCityToTempList(City city) {
+        citiesTempList = new ArrayList<>();
         if (!citiesTempList.contains(city)) {
             citiesTempList.add(city);
         } else{

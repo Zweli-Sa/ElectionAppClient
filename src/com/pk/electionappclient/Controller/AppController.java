@@ -14,9 +14,12 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 
 public abstract class AppController {
@@ -81,6 +84,19 @@ public abstract class AppController {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/" + path));
         root.getChildren().setAll(pane);
     }
+
+    protected <E> String listToString(List<E> list, String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        String str ="";
+        for (E e : list) {
+            Method method = e.getClass().getMethod(methodName);
+            str +=  method.invoke(e) + ", ";
+        }
+        if (str != null && str.length() > 0) {
+            str = str.substring(0, str.length() - 2);
+        }
+        return str;
+    }
+
 
 }
 

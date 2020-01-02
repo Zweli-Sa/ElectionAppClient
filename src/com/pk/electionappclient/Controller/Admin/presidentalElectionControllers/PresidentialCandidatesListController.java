@@ -105,8 +105,6 @@ public class PresidentialCandidatesListController extends AppController implemen
         System.out.println(getElections());
         clearCandidateTempList();
         show();
-        popUpError("Wybory zostały utworzone!");
-        loadAdminPanel(actionEvent);
     }
 
 

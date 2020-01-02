@@ -14,10 +14,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
+import static com.pk.electionappclient.controller.ConstituencyController.createConstituency;
+import static com.pk.electionappclient.controller.ConstituencyController.showConstituencies;
 
 public class CreateConstituencyController extends AppController implements Initializable {
 
@@ -45,6 +49,15 @@ public class CreateConstituencyController extends AppController implements Initi
     @FXML
     TextField constituencyIdTextField;
 
+
+    public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        createConstituency(2l, createConstituencyName(), citiesTempList);
+        showConstituencies(); // metoda do usunięcia
+    }
+
+    private String createConstituencyName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        return "Lista nr: " + getInputId() + " - " + listToString(citiesTempList, "getName");
+    }
 
 
     public void addCandidateElectionList(ActionEvent actionEvent) {
@@ -97,6 +110,6 @@ public class CreateConstituencyController extends AppController implements Initi
     }
 
     public int getInputId() {
-        //pobranie numeru z texfieldu
+        return Integer.parseInt(getTextFromField(constituencyIdTextField));
     }
 }

@@ -121,7 +121,6 @@ public class NewParliamentaryElectionsController extends AppController implement
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        show();
         loadInactiveElections();
         loadActiveElections();
 

@@ -16,8 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ConstituencyController.createConstituency;
-import static com.pk.electionappclient.controller.ConstituencyController.showConstituencies;
+import static com.pk.electionappclient.controller.ConstituencyController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
 public class CreateConstituencyController extends AppController implements Initializable {
@@ -49,6 +48,14 @@ public class CreateConstituencyController extends AppController implements Initi
     @FXML
     ComboBox selectElectionComboBox;
 
+    @FXML
+    TableView currentConstituency;
+
+    @FXML
+    TableColumn idColumn;
+
+    @FXML
+    TableColumn nameColumn;
 
     public void populateElectionComboBox() {
         populateComboBoxList(selectElectionComboBox, getInActiveElections());
@@ -57,8 +64,17 @@ public class CreateConstituencyController extends AppController implements Initi
     public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         //createConstituency(2l, createConstituencyName(), citiesTempList);
         Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
-        setConstituencyElectionController(election, createConstituency(2l, createConstituencyName(), citiesTempList));
+        //setConstituencyElectionController(election);
+        createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
+        //addConstituencyElection(election, createConstituency(getInputId(), createConstituencyName(), citiesTempList), getInputId());
+        showConstituencies();
         show();
+        //show();
+        //showConstituencies();
+        //loadCurrentConstituency();
+
+        clearCityTempList();
+
         //showConstituencies(); // metoda do usunięcia
     }
 
@@ -103,12 +119,19 @@ public class CreateConstituencyController extends AppController implements Initi
         cityTempTableView.getItems().setAll(getCitiesTempList());
     }
 
+    private void loadCurrentConstituency() {
+        Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        currentConstituency.getItems().setAll(getCurrentConstituency(election));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         clearCityTempList();
         populateElectionComboBox();
         loadCityName();
-        System.out.println(getCitiesDB());
+        //System.out.println(getCitiesDB());
     }
 
     public void removeSelectedCityTempList(ActionEvent actionEvent) {
@@ -117,7 +140,15 @@ public class CreateConstituencyController extends AppController implements Initi
         loadCityNameTemp();
     }
 
-    public int getInputId() {
-        return Integer.parseInt(getTextFromField(constituencyIdTextField));
+    public Long getInputId() {
+        return Long.parseLong(getTextFromField(constituencyIdTextField));
+    }
+
+    public void refreshTable(ActionEvent actionEvent) {
+        try {
+            loadCurrentConstituency();
+        } catch (NullPointerException e) {
+
+        }
     }
 }

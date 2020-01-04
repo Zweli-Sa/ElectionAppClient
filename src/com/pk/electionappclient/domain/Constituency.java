@@ -34,6 +34,13 @@ public class Constituency {
 
     public Constituency() {}
 
+    public Constituency(Long id, String name, List<City> cityList, Election election) {
+        this.id = id;
+        this.name = name;
+        this.cityList = cityList;
+        this.election = election;
+    }
+
     public Long getId() {
         return id;
     }
@@ -79,6 +86,8 @@ public class Constituency {
         return "Constituency{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", election=" + election +
                 ", electionLists=" + electionLists +
                 ", cityList=" + cityList +
                 '}';

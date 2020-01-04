@@ -9,6 +9,9 @@ import java.util.List;
 import static com.pk.electionappclient.controller.ClientController.candidateFinalList;
 import static com.pk.electionappclient.controller.ClientController.candidateTempList;
 
+import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
+import static com.pk.electionappclient.controller.ConstituencyController.getConstituenciesDB;
+
 public class ElectionController {
 
     private final static ElectionType presidential = new ElectionType(1, "Prezydenckie");
@@ -76,13 +79,34 @@ public class ElectionController {
         electionsDB.removeIf(e -> (e.getId() == election.getId()));
     }
 
-
-    public static void setConstituencyElectionController(Election election, List<Constituency> list) {
+    public static List<Constituency> getCurrentConstituency(Election election) {
         for (Election e : electionsDB) {
             if (e.getId() == election.getId()) {
-                e.setConstituencies(list);
+                return e.getConstituencies();
             }
         }
+        return null;
+    }
+
+
+//    public static void setConstituencyElectionController(Election election, List<Constituency> list) {
+//        for (Election e : electionsDB) {
+//            if (e.getId() == election.getId()) {
+//                System.out.println("Jest : " + e);
+//                System.out.println("list:" + list);
+//                //e.setConstituencies(list);
+//            }
+//        }
+//    }
+
+    public static void setConstituencyElectionController(Election election) {
+        List<Constituency> templist = new ArrayList<>();
+        for (Constituency c: constituenciesDB) {
+            if (c.getElection().getId() == election.getId()) {
+                templist.add(c);
+            }
+        }
+        election.setConstituencies(templist);
     }
 
     public static void show() {

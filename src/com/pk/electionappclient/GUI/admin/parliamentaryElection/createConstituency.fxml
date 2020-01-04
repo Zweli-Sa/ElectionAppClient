@@ -33,7 +33,7 @@
                         </ImageView>
                         <Pane layoutY="127.0" prefHeight="0.0" prefWidth="1200.0" style="-fx-background-color: #dc143c;" />
                         <Pane layoutX="-17.0" layoutY="-18.0" prefHeight="29.0" prefWidth="1222.0" style="-fx-background-color: #fff;" />
-                  <ComboBox fx:id="selectElectionComboBox" layoutX="389.0" layoutY="54.0" prefHeight="26.0" prefWidth="422.0" promptText="Wybierz wybory" />
+                  <ComboBox fx:id="selectElectionComboBox" layoutX="389.0" layoutY="54.0" onAction="#refreshTable" prefHeight="26.0" prefWidth="422.0" promptText="Wybierz wybory" />
                     </children></Pane>
             </top>
             <center>
@@ -61,10 +61,10 @@
                   </Label>
                   <Button layoutX="283.0" layoutY="28.0" mnemonicParsing="false" onAction="#addCandidateElectionList" prefHeight="26.0" prefWidth="104.0" text="Dodaj" />
                   <Button layoutX="702.0" layoutY="28.0" mnemonicParsing="false" onAction="#removeSelectedCityTempList" prefHeight="26.0" prefWidth="104.0" text="usuń" />
-                  <TableView layoutX="17.0" layoutY="457.0" prefHeight="300.0" prefWidth="789.0">
+                  <TableView fx:id="currentConstituency" layoutX="17.0" layoutY="457.0" prefHeight="300.0" prefWidth="789.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="nazwa" />
                     </columns>
                   </TableView>
                   <Label layoutX="17.0" layoutY="435.0" text="Utworzone okręgi wyborcze:" />

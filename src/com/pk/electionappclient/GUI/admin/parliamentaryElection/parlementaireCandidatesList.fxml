@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../../resources/css/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.controller.admin.parlimentaryElectionControllers.ParlementaireCandidatesListController">
+    <children>
+        <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button id="closeButton" fx:id="exitButton" layoutX="1150.0" layoutY="50.0" mnemonicParsing="false" onAction="#closePanel" style="-fx-background-color: #dc143c;" text="X" />
+                        <Label layoutX="124.0" layoutY="43.0" text="e-Wybory" textFill="GREY">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="39.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.273582458496094" AnchorPane.topAnchor="23.0">
+                            <image>
+                                <Image url="@/com/pk/electionappclient/resources/img/Herb_Polski.png" />
+                            </image>
+                        </ImageView>
+                        <Pane layoutY="127.0" prefHeight="0.0" prefWidth="1200.0" style="-fx-background-color: #dc143c;" />
+                        <Pane layoutX="-17.0" layoutY="-18.0" prefHeight="29.0" prefWidth="1222.0" style="-fx-background-color: #fff;" />
+                  <ComboBox fx:id="selectElectionComboBox" layoutX="376.0" layoutY="54.0" prefHeight="26.0" prefWidth="399.0" promptText="wybierz wybory" />
+                    </children></Pane>
+            </top>
+            <center>
+                <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView layoutY="63.0" prefHeight="307.0" prefWidth="821.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C2" />
+                    </columns>
+                  </TableView>
+                  <TableView layoutY="441.0" prefHeight="307.0" prefWidth="821.0">
+                     <columns>
+                        <TableColumn prefWidth="75.0" text="C2" />
+                     </columns>
+                  </TableView>
+                  <TextField layoutX="228.0" layoutY="21.0" prefHeight="26.0" prefWidth="324.0" />
+                  <TextField layoutX="235.0" layoutY="399.0" prefHeight="26.0" prefWidth="324.0" />
+                  <Button layoutX="710.0" layoutY="21.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="dodaj" />
+                  <Button layoutX="710.0" layoutY="397.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="usuń" />
+               </children></Pane>
+            </center>
+         <left>
+            <Pane fx:id="selectPartyComboBox" prefHeight="772.0" prefWidth="380.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+               <children>
+                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="submintButton" layoutX="40.0" layoutY="138.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="utwórz" />
+                  <ComboBox layoutX="40.0" layoutY="64.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
+                  <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
+                  <ComboBox fx:id="selectConstituencyComboBox" layoutX="40.0" layoutY="101.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz okręg wyborczy" />
+                   <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
+               </children></Pane>
+         </left>
+        </BorderPane>
+    </children>
+
+</AnchorPane>

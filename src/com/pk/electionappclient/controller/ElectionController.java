@@ -1,9 +1,6 @@
 package com.pk.electionappclient.controller;
 
-import com.pk.electionappclient.domain.Candidate;
-import com.pk.electionappclient.domain.Election;
-import com.pk.electionappclient.domain.ElectionList;
-import com.pk.electionappclient.domain.ElectionType;
+import com.pk.electionappclient.domain.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -18,11 +15,18 @@ public class ElectionController {
     private final static ElectionType parliamentary = new ElectionType(2, "Parlamentarne");
 
     private static List<Election> electionsDB = new ArrayList<>();
+    private static List<Election> inActiveElectionsDB = new ArrayList<>();
+    private static List<Election> activeElectionsDB = new ArrayList<>();
+
 
     public static List<Election> getElections() {
         return electionsDB;
     }
 
+
+    public static void clearInactiveElectionList() {
+        inActiveElectionsDB.clear();
+    }
 
     public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
         candidateFinalList = new ArrayList<>();
@@ -33,10 +37,66 @@ public class ElectionController {
         return electionsDB;
     }
 
+    public static List<Election> createElectionDayTest(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, String name) {
+        candidateFinalList = new ArrayList<>();
+        candidateTempList = new ArrayList<>();
+        if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
+            electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, name));
+        }
+        return electionsDB;
+    }
+
+    public static List<Election> getInActiveElections() {
+        inActiveElectionsDB = new ArrayList<>();
+        for (Election e : electionsDB) {
+            if (!e.getActive()) {
+                inActiveElectionsDB.add(e);
+            }
+        }
+        return inActiveElectionsDB;
+    }
+
+    public static List<Election> getActiveElections() {
+        activeElectionsDB = new ArrayList<>();
+        for (Election e : electionsDB) {
+            if (e.getActive()) {
+                activeElectionsDB.add(e);
+            }
+        }
+        return activeElectionsDB;
+    }
+
+//    public static void removeInactiveElection(Election el) {
+//        System.out.println(inActiveElectionsDB);
+//        inActiveElectionsDB.removeIf(e -> (e.getId() == el.getId()) );
+//        System.out.println(inActiveElectionsDB);
+//    }
+
+    public static void removeInactiveElection(Election election) {
+        electionsDB.removeIf(e -> (e.getId() == election.getId()));
+    }
+
+
+    public static void setConstituencyElectionController(Election election, List<Constituency> list) {
+        for (Election e : electionsDB) {
+            if (e.getId() == election.getId()) {
+                e.setConstituencies(list);
+            }
+        }
+    }
+
     public static void show() {
         for (Election e : electionsDB) {
-            System.out.println(e.getId() + " " + e.getListElectionList());
+            System.out.println(e);
         }
+    }
+
+    public static void initElectionsDB() {
+        electionsDB = new ArrayList<>();
+        electionsDB.add(new Election(1l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
+        electionsDB.add(new Election(4l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
+        electionsDB.add(new Election(5l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
+        electionsDB.add(new Election(2l, null, null, parliamentary, null, true, "Wybory parlamentaren 2014"));
     }
 
 

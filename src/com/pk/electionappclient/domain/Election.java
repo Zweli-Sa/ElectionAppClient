@@ -17,21 +17,31 @@ public class Election {
 
     private Boolean isActive;
 
-    private String ElectionName;
+    private String electionName;
 
-//    private List<Constituency> constituencies;
+    private List<Constituency> constituencies;
 
 
     public Election(long id, Boolean isActive, String electionName) {
         this.id = id;
         this.isActive = isActive;
-        ElectionName = electionName;
+        this.electionName = electionName;
     }
 
     public Election(long id, LocalDateTime startDate, LocalDateTime finishDate) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
+    }
+
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType,List<ElectionList> electionList, Boolean isActive, String electionName) {
+        this.id = id;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.electionType = electionType;
+        this.isActive = isActive;
+        this.ListElectionList = electionList;
+        this.electionName = electionName;
     }
 
     public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> electionList) {
@@ -58,9 +68,32 @@ public class Election {
         return electionType;
     }
 
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
+
+    public String getElectionName() {
+        return electionName;
+    }
+
+    public void setElectionName(String electionName) {
+        this.electionName = electionName;
+    }
 
     public List<ElectionList> getListElectionList() {
         return ListElectionList;
+    }
+
+    public List<Constituency> getConstituencies() {
+        return constituencies;
+    }
+
+    public void setConstituencies(List<Constituency> constituencies) {
+        this.constituencies = constituencies;
     }
 
     @Override
@@ -71,6 +104,9 @@ public class Election {
                 ", finishDate=" + finishDate +
                 ", electionType=" + electionType +
                 ", ListElectionList=" + ListElectionList +
+                ", isActive=" + isActive +
+                ", electionName='" + electionName + '\'' +
+                ", constituencies=" + constituencies +
                 '}';
     }
 }

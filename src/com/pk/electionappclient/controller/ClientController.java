@@ -8,7 +8,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import java.io.IOException;
 import java.util.*;
 
-import static com.pk.electionappclient.Controller.AppController.popUpError;
+import static com.pk.electionappclient.controller.AppController.popUpError;
 
 public class ClientController {
 

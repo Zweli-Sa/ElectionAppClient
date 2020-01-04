@@ -7,7 +7,7 @@ import com.pk.electionappclient.domain.ElectionList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pk.electionappclient.Controller.AppController.popUpError;
+import static com.pk.electionappclient.controller.AppController.popUpError;
 
 public class ElectionListController {
 

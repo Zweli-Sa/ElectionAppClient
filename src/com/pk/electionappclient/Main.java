@@ -9,13 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.xml.bind.JAXBContext;
-
-
-import java.io.File;
 
 import static com.pk.electionappclient.controller.ClientController.initCandidateList;
 import static com.pk.electionappclient.controller.ClientController.initCityDB;
+import static com.pk.electionappclient.controller.ElectionController.initElectionsDB;
 
 
 public class Main extends Application {
@@ -25,7 +22,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/Admin/adminPanel.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/admin/adminPanel.fxml"));
         primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.setTitle("Logowanie");
         primaryStage.initStyle(StageStyle.DECORATED.UNDECORATED);
@@ -50,10 +47,12 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        initElectionsDB();
         initCityDB();
         initCandidateList();
         launch(args);
 
     }
+
 }
 

@@ -62,20 +62,12 @@ public class CreateConstituencyController extends AppController implements Initi
     }
 
     public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        //createConstituency(2l, createConstituencyName(), citiesTempList);
         Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
-        //setConstituencyElectionController(election);
         createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
-        //addConstituencyElection(election, createConstituency(getInputId(), createConstituencyName(), citiesTempList), getInputId());
+        addConstituencyElection(election);
         showConstituencies();
-        show();
-        //show();
-        //showConstituencies();
-        //loadCurrentConstituency();
-
         clearCityTempList();
 
-        //showConstituencies(); // metoda do usunięcia
     }
 
     private String createConstituencyName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -131,7 +123,6 @@ public class CreateConstituencyController extends AppController implements Initi
         clearCityTempList();
         populateElectionComboBox();
         loadCityName();
-        //System.out.println(getCitiesDB());
     }
 
     public void removeSelectedCityTempList(ActionEvent actionEvent) {

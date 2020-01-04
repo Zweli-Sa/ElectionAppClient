@@ -69,12 +69,6 @@ public class ElectionController {
         return activeElectionsDB;
     }
 
-//    public static void removeInactiveElection(Election el) {
-//        System.out.println(inActiveElectionsDB);
-//        inActiveElectionsDB.removeIf(e -> (e.getId() == el.getId()) );
-//        System.out.println(inActiveElectionsDB);
-//    }
-
     public static void removeInactiveElection(Election election) {
         electionsDB.removeIf(e -> (e.getId() == election.getId()));
     }
@@ -87,17 +81,6 @@ public class ElectionController {
         }
         return null;
     }
-
-
-//    public static void setConstituencyElectionController(Election election, List<Constituency> list) {
-//        for (Election e : electionsDB) {
-//            if (e.getId() == election.getId()) {
-//                System.out.println("Jest : " + e);
-//                System.out.println("list:" + list);
-//                //e.setConstituencies(list);
-//            }
-//        }
-//    }
 
     public static void setConstituencyElectionController(Election election) {
         List<Constituency> templist = new ArrayList<>();

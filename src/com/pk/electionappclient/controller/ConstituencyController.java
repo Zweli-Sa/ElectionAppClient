@@ -22,22 +22,15 @@ public class ConstituencyController {
         return constituenciesDB;
     }
 
-    public static void addConstituencyElection(Election election, List<Constituency> list, Long constituencyId) {
+    public static void addConstituencyElection(Election election) {
         List<Constituency> temp = new ArrayList<>();
         for (Constituency c : constituenciesDB) {
-            if (c.getId() == constituencyId) {
+            if (c.getElection().getId() == election.getId()) {
                 temp.add(c);
             }
         }
-        election.setConstituencies(temp);
-//        List<Constituency> temp = new ArrayList<>();
-//        for (Constituency c : constituenciesDB) {
-//            if (c.getElection().getId() == election.getId()) {
-//                temp.add(c);
-//            }
-//        }
-//        System.out.println(temp);
-//        return temp;
+        System.out.println(temp);
+        election.setConstituencies(temp); // błąd przy wykonywaniu tego
     }
     public static void showConstituencies() {
         for (Constituency c : constituenciesDB) {

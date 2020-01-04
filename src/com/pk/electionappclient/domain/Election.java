@@ -15,8 +15,18 @@ public class Election {
 
     private List<ElectionList> ListElectionList;
 
+    private Boolean isActive;
+
+    private String ElectionName;
+
 //    private List<Constituency> constituencies;
 
+
+    public Election(long id, Boolean isActive, String electionName) {
+        this.id = id;
+        this.isActive = isActive;
+        ElectionName = electionName;
+    }
 
     public Election(long id, LocalDateTime startDate, LocalDateTime finishDate) {
         this.id = id;

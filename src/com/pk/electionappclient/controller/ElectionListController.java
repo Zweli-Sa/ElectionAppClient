@@ -3,11 +3,13 @@ package com.pk.electionappclient.controller;
 import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.City;
 import com.pk.electionappclient.domain.ElectionList;
+import com.pk.electionappclient.domain.ElectoralParty;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
+import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
 
 public class ElectionListController {
 
@@ -26,17 +28,21 @@ public class ElectionListController {
         return electionList;
     }
 
-    public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, City city) throws NullPointerException{
-        electionList = new ArrayList<>();
+    public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty) throws NullPointerException{
+        clearCandidateTempList();
         if (!candidates.isEmpty()) {
             id++;
-            electionList.add(new ElectionList(id, candidates, city));
+            electionList.add(new ElectionList(id, candidates, electoralParty));
         }
         else {
             popUpError("Dodaj kandydata do listy wyborzcej");
             throw new NullPointerException();
         }
         return electionList;
+    }
+
+    public static void clearElectionList() {
+        electionList = new ArrayList<>();
     }
 
 

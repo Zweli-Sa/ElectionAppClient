@@ -43,7 +43,6 @@ public class ClientController {
                 .collect(Collectors.toList());
         System.out.println(temp);
         return temp;
-
     }
 
 
@@ -75,7 +74,6 @@ public class ClientController {
 
 
     public static List<Candidate> addCandidateToTempList(Candidate candidate) {
-        candidateTempList = new ArrayList<>();
         if (!candidateTempList.contains(candidate)) {
             candidateTempList.add(candidate);
         } else{
@@ -85,7 +83,7 @@ public class ClientController {
     }
 
     public static List<Candidate> clearCandidateTempList() {
-        candidateTempList.clear();
+        candidateTempList = new ArrayList<>();
         return candidateTempList;
     }
 

@@ -80,6 +80,9 @@ public abstract class AppController {
         return textField.getText();
     }
 
+    protected Object getComboBoxValue(ComboBox comboBox) {
+        return comboBox.getSelectionModel().getSelectedItem();
+    }
 
     protected void closeLoginPanelOnAction(Button button) {
         Stage stage = (Stage) button.getScene().getWindow();

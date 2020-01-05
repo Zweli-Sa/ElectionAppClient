@@ -93,10 +93,9 @@ public class Constituency {
     public String toString() {
         return "Constituency{" +
                 "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", description='" + description + '\'' +
-//                ", election=" + election +
-//                ", electionLists=" + electionLists +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", electionLists=" + electionLists +
                 ", cityList=" + cityList +
                 '}';
     }

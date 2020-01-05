@@ -15,17 +15,20 @@ public class ElectionList {
 
     private List<Candidate> candidates;
 
-    private City city;
+    private ElectoralParty electoralParty;
 
-    public ElectionList(long id, List<Candidate> candidates, City city) {
-        this.id = id;
-        this.candidates = candidates;
-        this.city = city;
-    }
+//    private City city;
 
     public ElectionList(long id, List<Candidate> candidates) {
         this.id = id;
         this.candidates = candidates;
+        this.electoralParty = electoralParty;
+    }
+
+    public ElectionList(long id, List<Candidate> candidates, ElectoralParty electoralParty) {
+        this.id = id;
+        this.candidates = candidates;
+        this.electoralParty = electoralParty;
     }
 
     public ElectionList(long id, String name, List<Candidate> candidates) {
@@ -61,7 +64,7 @@ public class ElectionList {
         return "ElectionList{" +
                 "id=" + id +
                 ", candidates=" + candidates +
-                ", city=" + city +
+                ", electoralParty=" + electoralParty +
                 '}';
     }
 }

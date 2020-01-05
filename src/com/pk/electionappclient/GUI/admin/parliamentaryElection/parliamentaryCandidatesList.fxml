@@ -32,7 +32,6 @@
                         </ImageView>
                         <Pane layoutY="127.0" prefHeight="0.0" prefWidth="1200.0" style="-fx-background-color: #dc143c;" />
                         <Pane layoutX="-17.0" layoutY="-18.0" prefHeight="29.0" prefWidth="1222.0" style="-fx-background-color: #fff;" />
-                  <ComboBox fx:id="electionComboBox" layoutX="376.0" layoutY="54.0" onAction="#populateConstituencyComboBox" prefHeight="26.0" prefWidth="399.0" promptText="wybierz wybory" />
                     </children></Pane>
             </top>
             <center>
@@ -48,10 +47,22 @@
                            <TableColumn fx:id="politicalParty" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
                        </columns>
                    </TableView>
-                  <TextField layoutX="228.0" layoutY="21.0" prefHeight="26.0" prefWidth="324.0" />
-                  <TextField layoutX="235.0" layoutY="399.0" prefHeight="26.0" prefWidth="324.0" />
-                  <Button layoutX="710.0" layoutY="21.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="dodaj" />
+                  <TextField layoutX="284.0" layoutY="24.0" prefHeight="26.0" prefWidth="324.0" />
+                  <TextField layoutX="284.0" layoutY="407.0" prefHeight="26.0" prefWidth="324.0" />
+                  <Button layoutX="710.0" layoutY="21.0" mnemonicParsing="false" onAction="#addSelectedCandidateToTempList" prefHeight="30.0" prefWidth="100.0" text="dodaj" />
                   <Button layoutX="710.0" layoutY="397.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="usuń" />
+                  <TableView fx:id="candidatesTempTableView" layoutX="6.0" layoutY="441.0" prefHeight="311.0" prefWidth="806.0">
+                     <columns>
+                        <TableColumn fx:id="idColumnTemp" prefWidth="35.0" text="id" />
+                        <TableColumn fx:id="nameColumnTemp" prefWidth="126.0" text="Imię" />
+                        <TableColumn fx:id="lastNameColumnTemp" prefWidth="161.0" text="Nazwisko" />
+                        <TableColumn fx:id="educationColumnTemp" prefWidth="146.0" text="Wykształcenie" />
+                        <TableColumn fx:id="placeOfResidenceColumnTemp" prefWidth="143.0" text="Miejscowość" />
+                        <TableColumn fx:id="politicalPartyTemp" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="5.0" layoutY="39.0" text="Baza wszystkich kandydatów" />
+                  <Label layoutX="6.0" layoutY="419.0" text="Kandydaci dodani do tworzonej listy" />
                </children></Pane>
             </center>
          <left>
@@ -62,12 +73,12 @@
                                 <Font name="System Bold" size="13.0" />
                             </font>
                         </Button>
-                        <Button layoutX="40.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="utwórz" />
-                  <ComboBox fx:id="partyComboBox" layoutX="40.0" layoutY="64.0" onAction="#getCandidatesByPartyTest" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
+                        <Button fx:id="submitButton" layoutX="40.0" layoutY="162.0" mnemonicParsing="false" onAction="#createParlElectionList" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="utwórz" />
                   <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
-                  <ComboBox fx:id="constituencyComboBox" layoutX="40.0" layoutY="101.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz okręg wyborczy" />
+                  <ComboBox fx:id="constituencyComboBox" layoutX="40.0" layoutY="124.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz okręg wyborczy" />
                    <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
-                  <Button fx:id="loadButton" layoutX="40.0" layoutY="137.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #cecece;" text="wczytaj" />
+                  <ComboBox fx:id="electionComboBox" layoutX="41.0" layoutY="89.0" onAction="#populateConstituencyComboBox" prefHeight="26.0" prefWidth="301.0" promptText="wybierz wybory" />
+                  <ComboBox fx:id="partyComboBox" layoutX="42.0" layoutY="56.0" onAction="#actionOnPartyChange" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
                </children></Pane>
          </left>
         </BorderPane>

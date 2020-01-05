@@ -88,6 +88,10 @@ public class Election {
         return ListElectionList;
     }
 
+    public void setListElectionList(List<ElectionList> listElectionList) {
+        ListElectionList = listElectionList;
+    }
+
     public List<Constituency> getConstituencies() {
         return constituencies;
     }

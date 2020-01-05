@@ -62,6 +62,11 @@ public class ParliamentaryCandidatesListController extends AppController impleme
     @FXML
     TableColumn<ElectoralParty, String> politicalParty;
 
+    public void getCandidatesByPartyTest() {
+        ElectoralParty electoralParty = (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem();
+        getCandidatesByParty(electoralParty);
+    }
+
     public void populatePartiesComboBox() {
         populateComboBoxList(partyComboBox, getPartyDB());
     }
@@ -94,7 +99,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         educationColumn.setCellValueFactory(new PropertyValueFactory<>("education"));
         placeOfResidenceColumn.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
         politicalParty.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        tableView.getItems().setAll(getCandidatesByParty());
+        //tableView.getItems().setAll(getCandidatesByParty((ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
     }
 
     @Override

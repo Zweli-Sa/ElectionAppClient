@@ -63,7 +63,7 @@
                             </font>
                         </Button>
                         <Button layoutX="40.0" layoutY="187.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #4caf50;" text="utwórz" />
-                  <ComboBox fx:id="partyComboBox" layoutX="40.0" layoutY="64.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
+                  <ComboBox fx:id="partyComboBox" layoutX="40.0" layoutY="64.0" onAction="#getCandidatesByPartyTest" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
                   <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
                   <ComboBox fx:id="constituencyComboBox" layoutX="40.0" layoutY="101.0" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz okręg wyborczy" />
                    <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />

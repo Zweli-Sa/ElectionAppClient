@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
 
@@ -17,7 +18,7 @@ public class ClientController {
 
     private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
     private static ElectoralParty pis = new ElectoralParty(1, "Prawo i Sprawiedliwość");
-    private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
+    private static ElectoralParty none = new ElectoralParty(4, "Bezpartyjny");
     private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
 
 
@@ -35,6 +36,18 @@ public class ClientController {
         String jsonString = mapper.writeValueAsString(candidate);
 
     }
+
+    public static List<Candidate> getCandidatesByParty(ElectoralParty party) {
+        List<Candidate> temp = new ArrayList<>();
+        for (Candidate c : list) {
+            if (c.getElectoralParty().getId() == party.getId()) {
+                temp.add(c);
+            }
+        }
+        System.out.println(temp);
+        return temp;
+    }
+
 
     public static List<Candidate> getCandidates() {
         return list;
@@ -112,6 +125,8 @@ public class ClientController {
     public static List<ElectoralParty> getPartyDB() {
         return electoralParties;
     }
+
+
 
     public static List<ElectoralParty> initPartiesList() {
         electoralParties.add(sld);

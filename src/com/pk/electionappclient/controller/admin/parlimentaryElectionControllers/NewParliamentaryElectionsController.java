@@ -23,7 +23,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import static com.pk.electionappclient.controller.ClientController.citiesTempList;
 import static com.pk.electionappclient.controller.ClientController.getCandidates;
 import static com.pk.electionappclient.controller.ElectionController.*;
 

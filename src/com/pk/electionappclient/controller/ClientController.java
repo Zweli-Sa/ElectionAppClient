@@ -20,53 +20,21 @@ public class ClientController {
     private static ElectoralParty none = new ElectoralParty(1, "Bezpartyjny");
     private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
 
-    private static City krakow = new City(10l, "Kraków");
-    private static City warszawa = new City(20l, "Warszawa");
-    private static City wroclaw = new City(30l, "Wroclaw");
+
 
 
     private static List<Candidate> list;
     public static List<Candidate> candidateTempList = new ArrayList<>();
     public static List<Candidate> candidateFinalList = new ArrayList<>();
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
-    public static List<City> citiesDB = new ArrayList<>();
-    public static List<City> citiesTempList = new ArrayList<>();
+//    public static List<City> citiesDB = new ArrayList<>();
+//    public static List<City> citiesTempList = new ArrayList<>();
 
     public static void createCandidate(Candidate candidate) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(candidate);
 
     }
-
-
-    public static List<City> getCitiesDB() {
-        return citiesDB;
-    }
-
-    public static List<City> getCitiesTempList() {
-        return citiesTempList;
-    }
-    public static List<City> addCityToTempList(City city) {
-        //citiesTempList = new ArrayList<>();
-        if (!citiesTempList.contains(city)) {
-            citiesTempList.add(city);
-        } else{
-            popUpError("Miasto jest już na liście");
-        }
-        return citiesTempList;
-    }
-
-    public static List<City> clearCityTempList() {
-        citiesTempList = new ArrayList<>();
-        return citiesTempList;
-    }
-
-    public static List<City> removeCityTempList(City city) {
-        citiesTempList.remove(city);
-        return citiesTempList;
-    }
-
-
 
     public static List<Candidate> getCandidates() {
         return list;
@@ -150,9 +118,4 @@ public class ClientController {
         return electoralParties;
     }
 
-    public static void initCityDB() {
-        citiesDB.add(krakow);
-        citiesDB.add(warszawa);
-        citiesDB.add(wroclaw);
-    }
 }

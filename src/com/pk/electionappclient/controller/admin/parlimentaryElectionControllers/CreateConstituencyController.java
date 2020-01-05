@@ -3,6 +3,8 @@ package com.pk.electionappclient.controller.admin.parlimentaryElectionController
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.City;
 import com.pk.electionappclient.domain.Election;
+import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -61,12 +63,25 @@ public class CreateConstituencyController extends AppController implements Initi
         populateComboBoxList(selectElectionComboBox, getInActiveElections());
     }
 
-    public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
         Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
-        createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
-        electionSetConstituency(election, getConstituencyByElectionID(election));
-        show();
-        loadCurrentConstituency();
+        if(!citiesTempList.isEmpty()){
+            createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
+            electionSetConstituency(election, getConstituencyByElectionID(election));
+            show();
+            loadCurrentConstituency();
+            clearFields();
+
+        } else {
+            popUpError("Dodaj miasto by utworzyć okręg wyborczy");
+        }
+
+    }
+
+    private void clearFields() {
+        constituencyIdTextField.setText("");
+        clearCityTempList();
+        loadCityNameTemp();
     }
 
     private String createConstituencyName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -122,6 +137,8 @@ public class CreateConstituencyController extends AppController implements Initi
         clearCityTempList();
         populateElectionComboBox();
         loadCityName();
+        validateInputFields(submitButton);
+        System.out.println();
     }
 
     public void removeSelectedCityTempList(ActionEvent actionEvent) {
@@ -140,5 +157,12 @@ public class CreateConstituencyController extends AppController implements Initi
         } catch (NullPointerException e) {
 
         }
+    }
+
+    private void validateInputFields(Button button) {
+        button.disableProperty().bind(
+                Bindings.isEmpty(constituencyIdTextField.textProperty())
+                        .or(Bindings.isNull(selectElectionComboBox.valueProperty()))
+        );
     }
 }

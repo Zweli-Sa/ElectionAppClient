@@ -64,7 +64,7 @@
                   <TableView fx:id="currentConstituency" layoutX="17.0" layoutY="457.0" prefHeight="300.0" prefWidth="789.0">
                     <columns>
                       <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
-                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="nazwa" />
+                      <TableColumn fx:id="nameColumn" prefWidth="713.0" text="nazwa" />
                     </columns>
                   </TableView>
                   <Label layoutX="17.0" layoutY="435.0" text="Utworzone okręgi wyborcze:" />

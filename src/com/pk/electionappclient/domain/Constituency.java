@@ -81,14 +81,22 @@ public class Constituency {
         this.electionLists = electionLists;
     }
 
+    public List<City> getCityList() {
+        return cityList;
+    }
+
+    public void setCityList(List<City> cityList) {
+        this.cityList = cityList;
+    }
+
     @Override
     public String toString() {
         return "Constituency{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", election=" + election +
-                ", electionLists=" + electionLists +
+//                ", name='" + name + '\'' +
+//                ", description='" + description + '\'' +
+//                ", election=" + election +
+//                ", electionLists=" + electionLists +
                 ", cityList=" + cityList +
                 '}';
     }

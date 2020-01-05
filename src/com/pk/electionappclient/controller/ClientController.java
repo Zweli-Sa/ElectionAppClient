@@ -29,7 +29,7 @@ public class ClientController {
     public static List<Candidate> candidateTempList = new ArrayList<>();
     public static List<Candidate> candidateFinalList = new ArrayList<>();
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
-    private static List<City> citiesDB = new ArrayList<>();
+    public static List<City> citiesDB = new ArrayList<>();
     public static List<City> citiesTempList = new ArrayList<>();
 
     public static void createCandidate(Candidate candidate) throws IOException {
@@ -47,7 +47,7 @@ public class ClientController {
         return citiesTempList;
     }
     public static List<City> addCityToTempList(City city) {
-      //  citiesTempList = new ArrayList<>();
+        //citiesTempList = new ArrayList<>();
         if (!citiesTempList.contains(city)) {
             citiesTempList.add(city);
         } else{
@@ -57,7 +57,7 @@ public class ClientController {
     }
 
     public static List<City> clearCityTempList() {
-        citiesTempList.clear();
+        citiesTempList = new ArrayList<>();
         return citiesTempList;
     }
 
@@ -65,9 +65,6 @@ public class ClientController {
         citiesTempList.remove(city);
         return citiesTempList;
     }
-
-
-
 
 
 

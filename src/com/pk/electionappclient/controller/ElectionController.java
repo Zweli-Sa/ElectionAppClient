@@ -82,15 +82,14 @@ public class ElectionController {
         return null;
     }
 
-    public static void setConstituencyElectionController(Election election) {
-        List<Constituency> templist = new ArrayList<>();
-        for (Constituency c: constituenciesDB) {
-            if (c.getElection().getId() == election.getId()) {
-                templist.add(c);
+    public static void electionSetConstituency(Election election, List<Constituency> list) {
+        for (Election e : electionsDB) {
+            if (e.getId() == election.getId()) {
+                e.setConstituencies(list);
+            }
             }
         }
-        election.setConstituencies(templist);
-    }
+
 
     public static void show() {
         for (Election e : electionsDB) {

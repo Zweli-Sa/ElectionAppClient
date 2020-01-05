@@ -64,10 +64,9 @@ public class CreateConstituencyController extends AppController implements Initi
     public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
         createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
-        addConstituencyElection(election);
-        showConstituencies();
-        clearCityTempList();
-
+        electionSetConstituency(election, getConstituencyByElectionID(election));
+        show();
+        loadCurrentConstituency();
     }
 
     private String createConstituencyName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {

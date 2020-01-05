@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import static com.pk.electionappclient.controller.ClientController.initCandidateList;
+import static com.pk.electionappclient.controller.ClientController.initPartiesList;
 import static com.pk.electionappclient.controller.ConstituencyController.initCityDB;
 import static com.pk.electionappclient.controller.ElectionController.initElectionsDB;
 
@@ -49,6 +50,7 @@ public class Main extends Application {
         initElectionsDB();
         initCityDB();
         initCandidateList();
+        initPartiesList();
         launch(args);
 
     }

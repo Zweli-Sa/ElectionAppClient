@@ -151,7 +151,7 @@ public class NewParliamentaryElectionsController extends AppController implement
     }
 
     public void loadNewParliCandidateListFXML(ActionEvent actionEvent) throws IOException {
-        loadAnchorPane(electionAnchorPane, "/admin/parliamentaryElection/parlementaireCandidatesList.fxml");
+        loadAnchorPane(electionAnchorPane, "/admin/parliamentaryElection/parliamentaryCandidatesList.fxml");
     }
     public void loadAdminPanel(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(electionAnchorPane, "admin/adminPanel.fxml");

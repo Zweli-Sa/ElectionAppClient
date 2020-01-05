@@ -59,6 +59,7 @@ public class ElectionController {
         return inActiveElectionsDB;
     }
 
+
     public static List<Election> getActiveElections() {
         activeElectionsDB = new ArrayList<>();
         for (Election e : electionsDB) {

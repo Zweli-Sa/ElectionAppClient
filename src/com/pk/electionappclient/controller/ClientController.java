@@ -109,6 +109,9 @@ public class ClientController {
         return list;
     }
 
+    public static List<ElectoralParty> getPartyDB() {
+        return electoralParties;
+    }
 
     public static List<ElectoralParty> initPartiesList() {
         electoralParties.add(sld);

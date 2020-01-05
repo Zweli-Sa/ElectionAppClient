@@ -107,7 +107,7 @@ public class NewCandidateController extends AppController implements Initializab
     }
 
     public void populatePartiesComboBox() {
-        populateComboBoxList(partyComboBox, initPartiesList());
+        populateComboBoxList(partyComboBox, getPartyDB());
     }
 
 

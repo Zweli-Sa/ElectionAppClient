@@ -79,6 +79,8 @@ public class ConstituencyController {
         }
         System.out.println("temp: " + temp);
         return temp;
+
+
     }
     public static void showConstituencies() {
         for (Constituency c : constituenciesDB) {

@@ -39,13 +39,11 @@ public class ClientController {
 
     public static List<Candidate> getCandidatesByParty(ElectoralParty party) {
         List<Candidate> temp = new ArrayList<>();
-        for (Candidate c : list) {
-            if (c.getElectoralParty().getId() == party.getId()) {
-                temp.add(c);
-            }
-        }
+        temp = list.stream().filter(o -> o.getElectoralParty().getId()==(party.getId()))
+                .collect(Collectors.toList());
         System.out.println(temp);
         return temp;
+
     }
 
 

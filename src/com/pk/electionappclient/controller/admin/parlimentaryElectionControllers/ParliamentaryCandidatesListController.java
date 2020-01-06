@@ -211,4 +211,10 @@ public class ParliamentaryCandidatesListController extends AppController impleme
                         .or(Bindings.isNull(partyComboBox.valueProperty()))
                         );
     }
+
+    public void deleteCandidateFromTempList(ActionEvent actionEvent) {
+        Candidate candidate = candidatesTempTableView.getSelectionModel().getSelectedItem();
+        candidateTempList.remove(candidate);
+        loadTempCandidates();
+    }
 }

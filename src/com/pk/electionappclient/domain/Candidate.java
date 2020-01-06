@@ -2,24 +2,17 @@ package com.pk.electionappclient.domain;
 
 import java.util.List;
 
+
 public class Candidate {
-
     private Long id;
-
     private String name;
-
-    private String lastName;
-
-    private Education education;
+    private String lastname;
+    private String education;
 
     private String placeOfResidence;
-
-    protected List<VoteResult> voteResults;
-
+    private List<VoteResult> voteResults;
     private ElectionList electionList;
-
     private ElectoralParty electoralParty;
-
 
     public Candidate(long l, String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         this.id = l;

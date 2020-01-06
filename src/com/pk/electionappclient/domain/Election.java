@@ -5,10 +5,8 @@ import java.util.List;
 
 public class Election {
 
-    private long id;
-
+    private Long id;
     private LocalDateTime startDate;
-
     private LocalDateTime finishDate;
 
     private ElectionType electionType;

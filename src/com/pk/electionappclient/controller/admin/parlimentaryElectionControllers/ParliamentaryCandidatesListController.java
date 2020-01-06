@@ -197,8 +197,11 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
             System.out.println("cand temp list" + candidateTempList);
-            newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+//            newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+            constituency.setElectionLists(newParlElectionList(globalID++, candidateTempList, electoralParty, constituency));
             showElectionListDB();
+            System.out.println("Lista ELECTION:\n");
+            show();
 
 
 //            System.out.println(constituency);

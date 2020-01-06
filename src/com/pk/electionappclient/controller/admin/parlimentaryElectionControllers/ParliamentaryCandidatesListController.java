@@ -21,8 +21,7 @@ import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.*;
-import static com.pk.electionappclient.controller.ElectionController.getInActiveElections;
-import static com.pk.electionappclient.controller.ElectionController.show;
+import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.ElectionListController.clearElectionList;
 import static com.pk.electionappclient.controller.ElectionListController.newParlElectionList;
 
@@ -33,6 +32,8 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     @FXML
     Button exitButton;
+    @FXML
+    Button loadButton;
     @FXML
     Button submitButton;
     @FXML
@@ -83,6 +84,33 @@ public class ParliamentaryCandidatesListController extends AppController impleme
     @FXML
     TableColumn<ElectoralParty, String> politicalPartyTemp;
 
+    @FXML
+    TableView<Candidate> tableViewDB;
+    @FXML
+    TableColumn<Candidate, Long> idColumnDB;
+
+    @FXML
+    TableColumn<Candidate, String> nameColumnDB;
+
+    @FXML
+    TableColumn<Candidate, String> lastNameColumnDB;
+
+    @FXML
+    TableColumn<Candidate, String> educationColumnDB;
+
+    @FXML
+    TableColumn<Candidate, String> politicalPartyDB;
+
+    @FXML
+    TableColumn<ElectoralParty, String> placeOfResidenceColumnDB;
+
+    public void loadActualElectionList() {
+        ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
+        Election election = (Election) getComboBoxValue(electionComboBox);
+        Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
+        System.out.println("W load: " + getCandidatesElection(election, constituency, electoralParty));
+        loadElectionListDB(election, constituency, electoralParty);
+    }
 
     public void addSelectedCandidateToTempList() {
         Candidate candidate = tableView.getSelectionModel().getSelectedItem();
@@ -125,7 +153,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         tableView.getItems().setAll(getCandidatesByParty((ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
     }
     public void loadTempCandidates() {
-        idColumnTemp.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumnTemp.setCellValueFactory(new PropertyValueFactory<>("name"));
         lastNameColumnTemp.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         educationColumnTemp.setCellValueFactory(new PropertyValueFactory<>("education"));
@@ -133,6 +161,17 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         politicalPartyTemp.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
         candidatesTempTableView.getItems().setAll(getTempCandidateList());
     }
+
+    public void loadElectionListDB(Election election, Constituency constituency, ElectoralParty electoralParty) {
+        idColumnDB.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nameColumnDB.setCellValueFactory(new PropertyValueFactory<>("name"));
+        lastNameColumnDB.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+        educationColumnDB.setCellValueFactory(new PropertyValueFactory<>("education"));
+        placeOfResidenceColumnDB.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
+        politicalPartyDB.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
+        tableViewDB.getItems().setAll(getCandidatesElection(election, constituency, electoralParty));
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -160,7 +199,6 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             //showConstituencies();
             show();
             System.out.println(election);
-            System.out.println(constituency.getElectionLists());
         } catch (NullPointerException n) {
 
         }

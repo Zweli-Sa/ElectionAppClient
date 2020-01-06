@@ -1,14 +1,14 @@
 package com.pk.electionappclient.controller;
 
 import com.pk.electionappclient.domain.*;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.pk.electionappclient.controller.ClientController.candidateFinalList;
-import static com.pk.electionappclient.controller.ClientController.candidateTempList;
-
+import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
 import static com.pk.electionappclient.controller.ConstituencyController.getConstituenciesDB;
 
@@ -106,5 +106,28 @@ public class ElectionController {
         electionsDB.add(new Election(2l, null, null, parliamentary, null, true, "Wybory parlamentaren 2014"));
     }
 
+    public static List<Candidate> getCandidatesElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
+        List<ElectionList> eltemp = new ArrayList<>();
+        List<Candidate> candidates = new ArrayList<>();
+        for (Constituency c : constituenciesDB) {
+            if (c.getId() == constituency.getId()) {
+                for (ElectionList cc : c.getElectionLists()) {
+                    if (cc.getElectoralParty().getId() == electoralParty.getId())
+                        candidates = cc.getCandidates();
+                }
+            }
+        }
+
+//        List<Constituency> clist = new ArrayList<>();
+//        List<Candidate> candidateTemp = new ArrayList<>();
+//        clist = constituenciesDB.stream().filter(o -> o.getElection().getId()==(election.getId()))
+//                .collect(Collectors.toList());
+//
+//        for (Constituency c : clist) {
+//            System.out.println("Filtr MAP" + c.getElectionLists().stream().filter(a -> !a.getCandidates().isEmpty())
+//                    .collect(Collectors.toList()));
+//        }
+        return candidates;
+    }
 
 }

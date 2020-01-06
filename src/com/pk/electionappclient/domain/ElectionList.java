@@ -62,6 +62,14 @@ public class ElectionList {
         return candidates;
     }
 
+    public ElectoralParty getElectoralParty() {
+        return electoralParty;
+    }
+
+    public void setElectoralParty(ElectoralParty electoralParty) {
+        this.electoralParty = electoralParty;
+    }
+
     @Override
     public String toString() {
         return "ElectionList{" +

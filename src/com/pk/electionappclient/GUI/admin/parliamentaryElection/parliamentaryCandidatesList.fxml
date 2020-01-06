@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -37,32 +39,58 @@
             <center>
                 <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                <children>
-                   <TableView fx:id="tableView" layoutX="5.0" layoutY="59.0" prefHeight="311.0" prefWidth="806.0">
-                       <columns>
-                           <TableColumn fx:id="idColumn" prefWidth="35.0" text="id" />
-                           <TableColumn fx:id="nameColumn" prefWidth="126.0" text="Imię" />
-                           <TableColumn fx:id="lastNameColumn" prefWidth="161.0" text="Nazwisko" />
-                           <TableColumn fx:id="educationColumn" prefWidth="146.0" text="Wykształcenie" />
-                           <TableColumn fx:id="placeOfResidenceColumn" prefWidth="143.0" text="Miejscowość" />
-                           <TableColumn fx:id="politicalParty" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
-                       </columns>
-                   </TableView>
-                  <TextField layoutX="284.0" layoutY="24.0" prefHeight="26.0" prefWidth="324.0" />
-                  <TextField layoutX="284.0" layoutY="407.0" prefHeight="26.0" prefWidth="324.0" />
-                  <Button layoutX="710.0" layoutY="21.0" mnemonicParsing="false" onAction="#addSelectedCandidateToTempList" prefHeight="30.0" prefWidth="100.0" text="dodaj" />
-                  <Button layoutX="710.0" layoutY="397.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="usuń" />
-                  <TableView fx:id="candidatesTempTableView" layoutX="6.0" layoutY="441.0" prefHeight="311.0" prefWidth="806.0">
-                     <columns>
-                        <TableColumn fx:id="idColumnTemp" prefWidth="35.0" text="id" />
-                        <TableColumn fx:id="nameColumnTemp" prefWidth="126.0" text="Imię" />
-                        <TableColumn fx:id="lastNameColumnTemp" prefWidth="161.0" text="Nazwisko" />
-                        <TableColumn fx:id="educationColumnTemp" prefWidth="146.0" text="Wykształcenie" />
-                        <TableColumn fx:id="placeOfResidenceColumnTemp" prefWidth="143.0" text="Miejscowość" />
-                        <TableColumn fx:id="politicalPartyTemp" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
-                     </columns>
-                  </TableView>
-                  <Label layoutX="5.0" layoutY="39.0" text="Baza wszystkich kandydatów" />
-                  <Label layoutX="6.0" layoutY="419.0" text="Kandydaci dodani do tworzonej listy" />
+                  <TabPane layoutY="8.0" prefHeight="763.0" prefWidth="820.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="tworzenie listy wyborczej">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <TableView fx:id="tableView" layoutX="5.0" layoutY="59.0" prefHeight="311.0" prefWidth="806.0">
+                                <columns>
+                                    <TableColumn fx:id="idColumn" prefWidth="35.0" text="id" />
+                                    <TableColumn fx:id="nameColumn" prefWidth="126.0" text="Imię" />
+                                    <TableColumn fx:id="lastNameColumn" prefWidth="161.0" text="Nazwisko" />
+                                    <TableColumn fx:id="educationColumn" prefWidth="146.0" text="Wykształcenie" />
+                                    <TableColumn fx:id="placeOfResidenceColumn" prefWidth="143.0" text="Miejscowość" />
+                                    <TableColumn fx:id="politicalParty" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
+                                </columns>
+                            </TableView>
+                            <TextField layoutX="284.0" layoutY="24.0" prefHeight="26.0" prefWidth="324.0" />
+                            <TextField layoutX="284.0" layoutY="407.0" prefHeight="26.0" prefWidth="324.0" />
+                            <Button layoutX="710.0" layoutY="21.0" mnemonicParsing="false" onAction="#addSelectedCandidateToTempList" prefHeight="30.0" prefWidth="100.0" text="dodaj" />
+                            <Button layoutX="710.0" layoutY="397.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="100.0" text="usuń" />
+                            <TableView fx:id="candidatesTempTableView" layoutX="6.0" layoutY="441.0" prefHeight="311.0" prefWidth="806.0">
+                                <columns>
+                                    <TableColumn fx:id="idColumnTemp" prefWidth="35.0" text="id" />
+                                    <TableColumn fx:id="nameColumnTemp" prefWidth="126.0" text="Imię" />
+                                    <TableColumn fx:id="lastNameColumnTemp" prefWidth="161.0" text="Nazwisko" />
+                                    <TableColumn fx:id="educationColumnTemp" prefWidth="146.0" text="Wykształcenie" />
+                                    <TableColumn fx:id="placeOfResidenceColumnTemp" prefWidth="143.0" text="Miejscowość" />
+                                    <TableColumn fx:id="politicalPartyTemp" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
+                                </columns>
+                            </TableView>
+                                 <Label layoutX="6.0" layoutY="35.0" text="Baza wszystkich kandydatów" />
+                                 <Label layoutX="6.0" layoutY="417.0" text="Kandydaci dodani do tworzonej listy" />
+                          </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="utworzone listy wyborcze">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <TableView fx:id="tableViewDB" layoutX="5.0" layoutY="24.0" prefHeight="615.0" prefWidth="806.0">
+                                <columns>
+                                    <TableColumn fx:id="idColumnDB" prefWidth="35.0" text="id" />
+                                    <TableColumn fx:id="nameColumnDB" prefWidth="126.0" text="Imię" />
+                                    <TableColumn fx:id="lastNameColumnDB" prefWidth="161.0" text="Nazwisko" />
+                                    <TableColumn fx:id="educationColumnDB" prefWidth="146.0" text="Wykształcenie" />
+                                    <TableColumn fx:id="placeOfResidenceColumnDB" prefWidth="143.0" text="Miejscowość" />
+                                    <TableColumn fx:id="politicalPartyDB" maxWidth="255.0" minWidth="-1.0" prefWidth="189.0" text="Partia" />
+                                </columns>
+                            </TableView>
+                          </AnchorPane>
+                        </content>
+                      </Tab>
+                    </tabs>
+                  </TabPane>
                </children></Pane>
             </center>
          <left>
@@ -79,6 +107,7 @@
                    <Label layoutX="106.0" layoutY="14.0" text="Utwórz listę wyborczą" />
                   <ComboBox fx:id="electionComboBox" layoutX="41.0" layoutY="89.0" onAction="#populateConstituencyComboBox" prefHeight="26.0" prefWidth="301.0" promptText="wybierz wybory" />
                   <ComboBox fx:id="partyComboBox" layoutX="42.0" layoutY="56.0" onAction="#actionOnPartyChange" prefHeight="27.0" prefWidth="300.0" promptText="Wybierz partie" />
+                  <Button fx:id="loadButton" layoutX="42.0" layoutY="211.0" mnemonicParsing="false" onAction="#loadActualElectionList" prefHeight="47.0" prefWidth="299.0" text="wczytaj aktualne listy" />
                </children></Pane>
          </left>
         </BorderPane>

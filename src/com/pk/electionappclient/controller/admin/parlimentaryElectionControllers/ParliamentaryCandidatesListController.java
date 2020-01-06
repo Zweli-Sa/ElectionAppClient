@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
@@ -192,22 +193,26 @@ public class ParliamentaryCandidatesListController extends AppController impleme
     }
 
     public void createParlElectionList(ActionEvent actionEvent) {
-        try {
             ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-            System.out.println(constituency);
-            if(!candidateExistOnAnotherElectionList(candidateTempList, election)){
-                constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty, constituency));
-            } else {
-                popUpError("Kandydat jest na innej liście");
-            }
-            //showConstituencies();
-            show();
-            System.out.println(election);
-        } catch (NullPointerException n) {
+            System.out.println("cand temp list" + candidateTempList);
+            newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+            showElectionListDB();
 
-        }
+
+//            System.out.println(constituency);
+//            if(!candidateExistOnAnotherElectionList(candidateTempList, election)){
+//                constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty, constituency));
+//            } else {
+//                popUpError("Kandydat jest na innej liście");
+//            }
+//            //showConstituencies();
+//            show();
+//            System.out.println(election);
+//        } catch (NullPointerException n) {
+//
+//        }
     }
 
     private void validateInputFields(Button button) {

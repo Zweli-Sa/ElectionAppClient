@@ -12,6 +12,7 @@ public class ElectionList {
     private List<Candidate> candidates;
     private ElectoralParty electoralParty;
 
+
 //    private City city;
 
 
@@ -63,6 +64,14 @@ public class ElectionList {
 
     public void setElectoralParty(ElectoralParty electoralParty) {
         this.electoralParty = electoralParty;
+    }
+
+    public Constituency getConstituency() {
+        return constituency;
+    }
+
+    public void setConstituency(Constituency constituency) {
+        this.constituency = constituency;
     }
 
     @Override

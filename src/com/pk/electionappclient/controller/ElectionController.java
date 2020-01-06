@@ -109,24 +109,18 @@ public class ElectionController {
     public static List<Candidate> getCandidatesElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
         List<ElectionList> eltemp = new ArrayList<>();
         List<Candidate> candidates = new ArrayList<>();
-        for (Constituency c : constituenciesDB) {
-            if (c.getId() == constituency.getId()) {
-                for (ElectionList cc : c.getElectionLists()) {
-                    if (cc.getElectoralParty().getId() == electoralParty.getId())
-                        candidates = cc.getCandidates();
+        try {
+            for (Constituency c : constituenciesDB) {
+                if (c.getId() == constituency.getId()) {
+                    for (ElectionList cc : c.getElectionLists()) {
+                        if (cc.getElectoralParty().getId() == electoralParty.getId())
+                            candidates = cc.getCandidates();
+                    }
                 }
             }
+        } catch (NullPointerException e) {
+            System.out.println("Null w getCandidatesElection");
         }
-
-//        List<Constituency> clist = new ArrayList<>();
-//        List<Candidate> candidateTemp = new ArrayList<>();
-//        clist = constituenciesDB.stream().filter(o -> o.getElection().getId()==(election.getId()))
-//                .collect(Collectors.toList());
-//
-//        for (Constituency c : clist) {
-//            System.out.println("Filtr MAP" + c.getElectionLists().stream().filter(a -> !a.getCandidates().isEmpty())
-//                    .collect(Collectors.toList()));
-//        }
         return candidates;
     }
 

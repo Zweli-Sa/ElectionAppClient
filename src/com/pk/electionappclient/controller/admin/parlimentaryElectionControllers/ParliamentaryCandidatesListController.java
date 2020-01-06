@@ -108,8 +108,11 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
         Election election = (Election) getComboBoxValue(electionComboBox);
         Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-        System.out.println("W load: " + getCandidatesElection(election, constituency, electoralParty));
-        loadElectionListDB(election, constituency, electoralParty);
+        try {
+            loadElectionListDB(election, constituency, electoralParty);
+        } catch (NullPointerException E) {
+            loadElectionListDB(null, null, null);
+        }
     }
 
     public void addSelectedCandidateToTempList() {

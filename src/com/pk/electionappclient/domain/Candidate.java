@@ -7,7 +7,7 @@ public class Candidate {
     private Long id;
     private String name;
     private String lastname;
-    private String education;
+    private Education education;
 
     private String placeOfResidence;
     private List<VoteResult> voteResults;
@@ -17,7 +17,7 @@ public class Candidate {
     public Candidate(long l, String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         this.id = l;
         this.name = name;
-        this.lastName = lastName;
+        this.lastname = lastName;
         this.education = education;
         this.placeOfResidence = placeOfResidence;
         this.electoralParty = electoralParty;
@@ -28,7 +28,7 @@ public class Candidate {
                      List<VoteResult> voteResults, ElectionList electionList, ElectoralParty electoralParty) {
         this.id = id;
         this.name = name;
-        this.lastName = lastname;
+        this.lastname = lastname;
         this.education = education;
         this.placeOfResidence = placeOfResidence;
         this.voteResults = voteResults;
@@ -45,7 +45,7 @@ public class Candidate {
     }
 
     public String getLastname() {
-        return lastName;
+        return lastname;
     }
 
     public Education getEducation() {
@@ -77,7 +77,7 @@ public class Candidate {
     }
 
     public void setLastname(String lastname) {
-        this.lastName = lastname;
+        this.lastname = lastname;
     }
 
     public void setEducation(Education education) {
@@ -105,7 +105,7 @@ public class Candidate {
         return "Candidate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", lastName='" + lastname + '\'' +
                 ", education=" + education +
                 ", placeOfResidence='" + placeOfResidence + '\'' +
                 ", electoralParty=" + electoralParty +

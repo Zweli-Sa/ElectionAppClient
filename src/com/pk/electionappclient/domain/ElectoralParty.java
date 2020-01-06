@@ -7,9 +7,9 @@ public class ElectoralParty {
     private Long id;
     private String name;
     private String description;
-//    private List<Candidate> candidates;
+    private List<Candidate> candidates = null;
 
-//    private ElectoralProgramme electoralProgramme;
+    private ElectoralProgramme electoralProgramme = null;
 
 
 
@@ -22,6 +22,14 @@ public class ElectoralParty {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public ElectoralParty(long id, String name, String description, List<Candidate> candidates, ElectoralProgramme electoralProgramme) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.candidates = candidates;
+        this.electoralProgramme = electoralProgramme;
     }
 
     public long getId() {

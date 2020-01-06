@@ -22,8 +22,7 @@ import java.util.ResourceBundle;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
-import static com.pk.electionappclient.controller.ElectionListController.clearElectionList;
-import static com.pk.electionappclient.controller.ElectionListController.newParlElectionList;
+import static com.pk.electionappclient.controller.ElectionListController.*;
 
 public class ParliamentaryCandidatesListController extends AppController implements Initializable {
 
@@ -198,7 +197,11 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
             System.out.println(constituency);
-            constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty, constituency));
+            if(!candidateExistOnAnotherElectionList(candidateTempList, election)){
+                constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty, constituency));
+            } else {
+                popUpError("Kandydat jest na innej liście");
+            }
             //showConstituencies();
             show();
             System.out.println(election);

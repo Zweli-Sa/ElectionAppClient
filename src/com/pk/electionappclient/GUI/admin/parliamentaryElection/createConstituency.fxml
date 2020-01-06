@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="constituencyAnchorPane" prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../../resources/css/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.controller.admin.parlimentaryElectionControllers.CreateConstituencyController">
+    <children>
+        <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button id="closeButton" fx:id="exitButton" layoutX="1150.0" layoutY="50.0" mnemonicParsing="false" onAction="#closePanel" style="-fx-background-color: #dc143c;" text="X" />
+                        <Label layoutX="124.0" layoutY="43.0" text="e-Wybory" textFill="GREY">
+                            <font>
+                                <Font name="System Bold" size="36.0" />
+                            </font>
+                        </Label>
+                        <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="39.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="22.273582458496094" AnchorPane.topAnchor="23.0">
+                            <image>
+                                <Image url="@/com/pk/electionappclient/resources/img/Herb_Polski.png" />
+                            </image>
+                        </ImageView>
+                        <Pane layoutY="127.0" prefHeight="0.0" prefWidth="1200.0" style="-fx-background-color: #dc143c;" />
+                        <Pane layoutX="-17.0" layoutY="-18.0" prefHeight="29.0" prefWidth="1222.0" style="-fx-background-color: #fff;" />
+                  <ComboBox fx:id="selectElectionComboBox" layoutX="389.0" layoutY="54.0" onAction="#refreshTable" prefHeight="26.0" prefWidth="422.0" promptText="Wybierz wybory" />
+                    </children></Pane>
+            </top>
+            <center>
+                <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TableView fx:id="cityDBTableView" layoutX="17.0" layoutY="63.0" prefHeight="340.0" prefWidth="370.0">
+                            <columns>
+                        <TableColumn fx:id="cityNameColumn" prefWidth="795.0" text="Miejscowość" />
+                            </columns>
+                        </TableView>
+                  <TableView fx:id="cityTempTableView" layoutX="436.0" layoutY="63.0" prefHeight="340.0" prefWidth="370.0">
+                     <columns>
+                        <TableColumn fx:id="cityNameTempColumn" prefWidth="795.0" text="Miejscowość" />
+                     </columns>
+                  </TableView>
+                  <Label layoutX="17.0" layoutY="14.0" prefHeight="48.0" prefWidth="282.0" text="Dodaj miejscowość" wrapText="true">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="436.0" layoutY="31.0" text="Wybrane miejścowości:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="283.0" layoutY="28.0" mnemonicParsing="false" onAction="#addCandidateElectionList" prefHeight="26.0" prefWidth="104.0" text="Dodaj" />
+                  <Button layoutX="702.0" layoutY="28.0" mnemonicParsing="false" onAction="#removeSelectedCityTempList" prefHeight="26.0" prefWidth="104.0" text="usuń" />
+                  <TableView fx:id="currentConstituency" layoutX="17.0" layoutY="457.0" prefHeight="300.0" prefWidth="789.0">
+                    <columns>
+                      <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="nameColumn" prefWidth="713.0" text="nazwa" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="17.0" layoutY="435.0" text="Utworzone okręgi wyborcze:" />
+                  <Line endX="4.0" endY="372.0" layoutX="407.0" layoutY="42.0" startX="4.0" startY="-22.0" stroke="#d3d3d3" />
+                  <Line endX="387.0" endY="372.0" layoutX="417.0" layoutY="52.0" startX="-395.0" startY="372.0" stroke="#d3d3d3" />
+                    </children></Pane>
+            </center>
+         <left>
+            <Pane prefHeight="772.0" prefWidth="380.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="constituencyIdTextField" layoutX="39.0" layoutY="22.0" prefHeight="49.0" prefWidth="298.0" promptText="Wpisz numer okręgu" />
+                        <Button layoutX="10.0" layoutY="715.0" mnemonicParsing="false" onAction="#loadAdminPanel" prefHeight="44.0" prefWidth="78.0" style="-fx-background-color: #dbdbdb;" text="cofnij">
+                            <font>
+                                <Font name="System Bold" size="13.0" />
+                            </font>
+                        </Button>
+                  <Button fx:id="submitButton" layoutX="39.0" layoutY="81.0" mnemonicParsing="false" onAction="#newConstituency" prefHeight="40.0" prefWidth="298.0" style="-fx-background-color: #4caf50;" text="Utwórz" />
+               </children>
+            </Pane>
+         </left>
+        </BorderPane>
+    </children>
+
+</AnchorPane>

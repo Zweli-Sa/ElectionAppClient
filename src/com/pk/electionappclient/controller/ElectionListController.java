@@ -30,6 +30,15 @@ public class ElectionListController {
         return false;
     }
 
+    public static boolean candidateInAnotherConstituency(Constituency constituency, List<Candidate> candidateList) {
+        for (Candidate c : candidateList) {
+            if(electionList.stream().filter(o -> o.getConstituency().getElection().getId() == constituency.getElection().getId() && o.getCandidates().contains(c)).findAny().isPresent()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException{
         if (electionList.isEmpty()) {
             electionList.add(new ElectionList(id, candidates, electoralParty, constituency));

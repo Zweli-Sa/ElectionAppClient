@@ -11,7 +11,7 @@ public class ElectionList {
 
     private String description;
 
-//    private Constituency constituency;
+    private Constituency constituency;
 
     private List<Candidate> candidates;
 
@@ -19,17 +19,20 @@ public class ElectionList {
 
 //    private City city;
 
+
+
     public ElectionList(long id, List<Candidate> candidates) {
         this.id = id;
         this.candidates = candidates;
         this.electoralParty = electoralParty;
     }
 
-    public ElectionList(long id, List<Candidate> candidates, ElectoralParty electoralParty) {
+    public ElectionList(long id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) {
         this.id = id;
         this.candidates = candidates;
         this.electoralParty = electoralParty;
-    }
+        this.constituency = constituency;
+    }///dodane constituency
 
     public ElectionList(long id, String name, List<Candidate> candidates) {
         this.id = id;
@@ -63,6 +66,8 @@ public class ElectionList {
     public String toString() {
         return "ElectionList{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", constituency=" + constituency.getId() +
                 ", candidates=" + candidates +
                 ", electoralParty=" + electoralParty +
                 '}';

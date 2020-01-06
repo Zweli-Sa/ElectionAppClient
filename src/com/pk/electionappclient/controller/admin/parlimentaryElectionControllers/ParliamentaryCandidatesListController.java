@@ -3,6 +3,7 @@ package com.pk.electionappclient.controller.admin.parlimentaryElectionController
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.*;
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -135,6 +136,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        validateInputFields(submitButton);
         clearField();
         populatePartiesComboBox();
         populateElectionComboBox();
@@ -143,16 +145,32 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     public void actionOnPartyChange(ActionEvent actionEvent) {
         loadCandidates();
+        clearCityTempList();
         clearCandidateTempList();
         loadTempCandidates();
     }
 
     public void createParlElectionList(ActionEvent actionEvent) {
-        ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
-        Election election = (Election) getComboBoxValue(electionComboBox);
-        Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-        constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty));
-        showConstituencies();
-        show();
+        try {
+            ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
+            Election election = (Election) getComboBoxValue(electionComboBox);
+            Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
+            System.out.println(constituency);
+            constituency.setElectionLists(newParlElectionList(2, candidateTempList, electoralParty, constituency));
+            //showConstituencies();
+            show();
+            System.out.println(election);
+            System.out.println(constituency.getElectionLists());
+        } catch (NullPointerException n) {
+
+        }
+    }
+
+    private void validateInputFields(Button button) {
+        button.disableProperty().bind(
+                Bindings.isNull(constituencyComboBox.valueProperty())
+                        .or(Bindings.isNull(electionComboBox.valueProperty()))
+                        .or(Bindings.isNull(partyComboBox.valueProperty()))
+                        );
     }
 }

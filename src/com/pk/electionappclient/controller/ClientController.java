@@ -82,9 +82,8 @@ public class ClientController {
         return candidateTempList;
     }
 
-    public static List<Candidate> clearCandidateTempList() {
+    public static void clearCandidateTempList() {
         candidateTempList = new ArrayList<>();
-        return candidateTempList;
     }
 
 

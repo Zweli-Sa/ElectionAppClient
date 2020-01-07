@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
 import static com.pk.electionappclient.controller.ConstituencyController.getConstituenciesDB;
+import static com.pk.electionappclient.controller.ElectionListController.electionList;
 
 public class ElectionController {
 
@@ -32,8 +33,7 @@ public class ElectionController {
     }
 
     public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
-        candidateFinalList = new ArrayList<>();
-        candidateTempList = new ArrayList<>();
+        clearCandidateTempList();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             electionsDB.add(new Election(id, startDate, finishDate, electionType, list));
         }
@@ -107,7 +107,6 @@ public class ElectionController {
     }
 
     public static List<Candidate> getCandidatesElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
-        List<ElectionList> eltemp = new ArrayList<>();
         List<Candidate> candidates = new ArrayList<>();
         try {
             for (Constituency c : constituenciesDB) {
@@ -122,6 +121,20 @@ public class ElectionController {
             System.out.println("Null w getCandidatesElection");
         }
         return candidates;
+    }
+
+    public static List<ElectionList> getElectionIdByConstituencyID(Constituency constituency) {
+        List<ElectionList> elist = new ArrayList<>();
+        try {
+            for (ElectionList el : electionList) {
+                if (el.getConstituency().getId() == constituency.getId()) {
+                        elist.add(el);
+                    }
+                }
+            } catch (NullPointerException e) {
+            System.out.println("Null w getCandidatesElection");
+        }
+        return elist;
     }
 
 }

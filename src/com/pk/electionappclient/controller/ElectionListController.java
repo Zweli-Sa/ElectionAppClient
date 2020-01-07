@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
+import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
 
 public class ElectionListController {
 
     public static List<ElectionList> electionList = new ArrayList<>();
 
     public static List<ElectionList> newPresElectionList(int id, List<Candidate> candidates) throws NullPointerException{
-        electionList = new ArrayList<>();
         if (!candidates.isEmpty()) {
-            id++;
+            System.out.println("newPresElectionList");
             electionList.add(new ElectionList(id, candidates));
         }
         else {

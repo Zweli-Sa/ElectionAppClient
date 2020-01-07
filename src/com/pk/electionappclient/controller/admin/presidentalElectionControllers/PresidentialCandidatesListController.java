@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
+import static com.pk.electionappclient.controller.ElectionListController.electionList;
 import static com.pk.electionappclient.controller.ElectionListController.newPresElectionList;
 import static com.pk.electionappclient.controller.ElectionTypeController.prezydenckie;
 import static java.sql.Date.valueOf;
@@ -94,16 +95,16 @@ public class PresidentialCandidatesListController extends AppController implemen
     }
 
     public void createPresElectionDay(ActionEvent actionEvent) throws IOException {
-        id++;
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
-                createElectionDay(id, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newPresElectionList(id, setCandidateFinalList()));
+                createElectionDay(id++, presElectionStartDate(), presElectionEndDate(),
+                        prezydenckie, newPresElectionList(id++, candidateTempList));
             }
         } catch (NullPointerException e) {
         }
-        System.out.println(getElections());
-        clearCandidateTempList();
+        System.out.println(electionList);
+        //System.out.println(getElections());
+//        clearCandidateTempList();
         show();
     }
 

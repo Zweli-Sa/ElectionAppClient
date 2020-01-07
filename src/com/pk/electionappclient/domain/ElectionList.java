@@ -79,7 +79,7 @@ public class ElectionList {
         return "ElectionList{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", constituency=" + constituency.getId() +
+//                ", constituency=" + constituency.getId() +
                 ", candidates=" + candidates +
                 ", electoralParty=" + electoralParty +
                 '}';

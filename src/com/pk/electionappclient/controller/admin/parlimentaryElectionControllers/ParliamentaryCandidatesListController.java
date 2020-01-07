@@ -199,9 +199,9 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             if (candidateInAnotherConstituency(constituency, candidateTempList)) {
                 popUpError("Kandydat jest już dodany do innego okregu wyborczego");
             } else{
-                constituency.setElectionLists(newParlElectionList(globalID++, candidateTempList, electoralParty, constituency));
+                newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+                constituency.setElectionLists(getElectionIdByConstituencyID(constituency));
             }
-
     }
 
     private void validateInputFields(Button button) {

@@ -4,6 +4,8 @@ import com.pk.electionappclient.domain.*;
 import com.pk.electionappclient.httpresponser.HttpResponser;
 import com.pk.electionappclient.mapper.JsonMapper;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.*;
@@ -47,7 +49,15 @@ public class ClientController {
 
 
     public static List<Candidate> getCandidates() {
-        return list;
+        RestTemplate restTemplate = new RestTemplate();
+        List<Candidate> candidateList = new ArrayList<>();
+        try {
+            Candidate[] candidates = restTemplate.getForObject("http://localhost:8080/v1/election/getCandidates", Candidate[].class);
+            candidateList = Arrays.asList(candidates);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+        return candidateList;
     }
     public static List<Candidate> setCandidateFinalList() {
         candidateFinalList.addAll(candidateTempList);

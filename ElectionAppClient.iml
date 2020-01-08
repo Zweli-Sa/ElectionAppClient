@@ -11,5 +11,8 @@
     <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
     <orderEntry type="library" name="jackson-all-1.9.0" level="project" />
     <orderEntry type="library" exported="" name="jfoenix-8.0.8" level="project" />
+    <orderEntry type="library" name="spring-web-3.2.3.release" level="project" />
+    <orderEntry type="library" name="org.springframework.core_3.1.4.release" level="project" />
+    <orderEntry type="library" name="commons-logging-1.2" level="project" />
   </component>
 </module>

@@ -1,9 +1,10 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class Candidate {
+public class Candidate implements Serializable {
     private Long id;
     private String name;
     private String lastname;
@@ -13,6 +14,9 @@ public class Candidate {
     private List<VoteResult> voteResults;
     private ElectionList electionList;
     private ElectoralParty electoralParty;
+
+    public Candidate() {
+    }
 
     public Candidate(long l, String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         this.id = l;

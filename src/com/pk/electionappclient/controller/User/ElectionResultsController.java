@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 
 public class ElectionResultsController extends AppController {
 
-    com.pk.electionappclient.controller.login.loginController loginController;
+    com.pk.electionappclient.controller.loginController loginController;
 
     @FXML
     Button exitButton;

@@ -18,8 +18,11 @@ public class AdminPanelController extends AppController {
 
 
 
-    public void closePanel(ActionEvent actionEvent) {
-        closeLoginPanelOnAction(exitButton);
+    public void closePanel(ActionEvent actionEvent) throws IOException {
+
+        //closeLoginPanelOnAction(exitButton);
+        loadAnchorPane(adminAnchorPane, "/login.fxml");
+
     }
 
     public void loadConstituencyFXML(ActionEvent actionEvent) throws IOException {
@@ -31,5 +34,9 @@ public class AdminPanelController extends AppController {
 
     public void loadCandidatesListFXML(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(adminAnchorPane, "admin/presidentialElection/presidentialCandidatesList.fxml");
+    }
+
+    public void loadLoginPanelFXML(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(adminAnchorPane, "/login.fxml");
     }
 }

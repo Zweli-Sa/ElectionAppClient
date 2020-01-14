@@ -28,4 +28,8 @@ public class UserPanelController extends AppController {
     public void loadCurrentElectionsPanel(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(userPanelAnchorPane, "user/currentElections.fxml");
     }
+
+    public void loadResultsPanel(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(userPanelAnchorPane, "user/electionResults.fxml");
+    }
 }

@@ -138,9 +138,7 @@ public class ClientController {
     public static List<Candidate> getTempCandidateList() {
         return candidateTempList;
     }
-    public static List<Candidate> getCandidateFinalList() {
-        return candidateFinalList;
-    }
+
 
 
     public static List<Candidate> addCandidateToTempList(Candidate candidate) {

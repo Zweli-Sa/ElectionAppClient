@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.controller.User.ElectionResultsController">
+<AnchorPane fx:id="electionResultsAnchorPane" prefHeight="900.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.controller.User.ElectionResultsController">
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
                 <Pane prefHeight="128.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" BorderPane.alignment="CENTER">
@@ -28,28 +28,26 @@
             <center>
                 <Pane prefHeight="395.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <TreeTableView layoutX="19.0" layoutY="71.0" prefHeight="531.0" prefWidth="1167.0">
+                        <TableView fx:id="resultTableView" layoutX="19.0" layoutY="71.0" prefHeight="614.0" prefWidth="1167.0">
                             <columns>
-                        <TreeTableColumn prefWidth="180.0" text="Czy uzyskał mandat?" />
-                                <TreeTableColumn prefWidth="180.0" text="liczba głosów" />
-                                <TreeTableColumn prefWidth="138.0" text="Numer na liście" />
-                                <TreeTableColumn minWidth="0.0" prefWidth="167.0" text="Nazwisko i imiona" />
-                                <TreeTableColumn prefWidth="175.0" text="Miejscowość zamieszkania" />
-                                <TreeTableColumn prefWidth="157.0" text="Partia polityczna" />
+                                <TableColumn fx:id="resultColumn" prefWidth="180.0" text="liczba głosów" />
+                                <TableColumn fx:id="nameColumn" prefWidth="138.0" text="Imie" />
+                                <TableColumn fx:id="lastNameColumn" minWidth="0.0" prefWidth="167.0" text="Nazwisko" />
+                                <TableColumn fx:id="partyColumn" prefWidth="157.0" text="Partia polityczna" />
                             </columns>
-                        </TreeTableView>
+                        </TableView>
                         <Label layoutX="23.0" layoutY="14.0" text="Wybierz wybory:" />
-                  <ComboBox layoutX="141.0" layoutY="9.0" prefHeight="26.0" prefWidth="217.0" />
-                  <ComboBox layoutX="957.0" layoutY="9.0" prefHeight="26.0" prefWidth="222.0" />
+                  <ComboBox fx:id="electionComboBox" layoutX="141.0" layoutY="9.0" prefHeight="26.0" prefWidth="217.0" />
+                  <ComboBox fx:id="partyComboBox" layoutX="957.0" layoutY="9.0" prefHeight="26.0" prefWidth="222.0" />
                   <Label layoutX="853.0" layoutY="14.0" text="Wybierz listę:" />
-                  <ComboBox layoutX="525.0" layoutY="9.0" prefHeight="26.0" prefWidth="301.0" />
+                  <ComboBox fx:id="constituencyComboBox" layoutX="525.0" layoutY="9.0" prefHeight="26.0" prefWidth="301.0" />
                   <Label layoutX="423.0" layoutY="14.0" text="Wybierz okręg:" />
                     </children></Pane>
             </center>
             <bottom>
-                <Pane prefHeight="63.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+                <Pane prefHeight="69.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button layoutX="1107.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="79.0" style="-fx-background-color: #dbdbdb;" text="cofnij" />
+                        <Button layoutX="1093.0" layoutY="7.0" mnemonicParsing="false" onAction="#loadUserPanel" prefHeight="55.0" prefWidth="79.0" style="-fx-background-color: #dbdbdb;" text="cofnij" />
                     </children>
                 </Pane>
             </bottom>

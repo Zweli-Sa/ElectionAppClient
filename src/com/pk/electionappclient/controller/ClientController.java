@@ -66,13 +66,13 @@ public class ClientController {
     }
 
 
-    public static List<Constituency> getConstituencyListByUserCityId(Election election, int userId) {
+    public static Constituency getConstituencyListByUserCityId(Election election, int userId) {
         Election e = getElectionByElection(election);
-        List<Constituency> temp = new ArrayList<>();
+        Constituency temp = null;
         for (Constituency c : e.getConstituencies()) {
             for (City city : c.getCityList()) {
                 if (city.getId() == userId) {
-                    temp.add(c);
+                    temp = c;
                 }
             }
         }
@@ -80,13 +80,10 @@ public class ClientController {
 
     }
 
-    public static List<ElectionList> getElectionListByConstituency(List<Constituency> constituencyList) {
+    public static List<ElectionList> getElectionListByConstituency(Constituency constituency) {
+        constituency.getElectionLists();
         List<ElectionList> electionLists = new ArrayList<>();
-        for (Constituency c : constituencyList) {
-            for (ElectionList el : c.getElectionLists()) {
-                electionLists.add(el);
-            }
-        }
+        electionLists = constituency.getElectionLists();
         return electionLists;
     }
 

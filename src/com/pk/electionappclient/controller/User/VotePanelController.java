@@ -93,7 +93,8 @@ public class VotePanelController extends AppController implements Initializable 
 
     public void voteAction(ActionEvent actionEvent) {
         Candidate candidate = candidatesTableView.getSelectionModel().getSelectedItem();
-        voteForCandidate(election, candidate, (Constituency) getConstituencyListByUserCityId(election, 20));
+        Constituency constituency = getConstituencyListByUserCityId(election, 20);
+        voteForCandidate(election, candidate, constituency);
         System.out.println(voteResultsDB);
     }
 }

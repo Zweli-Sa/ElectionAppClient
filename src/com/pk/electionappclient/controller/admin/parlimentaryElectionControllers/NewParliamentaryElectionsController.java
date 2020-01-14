@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.ClientController.getCandidates;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
@@ -76,7 +77,7 @@ public class NewParliamentaryElectionsController extends AppController implement
     public void addNewElectionDay(ActionEvent actionEvent) {
         try {
             if (validateDate(parliamentaryElectionStartDate(), parliamentaryElectionEndDate())) {
-                createElectionDayTest(3, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false, createElectionName());
+                createElectionDayTest(globalID++, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false, createElectionName());
                 loadInactiveElections();
                 show();
             }
@@ -158,12 +159,16 @@ public class NewParliamentaryElectionsController extends AppController implement
     }
 
     public void activeSelectedElection(ActionEvent actionEvent) {
-        Election election;
-        election = (Election) inactiveElectionDayTable.getSelectionModel().getSelectedItem();
-        System.out.println(election);
-        election.setActive(true);
-        loadInactiveElections();
-        loadActiveElections();
+        try {
+            Election election;
+            election = (Election) inactiveElectionDayTable.getSelectionModel().getSelectedItem();
+            System.out.println(election);
+            election.setActive(true);
+            loadInactiveElections();
+            loadActiveElections();
+        } catch (NullPointerException e) {
+            popUpError("Wybierz wybory by je aktywowac");
+        }
 
     }
 

@@ -66,7 +66,7 @@ public class ClientController {
     }
 
 
-    public static List<Constituency> getConstituencyByUserId(Election election, int userId) {
+    public static List<Constituency> getConstituencyListByUserCityId(Election election, int userId) {
         Election e = getElectionByElection(election);
         List<Constituency> temp = new ArrayList<>();
         for (Constituency c : e.getConstituencies()) {
@@ -107,6 +107,14 @@ public class ClientController {
         }
         return temp;
     }
+
+// ---------------------------------------------------------------------------------------------------------------------
+
+//-----VOTE-Results-----------------------------------------------------------------------------------------------------
+
+
+
+
 
 // ---------------------------------------------------------------------------------------------------------------------
     public static List<Candidate> getCandidates() {

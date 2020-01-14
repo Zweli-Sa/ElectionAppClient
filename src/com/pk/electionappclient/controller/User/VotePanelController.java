@@ -1,10 +1,7 @@
 package com.pk.electionappclient.controller.User;
 
 import com.pk.electionappclient.controller.AppController;
-import com.pk.electionappclient.domain.Candidate;
-import com.pk.electionappclient.domain.Election;
-import com.pk.electionappclient.domain.ElectionList;
-import com.pk.electionappclient.domain.ElectoralParty;
+import com.pk.electionappclient.domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,6 +12,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.*;
+import static com.pk.electionappclient.controller.VoteResultsController.voteForCandidate;
+import static com.pk.electionappclient.controller.VoteResultsController.voteResultsDB;
 
 public class VotePanelController extends AppController implements Initializable {
 
@@ -59,7 +58,7 @@ public class VotePanelController extends AppController implements Initializable 
         educationColumn.setCellValueFactory(new PropertyValueFactory<>("education"));
         placeOfResidenceColumn.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
         politicalParty.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        candidatesTableView.getItems().setAll(getCandidateByElectionListElectoralParty(getElectionListByConstituency(getConstituencyByUserId(election, 20)), (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
+        candidatesTableView.getItems().setAll(getCandidateByElectionListElectoralParty(getElectionListByConstituency(getConstituencyListByUserCityId(election, 20)), (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
     }
 
     public void setElection(Election election) {
@@ -79,7 +78,7 @@ public class VotePanelController extends AppController implements Initializable 
 
     public void init() {
         System.out.println("INIT");
-        populateComboBoxList(partyComboBox, getElectoralPartiesByElectionList(getElectionListByConstituency( getConstituencyByUserId(election, 20))));
+        populateComboBoxList(partyComboBox, getElectoralPartiesByElectionList(getElectionListByConstituency(getConstituencyListByUserCityId(election, 20))));
     }
 
     @Override
@@ -87,10 +86,14 @@ public class VotePanelController extends AppController implements Initializable 
         userCityId=20;
     }
 
-    public void showEl(ActionEvent actionEvent) {
-        System.out.println(election);
+
+    public void loadCandidatesOnChange(ActionEvent actionEvent) {
         loadCandidateTable();
+    }
 
-
+    public void voteAction(ActionEvent actionEvent) {
+        Candidate candidate = candidatesTableView.getSelectionModel().getSelectedItem();
+        voteForCandidate(election, candidate, (Constituency) getConstituencyListByUserCityId(election, 20));
+        System.out.println(voteResultsDB);
     }
 }

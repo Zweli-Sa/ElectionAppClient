@@ -132,7 +132,7 @@ public class User {
         this.password = password;
     }
 
-    public User(long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, BigInteger idNumber, String email, String phoneNumber, City city) {
+    public User(Long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, BigInteger idNumber, String email, String phoneNumber, City city, String password, Boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
@@ -145,7 +145,7 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.city = city;
+        this.password = password;
+        this.isAdmin = isAdmin;
     }
-
-
 }

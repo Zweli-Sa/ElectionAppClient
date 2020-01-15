@@ -52,6 +52,16 @@ public class Election {
         this.ListElectionList = electionList;
     }
 
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinish) {
+        this.id = id;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.electionType = electionType;
+        this.ListElectionList = list;
+        this.isActive=isActive;
+        this.isFinished = isFinish;
+    }
+
     public long getId() {
         return id;
     }

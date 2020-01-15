@@ -32,6 +32,46 @@ public class VoteResult {
     }
 
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Election getElection() {
+        return election;
+    }
+
+    public void setElection(Election election) {
+        this.election = election;
+    }
+
+    public Candidate getCandidate() {
+        return candidate;
+    }
+
+    public void setCandidate(Candidate candidate) {
+        this.candidate = candidate;
+    }
+
+    public Constituency getConstituency() {
+        return constituency;
+    }
+
+    public void setConstituency(Constituency constituency) {
+        this.constituency = constituency;
+    }
+
+    public LocalDateTime getVoteTime() {
+        return voteTime;
+    }
+
+    public void setVoteTime(LocalDateTime voteTime) {
+        this.voteTime = voteTime;
+    }
+
     @Override
     public String toString() {
         return "VoteResult{" +

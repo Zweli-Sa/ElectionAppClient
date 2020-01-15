@@ -11,8 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
-
-import static com.pk.electionappclient.controller.ElectionController.getElections;
+import static com.pk.electionappclient.controller.ElectionController.*;
 
 public class ClientController {
 
@@ -164,9 +163,6 @@ public class ClientController {
         return true;
     }
 
-    public static List<Report> getUserReports(Long id) {
-        return new ArrayList<>();
-    }
 
     public static List<VoteResult> getVoteResults() {
         return new ArrayList<>();
@@ -186,6 +182,26 @@ public class ClientController {
     }
 
     public static List<ElectoralParty> getPartyDB() {
+        return electoralParties;
+    }
+
+    public static List<ElectoralParty> getPartyByConstituency(Constituency constituency) {
+        List<ElectoralParty> electoralParties = new ArrayList<>();
+        for (Election e : finishedElectionsDB) {
+
+            System.out.println("Election e: " + e);
+            for (Constituency c : e.getConstituencies()) {
+                if (c.getId() == constituency.getId()) {
+                    for (ElectionList el : c.getElectionLists()) {
+                        System.out.println("ElectionList el:" + el);
+                        if (el.getConstituency().getId() == constituency.getId()) {
+                            electoralParties.add(el.getElectoralParty());
+                        }
+                }
+
+                }
+            }
+        }
         return electoralParties;
     }
 

@@ -18,7 +18,7 @@ public class ElectionController {
     private static List<Election> electionsDB = new ArrayList<>();
     private static List<Election> inActiveElectionsDB = new ArrayList<>();
     private static List<Election> activeElectionsDB = new ArrayList<>();
-    private static List<Election> finishedElectionsDB = new ArrayList<>();
+    public static List<Election> finishedElectionsDB = new ArrayList<>();
 
 
     public static List<Election> getElections() {
@@ -30,10 +30,10 @@ public class ElectionController {
         inActiveElectionsDB.clear();
     }
 
-    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
+    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinish) {
         clearCandidateTempList();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
-            electionsDB.add(new Election(id, startDate, finishDate, electionType, list));
+            electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, isFinish));
         }
         return electionsDB;
     }

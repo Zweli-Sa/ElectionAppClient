@@ -40,64 +40,75 @@ public class Candidate implements Serializable {
         this.electoralParty = electoralParty;
     }
 
+    public Candidate(Long id, String name, String lastname, Education education, String placeOfResidence, List<VoteResult> voteResults, ElectionList electionList, ElectoralParty electoralParty) {
+        this.id = id;
+        this.name = name;
+        this.lastname = lastname;
+        this.education = education;
+        this.placeOfResidence = placeOfResidence;
+        this.voteResults = voteResults;
+        this.electionList = electionList;
+        this.electoralParty = electoralParty;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public Education getEducation() {
-        return education;
-    }
-
-    public String getPlaceOfResidence() {
-        return placeOfResidence;
-    }
-
-    public List<VoteResult> getVoteResults() {
-        return voteResults;
-    }
-
-    public ElectionList getElectionList() {
-        return electionList;
-    }
-
-    public ElectoralParty getElectoralParty() {
-        return electoralParty;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
     }
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
+    public Education getEducation() {
+        return education;
+    }
+
     public void setEducation(Education education) {
         this.education = education;
+    }
+
+    public String getPlaceOfResidence() {
+        return placeOfResidence;
     }
 
     public void setPlaceOfResidence(String placeOfResidence) {
         this.placeOfResidence = placeOfResidence;
     }
 
+    public List<VoteResult> getVoteResults() {
+        return voteResults;
+    }
+
     public void setVoteResults(List<VoteResult> voteResults) {
         this.voteResults = voteResults;
     }
 
+    public ElectionList getElectionList() {
+        return electionList;
+    }
+
     public void setElectionList(ElectionList electionList) {
         this.electionList = electionList;
+    }
+
+    public ElectoralParty getElectoralParty() {
+        return electoralParty;
     }
 
     public void setElectoralParty(ElectoralParty electoralParty) {

@@ -39,40 +39,49 @@ public class Constituency implements Serializable {
         this.election = election;
     }
 
+    public Constituency(Long id, String name, String description, Election election, List<ElectionList> electionLists, List<City> cityList) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.election = election;
+        this.electionLists = electionLists;
+        this.cityList = cityList;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Election getElection() {
-        return election;
-    }
-
-    public List<ElectionList> getElectionLists() {
-        return electionLists;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public Election getElection() {
+        return election;
+    }
+
     public void setElection(Election election) {
         this.election = election;
+    }
+
+    public List<ElectionList> getElectionLists() {
+        return electionLists;
     }
 
     public void setElectionLists(List<ElectionList> electionLists) {

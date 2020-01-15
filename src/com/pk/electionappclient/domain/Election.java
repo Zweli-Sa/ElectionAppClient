@@ -12,7 +12,7 @@ public class Election implements Serializable {
 
     private ElectionType electionType;
 
-    private List<ElectionList> ListElectionList;
+    private List<ElectionList> listElectionList;
 
     private Boolean isActive;
 
@@ -42,7 +42,7 @@ public class Election implements Serializable {
         this.finishDate = finishDate;
         this.electionType = electionType;
         this.isActive = isActive;
-        this.ListElectionList = electionList;
+        this.listElectionList = electionList;
         this.electionName = electionName;
     }
 
@@ -51,23 +51,58 @@ public class Election implements Serializable {
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.electionType = electionType;
-        this.ListElectionList = electionList;
+        this.listElectionList = electionList;
     }
 
-    public long getId() {
+    public Election(Long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> listElectionList, Boolean isActive, String electionName, List<Constituency> constituencies) {
+        this.id = id;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.electionType = electionType;
+        this.listElectionList = listElectionList;
+        this.isActive = isActive;
+        this.electionName = electionName;
+        this.constituencies = constituencies;
+    }
+
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDateTime getStartDate() {
         return startDate;
     }
 
+    public void setStartDate(LocalDateTime startDate) {
+        this.startDate = startDate;
+    }
+
     public LocalDateTime getFinishDate() {
         return finishDate;
     }
 
+    public void setFinishDate(LocalDateTime finishDate) {
+        this.finishDate = finishDate;
+    }
+
     public ElectionType getElectionType() {
         return electionType;
+    }
+
+    public void setElectionType(ElectionType electionType) {
+        this.electionType = electionType;
+    }
+
+    public List<ElectionList> getListElectionList() {
+        return listElectionList;
+    }
+
+    public void setListElectionList(List<ElectionList> listElectionList) {
+        this.listElectionList = listElectionList;
     }
 
     public Boolean getActive() {
@@ -86,14 +121,6 @@ public class Election implements Serializable {
         this.electionName = electionName;
     }
 
-    public List<ElectionList> getListElectionList() {
-        return ListElectionList;
-    }
-
-    public void setListElectionList(List<ElectionList> listElectionList) {
-        ListElectionList = listElectionList;
-    }
-
     public List<Constituency> getConstituencies() {
         return constituencies;
     }
@@ -109,7 +136,7 @@ public class Election implements Serializable {
                 ", startDate=" + startDate +
                 ", finishDate=" + finishDate +
                 ", electionType=" + electionType +
-                ", ListElectionList=" + ListElectionList +
+                ", listElectionList=" + listElectionList +
                 ", isActive=" + isActive +
                 ", electionName='" + electionName + '\'' +
                 ", constituencies=" + constituencies +

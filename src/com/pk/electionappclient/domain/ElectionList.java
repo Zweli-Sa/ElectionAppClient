@@ -8,10 +8,10 @@ public class ElectionList implements Serializable {
     private Long id;
     private String name;
     private String description;
+    private Election election;
     private Constituency constituency;
     private List<Candidate> candidates;
     private ElectoralParty electoralParty;
-//    private City city;
 
     public ElectionList() {
     }
@@ -41,48 +41,66 @@ public class ElectionList implements Serializable {
         this.description = description;
     }
 
+    public ElectionList(Long id, String name, String description, Election election, Constituency constituency, List<Candidate> candidates, ElectoralParty electoralParty) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.election = election;
+        this.constituency = constituency;
+        this.candidates = candidates;
+        this.electoralParty = electoralParty;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Constituency getConstituency() {
-        return constituency;
-    }
-
-    public List<Candidate> getCandidates() {
-        return candidates;
-    }
-
-    public ElectoralParty getElectoralParty() {
-        return electoralParty;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public Election getElection() {
+        return election;
+    }
+
+    public void setElection(Election election) {
+        this.election = election;
+    }
+
+    public Constituency getConstituency() {
+        return constituency;
+    }
+
     public void setConstituency(Constituency constituency) {
         this.constituency = constituency;
     }
 
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
     public void setCandidates(List<Candidate> candidates) {
         this.candidates = candidates;
+    }
+
+    public ElectoralParty getElectoralParty() {
+        return electoralParty;
     }
 
     public void setElectoralParty(ElectoralParty electoralParty) {

@@ -1,12 +1,22 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
-import com.pk.electionappclient.domain.*;
+import com.pk.electionappclient.domain.Candidate;
+import com.pk.electionappclient.domain.City;
+import com.pk.electionappclient.domain.Constituency;
+import com.pk.electionappclient.domain.Election;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.ListIterator;
 
-import static com.pk.electionappclient.controller.AppController.popUpError;
+import static com.pk.electionappclient.Controller.AppController.popUpError;
 
 public class ConstituencyController {
     public static List<City> citiesDB = new ArrayList<>();
@@ -19,12 +29,21 @@ public class ConstituencyController {
 
 
     public static List<City> getCitiesDB() {
-        return citiesDB;
+        RestTemplate restTemplate = new RestTemplate();
+        List<City> cityList = new ArrayList<>();
+        try {
+            City[] cities = restTemplate.getForObject("http://localhost:8080/v1/election/getCities", City[].class);
+            cityList = Arrays.asList(cities);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+        return cityList;
     }
 
     public static List<City> getCitiesTempList() {
         return citiesTempList;
     }
+
     public static List<City> addCityToTempList(City city) {
         //citiesTempList = new ArrayList<>();
         if (!citiesTempList.contains(city)) {
@@ -51,7 +70,23 @@ public class ConstituencyController {
         if (containsCity(cityList, election)) {
             popUpError("Błąd! Miasto zostało dodane do innego okręgu wyborczego");
         } else {
-            constituenciesDB.add(new Constituency(id, name, cityList, election));
+            Constituency constituency = new Constituency(id, name, cityList, election);
+            constituenciesDB.add(constituency);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            URI uri = null;
+            try {
+                uri = new URI("http://localhost:8080/v1/election/createConstituency");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("X-COM-PERSIST", "true");
+            headers.set("X-COM-LOCATION", "PL");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Constituency> request = new HttpEntity<>(constituency,headers);
+            restTemplate.postForEntity(uri, request, String.class);
         }
         return constituenciesDB;
     }
@@ -63,11 +98,6 @@ public class ConstituencyController {
             }
         }
         return false;
-    }
-
-
-    public static List<Constituency> getConstituenciesDB() {
-        return constituenciesDB;
     }
 
     public static List<Constituency> getConstituencyByElectionID(Election election) {
@@ -82,11 +112,7 @@ public class ConstituencyController {
 
 
     }
-    public static void showConstituencies() {
-        for (Constituency c : constituenciesDB) {
-            System.out.println(c);
-        }
-    }
+
     public static void initCityDB() {
         citiesDB.add(krakow);
         citiesDB.add(warszawa);

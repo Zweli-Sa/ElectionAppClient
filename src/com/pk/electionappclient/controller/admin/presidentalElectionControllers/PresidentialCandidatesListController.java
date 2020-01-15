@@ -1,8 +1,8 @@
-package com.pk.electionappclient.controller.admin.presidentalElectionControllers;
+package com.pk.electionappclient.Controller.admin.presidentalElectionControllers;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.ElectoralParty;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -22,12 +21,11 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ElectionController.*;
-import static com.pk.electionappclient.controller.ElectionListController.electionList;
-import static com.pk.electionappclient.controller.ElectionListController.newPresElectionList;
-import static com.pk.electionappclient.controller.ElectionTypeController.prezydenckie;
-import static java.sql.Date.valueOf;
+import static com.pk.electionappclient.Controller.ClientController.*;
+import static com.pk.electionappclient.Controller.ElectionController.*;
+import static com.pk.electionappclient.Controller.ElectionListController.electionList;
+import static com.pk.electionappclient.Controller.ElectionListController.newPresElectionList;
+import static com.pk.electionappclient.Controller.ElectionTypeController.prezydenckie;
 
 public class PresidentialCandidatesListController extends AppController implements Initializable {
 

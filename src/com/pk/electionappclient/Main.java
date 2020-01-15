@@ -9,10 +9,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import static com.pk.electionappclient.controller.ClientController.initCandidateList;
-import static com.pk.electionappclient.controller.ClientController.initPartiesList;
-import static com.pk.electionappclient.controller.ConstituencyController.initCityDB;
-import static com.pk.electionappclient.controller.ElectionController.initElectionsDB;
+import static com.pk.electionappclient.Controller.ClientController.initCandidateList;
+import static com.pk.electionappclient.Controller.ClientController.initPartiesList;
+import static com.pk.electionappclient.Controller.ConstituencyController.initCityDB;
+import static com.pk.electionappclient.Controller.ElectionController.initElectionsDB;
 
 
 public class Main extends Application {

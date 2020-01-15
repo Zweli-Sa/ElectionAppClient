@@ -1,17 +1,20 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
 import com.pk.electionappclient.domain.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestClientException;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
 
-import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
-import static com.pk.electionappclient.controller.ConstituencyController.getConstituenciesDB;
-import static com.pk.electionappclient.controller.ElectionListController.electionList;
+import static com.pk.electionappclient.Controller.ClientController.*;
+import static com.pk.electionappclient.Controller.ConstituencyController.constituenciesDB;
+import static com.pk.electionappclient.Controller.ElectionListController.electionList;
 
 public class ElectionController {
 
@@ -24,7 +27,15 @@ public class ElectionController {
 
 
     public static List<Election> getElections() {
-        return electionsDB;
+        RestTemplate restTemplate = new RestTemplate();
+        List<Election> electionList = new ArrayList<>();
+        try {
+            Election[] elections = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", Election[].class);
+            electionList= Arrays.asList(elections);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+        return electionList;
     }
 
 
@@ -35,7 +46,23 @@ public class ElectionController {
     public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
         clearCandidateTempList();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
-            electionsDB.add(new Election(id, startDate, finishDate, electionType, list));
+            Election election = new Election(id, startDate, finishDate, electionType, list);
+            electionsDB.add(election);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            URI uri = null;
+            try {
+                uri = new URI("http://localhost:8080/v1/election/createElection");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("X-COM-PERSIST", "true");
+            headers.set("X-COM-LOCATION", "PL");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Election> request = new HttpEntity<>(election,headers);
+            restTemplate.postForEntity(uri, request, String.class);
         }
         return electionsDB;
     }
@@ -44,7 +71,23 @@ public class ElectionController {
         candidateFinalList = new ArrayList<>();
         candidateTempList = new ArrayList<>();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
-            electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, name));
+            Election election = new Election(id, startDate, finishDate, electionType, list, isActive, name);
+            electionsDB.add(election);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            URI uri = null;
+            try {
+                uri = new URI("http://localhost:8080/v1/election/createElection");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("X-COM-PERSIST", "true");
+            headers.set("X-COM-LOCATION", "PL");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<Election> request = new HttpEntity<>(election,headers);
+            restTemplate.postForEntity(uri, request, String.class);
         }
         return electionsDB;
     }
@@ -84,9 +127,13 @@ public class ElectionController {
     }
 
     public static void electionSetConstituency(Election election, List<Constituency> list) {
-        for (Election e : electionsDB) {
+        for (Election e : getElections()) {
             if (e.getId() == election.getId()) {
                 e.setConstituencies(list);
+
+                Map<String, String> params = new HashMap<>();
+                RestTemplate restTemplate = new RestTemplate();
+                restTemplate.put("http://localhost:8080/v1/election/updateElection/" + e.getId(), e, params); //TODO: do sprawdzenia
             }
             }
         }

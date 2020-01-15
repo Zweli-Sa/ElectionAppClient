@@ -1,8 +1,10 @@
-package com.pk.electionappclient.controller.admin.parlimentaryElectionControllers;
+package com.pk.electionappclient.Controller.admin.parlimentaryElectionControllers;
 
-import com.pk.electionappclient.controller.AppController;
-import com.pk.electionappclient.domain.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.pk.electionappclient.Controller.AppController;
+import com.pk.electionappclient.domain.Candidate;
+import com.pk.electionappclient.domain.Constituency;
+import com.pk.electionappclient.domain.Election;
+import com.pk.electionappclient.domain.ElectoralParty;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,14 +18,15 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Main.globalID;
-import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ConstituencyController.*;
-import static com.pk.electionappclient.controller.ElectionController.*;
-import static com.pk.electionappclient.controller.ElectionListController.*;
+import static com.pk.electionappclient.Controller.ClientController.*;
+import static com.pk.electionappclient.Controller.ConstituencyController.clearCityTempList;
+import static com.pk.electionappclient.Controller.ConstituencyController.getConstituencyByElectionID;
+import static com.pk.electionappclient.Controller.ElectionController.*;
+import static com.pk.electionappclient.Controller.ElectionListController.candidateInAnotherConstituency;
+import static com.pk.electionappclient.Controller.ElectionListController.newParlElectionList;
 
 public class ParliamentaryCandidatesListController extends AppController implements Initializable {
 

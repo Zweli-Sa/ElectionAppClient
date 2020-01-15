@@ -1,12 +1,20 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
-import com.pk.electionappclient.domain.*;
+import com.pk.electionappclient.domain.Candidate;
+import com.pk.electionappclient.domain.Constituency;
+import com.pk.electionappclient.domain.ElectionList;
+import com.pk.electionappclient.domain.ElectoralParty;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.pk.electionappclient.controller.AppController.popUpError;
-import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
+import static com.pk.electionappclient.Controller.AppController.popUpError;
 
 public class ElectionListController {
 
@@ -15,7 +23,23 @@ public class ElectionListController {
     public static List<ElectionList> newPresElectionList(int id, List<Candidate> candidates) throws NullPointerException{
         if (!candidates.isEmpty()) {
             System.out.println("newPresElectionList");
-            electionList.add(new ElectionList(id, candidates));
+            ElectionList election = new ElectionList(id, candidates);
+            electionList.add(election);
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            URI uri = null;
+            try {
+                uri = new URI("http://localhost:8080/v1/election/createElectionList");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("X-COM-PERSIST", "true");
+            headers.set("X-COM-LOCATION", "PL");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<ElectionList> request = new HttpEntity<>(election,headers);
+            restTemplate.postForEntity(uri, request, String.class);
         }
         else {
             popUpError("Dodaj kandydata do listy wyborzcej");
@@ -41,7 +65,22 @@ public class ElectionListController {
 
     public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException{
         if (electionList.isEmpty()) {
-            electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
+            ElectionList election = new ElectionList(id, candidates, electoralParty, constituency);
+            electionList.add(election);
+            RestTemplate restTemplate = new RestTemplate();
+
+            URI uri = null;
+            try {
+                uri = new URI("http://localhost:8080/v1/election/createElectionList");
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("X-COM-PERSIST", "true");
+            headers.set("X-COM-LOCATION", "PL");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            HttpEntity<ElectionList> request = new HttpEntity<>(election,headers);
+            restTemplate.postForEntity(uri, request, String.class);
         } else {
             if (containPartyElectionlist(constituency, electoralParty)) {
                 for (ElectionList el : electionList) {
@@ -51,7 +90,22 @@ public class ElectionListController {
                     }
                 }
             }else {
-                electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
+                ElectionList election = new ElectionList(id, candidates, electoralParty, constituency);
+                electionList.add(election);
+                RestTemplate restTemplate = new RestTemplate();
+
+                URI uri = null;
+                try {
+                    uri = new URI("http://localhost:8080/v1/election/createElectionList");
+                } catch (URISyntaxException e) {
+                    e.printStackTrace();
+                }
+                HttpHeaders headers = new HttpHeaders();
+                headers.set("X-COM-PERSIST", "true");
+                headers.set("X-COM-LOCATION", "PL");
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                HttpEntity<ElectionList> request = new HttpEntity<>(election,headers);
+                restTemplate.postForEntity(uri, request, String.class);
             }
         }
         return electionList;

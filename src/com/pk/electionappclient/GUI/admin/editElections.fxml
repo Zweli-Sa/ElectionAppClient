@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
-
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.controller.admin.EditElectionsController">
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@../../resources/css/login.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pk.electionappclient.Controller.admin.EditElectionsController">
     <children>
         <BorderPane layoutX="178.0" layoutY="85.0" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>

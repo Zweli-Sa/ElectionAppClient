@@ -1,17 +1,20 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
-import com.pk.electionappclient.domain.*;
-import com.pk.electionappclient.httpresponser.HttpResponser;
-import com.pk.electionappclient.mapper.JsonMapper;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.pk.electionappclient.domain.Candidate;
+import com.pk.electionappclient.domain.Education;
+import com.pk.electionappclient.domain.ElectoralParty;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.pk.electionappclient.controller.AppController.popUpError;
+import static com.pk.electionappclient.Controller.AppController.popUpError;
 
 public class ClientController {
 
@@ -30,18 +33,28 @@ public class ClientController {
     public static List<Candidate> candidateTempList = new ArrayList<>();
     public static List<Candidate> candidateFinalList = new ArrayList<>();
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
-//    public static List<City> citiesDB = new ArrayList<>();
-//    public static List<City> citiesTempList = new ArrayList<>();
 
-    public static void createCandidate(Candidate candidate) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = mapper.writeValueAsString(candidate);
+    public static void createCandidate(Candidate candidate) {
+        RestTemplate restTemplate = new RestTemplate();
+
+        URI uri = null;
+        try {
+            uri = new URI("http://localhost:8080/v1/election/createCandidate");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("X-COM-PERSIST", "true");
+        headers.set("X-COM-LOCATION", "PL");
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<Candidate> request = new HttpEntity<>(candidate,headers);
+        restTemplate.postForEntity(uri, request, String.class);
 
     }
 
     public static List<Candidate> getCandidatesByParty(ElectoralParty party) {
         List<Candidate> temp = new ArrayList<>();
-        temp = list.stream().filter(o -> o.getElectoralParty().getId()==(party.getId()))
+        temp = list.stream().filter(o -> o.getElectoralParty().getId().equals(party.getId()))
                 .collect(Collectors.toList());
         System.out.println(temp);
         return temp;
@@ -59,18 +72,22 @@ public class ClientController {
         }
         return candidateList;
     }
-    public static List<Candidate> setCandidateFinalList() {
-        candidateFinalList.addAll(candidateTempList);
-        return candidateFinalList;
-    }
 
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
-        list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
+        Candidate candidate = new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty);
+        list.add(candidate);
+        createCandidate(candidate);
+
         return list;
     }
 
     public static List<Candidate> removeCadidateFromList(Candidate candidate) {
         list.remove(candidate);
+
+        Map<String, String> params = new HashMap<String, String>();
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete ("http://localhost:8080/v1/election/deleteCandidate/" + candidate.getId(),  params );
         return list;
     }
 
@@ -78,10 +95,6 @@ public class ClientController {
     public static List<Candidate> getTempCandidateList() {
         return candidateTempList;
     }
-    public static List<Candidate> getCandidateFinalList() {
-        return candidateFinalList;
-    }
-
 
     public static List<Candidate> addCandidateToTempList(Candidate candidate) {
         if (!candidateTempList.contains(candidate)) {
@@ -96,39 +109,26 @@ public class ClientController {
         candidateTempList = new ArrayList<>();
     }
 
-
-
-    public static User getUser(Long id) throws IOException {
-        return JsonMapper.mapToObject(HttpResponser.get("/v1/user/getUser/" + id));
-    }
-
-    public static boolean checkLoginData() {
-        return true;
-    }
-
-    public static List<Report> getUserReports(Long id) {
-        return new ArrayList<>();
-    }
-
-    public static List<VoteResult> getVoteResults() {
-        return new ArrayList<>();
-    }
-
-    public static List<VoteResult> getVoteResultByElection(Election election) {
-        return new ArrayList<>();
-    }
-
     public static List<Candidate> initCandidateList() {
         list = new ArrayList<>();
         list.add(new Candidate(22222l, "Adam", "Nowak",Education.MAGISTER, "Kraków", sld));
         list.add(new Candidate(33333l, "Jan", "Kowalski",Education.PODSTAWOWE, "Kraków", none));
-        list.add(new Candidate(44444l, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
+        list.add(new Candidate(44444l, "Jaroslaw", "Kaczynski", Education.SREDNIE, "Warszawa", pis));
 
         return list;
     }
 
     public static List<ElectoralParty> getPartyDB() {
-        return electoralParties;
+
+        RestTemplate restTemplate = new RestTemplate();
+        List<ElectoralParty> electoralPartyList = new ArrayList<>();
+        try {
+            ElectoralParty[] electoralParties = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", ElectoralParty[].class);
+            electoralPartyList = Arrays.asList(electoralParties);
+        } catch (RestClientException e) {
+            e.printStackTrace();
+        }
+        return electoralPartyList;
     }
 
 

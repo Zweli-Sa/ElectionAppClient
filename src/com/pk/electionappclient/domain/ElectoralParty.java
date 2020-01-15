@@ -1,17 +1,18 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class ElectoralParty {
+public class ElectoralParty implements Serializable {
 
     private Long id;
     private String name;
     private String description;
     private List<Candidate> candidates = null;
-
     private ElectoralProgramme electoralProgramme = null;
 
-
+    public ElectoralParty() {
+    }
 
     public ElectoralParty(long id, String name) {
         this.id = id;
@@ -32,12 +33,44 @@ public class ElectoralParty {
         this.electoralProgramme = electoralProgramme;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public ElectoralProgramme getElectoralProgramme() {
+        return electoralProgramme;
+    }
+
+    public void setElectoralProgramme(ElectoralProgramme electoralProgramme) {
+        this.electoralProgramme = electoralProgramme;
     }
 
     @Override

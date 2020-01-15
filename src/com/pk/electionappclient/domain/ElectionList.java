@@ -1,9 +1,9 @@
 package com.pk.electionappclient.domain;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 
-public class ElectionList {
+public class ElectionList implements Serializable {
 
     private Long id;
     private String name;
@@ -11,11 +11,10 @@ public class ElectionList {
     private Constituency constituency;
     private List<Candidate> candidates;
     private ElectoralParty electoralParty;
-
-
 //    private City city;
 
-
+    public ElectionList() {
+    }
 
     public ElectionList(long id, List<Candidate> candidates) {
         this.id = id;
@@ -42,7 +41,7 @@ public class ElectionList {
         this.description = description;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -54,6 +53,10 @@ public class ElectionList {
         return description;
     }
 
+    public Constituency getConstituency() {
+        return constituency;
+    }
+
     public List<Candidate> getCandidates() {
         return candidates;
     }
@@ -62,16 +65,28 @@ public class ElectionList {
         return electoralParty;
     }
 
-    public void setElectoralParty(ElectoralParty electoralParty) {
-        this.electoralParty = electoralParty;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Constituency getConstituency() {
-        return constituency;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setConstituency(Constituency constituency) {
         this.constituency = constituency;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
+    }
+
+    public void setElectoralParty(ElectoralParty electoralParty) {
+        this.electoralParty = electoralParty;
     }
 
     @Override

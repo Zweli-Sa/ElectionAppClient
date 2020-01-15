@@ -1,9 +1,9 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.math.BigInteger;
-import java.util.List;
 
-public class User {
+public class User implements Serializable {
 
     private Long id;
     private String name;

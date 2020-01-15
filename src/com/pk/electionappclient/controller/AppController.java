@@ -1,7 +1,6 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
 
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,10 +18,7 @@ import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 
 public abstract class AppController {

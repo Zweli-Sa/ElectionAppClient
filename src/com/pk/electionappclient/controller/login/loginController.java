@@ -1,10 +1,10 @@
-package com.pk.electionappclient.controller.login;
+package com.pk.electionappclient.Controller.login;
 
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.fxml.FXML;
 
 public class loginController extends AppController {
 

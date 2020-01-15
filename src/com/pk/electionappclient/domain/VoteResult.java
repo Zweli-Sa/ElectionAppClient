@@ -1,9 +1,9 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.List;
 
-public class VoteResult {
+public class VoteResult implements Serializable {
     private long id;
 
 //    private User user;

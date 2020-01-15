@@ -1,7 +1,9 @@
 package com.pk.electionappclient.domain;
 
 
-public class City {
+import java.io.Serializable;
+
+public class City implements Serializable {
     private long id;
     private String name;
 

@@ -1,6 +1,6 @@
-package com.pk.electionappclient.controller.User;
+package com.pk.electionappclient.Controller.User;
 
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-
 
 import java.net.URL;
 import java.util.ResourceBundle;

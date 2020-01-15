@@ -1,9 +1,10 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class Election {
+public class Election implements Serializable {
 
     private Long id;
     private LocalDateTime startDate;
@@ -18,6 +19,9 @@ public class Election {
     private String electionName;
 
     private List<Constituency> constituencies;
+
+    public Election() {
+    }
 
 
     public Election(long id, Boolean isActive, String electionName) {

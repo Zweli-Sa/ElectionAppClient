@@ -1,6 +1,6 @@
-package com.pk.electionappclient.controller.admin;
+package com.pk.electionappclient.Controller.admin;
 
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package com.pk.electionappclient.controller;
+package com.pk.electionappclient.Controller;
 
 import com.pk.electionappclient.domain.ElectionType;
 

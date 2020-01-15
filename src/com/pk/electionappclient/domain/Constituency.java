@@ -1,9 +1,10 @@
 package com.pk.electionappclient.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 
-public class Constituency {
+public class Constituency implements Serializable {
 
     private Long id;
     private String name;
@@ -12,6 +13,9 @@ public class Constituency {
     private List<ElectionList> electionLists;
     private List<City> cityList;
 
+    public Constituency() {
+
+    }
 
     public Constituency(Long id, String name, List<City> cityList) {
         this.id = id;
@@ -27,8 +31,6 @@ public class Constituency {
         this.election = election;
         this.electionLists = electionLists;
     }
-
-    public Constituency() {}
 
     public Constituency(Long id, String name, List<City> cityList, Election election) {
         this.id = id;

@@ -1,10 +1,9 @@
-package com.pk.electionappclient.controller.admin.parlimentaryElectionControllers;
+package com.pk.electionappclient.Controller.admin.parlimentaryElectionControllers;
 
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import com.pk.electionappclient.domain.City;
 import com.pk.electionappclient.domain.Election;
 import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableArray;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,9 +16,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.ConstituencyController.*;
-import static com.pk.electionappclient.controller.ElectionController.*;
+import static com.pk.electionappclient.Controller.ConstituencyController.*;
+import static com.pk.electionappclient.Controller.ElectionController.*;
 
 public class CreateConstituencyController extends AppController implements Initializable {
 

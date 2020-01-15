@@ -1,30 +1,26 @@
-package com.pk.electionappclient.controller.admin.parlimentaryElectionControllers;
+package com.pk.electionappclient.Controller.admin.parlimentaryElectionControllers;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import com.pk.electionappclient.domain.Election;
-import com.sun.org.apache.xml.internal.security.Init;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
-import static com.pk.electionappclient.controller.ClientController.getCandidates;
-import static com.pk.electionappclient.controller.ElectionController.*;
+import static com.pk.electionappclient.Controller.ElectionController.*;
 
 public class NewParliamentaryElectionsController extends AppController implements Initializable {
 

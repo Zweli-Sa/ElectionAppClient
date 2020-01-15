@@ -1,6 +1,6 @@
-package com.pk.electionappclient.controller.admin;
+package com.pk.electionappclient.Controller.admin;
 
-import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.Controller.AppController;
 import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.Education;
 import com.pk.electionappclient.domain.ElectoralParty;
@@ -13,10 +13,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.pk.electionappclient.controller.ClientController.*;
+import static com.pk.electionappclient.Controller.ClientController.*;
 
 public class NewCandidateController extends AppController implements Initializable {
 
@@ -111,9 +112,12 @@ public class NewCandidateController extends AppController implements Initializab
     }
 
 
-    public void createNewCandidate(ActionEvent actionEvent) {
+    public void createNewCandidate(ActionEvent actionEvent) throws IOException, URISyntaxException {
         addCandidate(getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
                 educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), partyComboBox.getValue());
+        Candidate candidate = new Candidate(0L, getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
+                educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), null);
+        com.pk.electionappclient.Controller.ClientController.createCandidate(candidate);
         loadCandidates();
         if (editButton.getId().equals("acceptChanges")) {
             changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
@@ -138,6 +142,10 @@ public class NewCandidateController extends AppController implements Initializab
         } catch (NullPointerException e) {
             editButton.setId("editButton");
             popUpError("Zaznacz kadydata by go zedytować");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
 
     }

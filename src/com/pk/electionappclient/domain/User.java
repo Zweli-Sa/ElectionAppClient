@@ -1,8 +1,5 @@
 package com.pk.electionappclient.domain;
 
-import java.math.BigInteger;
-import java.util.List;
-
 public class User {
 
     private Long id;
@@ -13,7 +10,7 @@ public class User {
     private long flatNumber;
     private String postcode;
     private String pesel;
-    private BigInteger idNumber;
+    private String idNumber;
     private String email;
     private String phoneNumber;
     private City city;
@@ -84,11 +81,11 @@ public class User {
         this.pesel = pesel;
     }
 
-    public BigInteger getIdNumber() {
+    public String getIdNumber() {
         return idNumber;
     }
 
-    public void setIdNumber(BigInteger idNumber) {
+    public void setIdNumber(String idNumber) {
         this.idNumber = idNumber;
     }
 
@@ -132,7 +129,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, BigInteger idNumber, String email, String phoneNumber, City city, String password, Boolean isAdmin) {
+    public User(Long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, String idNumber, String email, String phoneNumber, City city, String password, Boolean isAdmin) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;

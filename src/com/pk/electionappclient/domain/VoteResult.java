@@ -8,7 +8,7 @@ import java.util.List;
 public class VoteResult {
     private long id;
 
-//    private User user;
+    private User user;
 //
     private Election election;
 //
@@ -18,7 +18,8 @@ public class VoteResult {
 
     private LocalDateTime voteTime;
 
-    public VoteResult(long id, Election election, Candidate candidate,Constituency constituency, LocalDateTime voteTime) {
+    public VoteResult(User user, long id, Election election, Candidate candidate,Constituency constituency, LocalDateTime voteTime) {
+        this.user = user;
         this.id = id;
         this.election = election;
         this.voteTime = voteTime;
@@ -70,6 +71,14 @@ public class VoteResult {
 
     public void setVoteTime(LocalDateTime voteTime) {
         this.voteTime = voteTime;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

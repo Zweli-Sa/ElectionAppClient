@@ -11,11 +11,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.userTestowy;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.VoteResultsController.voteForCandidate;
 import static com.pk.electionappclient.controller.VoteResultsController.voteResultsDB;
 
 public class VotePanelController extends AppController implements Initializable {
+
+    private User user;
 
     public Election election;
 
@@ -94,7 +97,7 @@ public class VotePanelController extends AppController implements Initializable 
     public void voteAction(ActionEvent actionEvent) {
         Candidate candidate = candidatesTableView.getSelectionModel().getSelectedItem();
         Constituency constituency = getConstituencyListByUserCityId(election, 20);
-        voteForCandidate(election, candidate, constituency);
+        voteForCandidate(userTestowy, election, candidate, constituency);
         System.out.println(voteResultsDB);
     }
 }

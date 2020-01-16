@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.ElectionListController.electionList;
@@ -97,8 +98,8 @@ public class PresidentialCandidatesListController extends AppController implemen
     public void createPresElectionDay(ActionEvent actionEvent) throws IOException {
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
-                createElectionDay(id++, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newPresElectionList(id++, candidateTempList), true, false);
+                createElectionDay(globalID++, presElectionStartDate(), presElectionEndDate(),
+                        prezydenckie, newPresElectionList(globalID++, candidateTempList), true, false);
             }
         } catch (NullPointerException e) {
         }

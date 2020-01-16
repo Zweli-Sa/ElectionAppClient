@@ -7,6 +7,7 @@ import java.util.List;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
 import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
+import static com.pk.electionappclient.controller.ElectionController.getParlElectiosnDB;
 
 public class ElectionListController {
 
@@ -30,10 +31,17 @@ public class ElectionListController {
         return false;
     }
 
-    public static boolean candidateInAnotherConstituency(Constituency constituency, List<Candidate> candidateList) {
-        for (Candidate c : candidateList) {
-            if(electionList.stream().filter(o -> o.getConstituency().getElection().getId() == constituency.getElection().getId() && o.getCandidates().contains(c)).findAny().isPresent()) {
-                return true;
+    public static boolean candidateInAnotherConstituency(Election election, Constituency constituency, List<Candidate> candidateList) {
+        List<Candidate> candidates = new ArrayList<>();
+        List<Constituency> constituencies = getConstituencyListsByElection(election);
+        for (Constituency c : constituencies) {
+            for (ElectionList el : c.getElectionLists()) {
+                for (Candidate cc : candidateList) {
+                    if (el.getCandidates().contains(cc)) {
+                        return true;
+                    }
+                }
+
             }
         }
         return false;
@@ -74,6 +82,17 @@ public class ElectionListController {
     public static void showElectionListDB() {
         System.out.println(electionList);
     }
+
+    public static List<Constituency> getConstituencyListsByElection(Election election) {
+        List<Constituency> temp = new ArrayList<>();
+        for (Election e : getParlElectiosnDB()) {
+            if(e.getId() == election.getId()) {
+                temp.add((Constituency) e.getConstituencies());
+            }
+        }
+        return temp;
+    }
+
 
 
 }

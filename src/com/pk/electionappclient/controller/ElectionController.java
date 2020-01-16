@@ -5,6 +5,7 @@ import com.pk.electionappclient.domain.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
@@ -19,7 +20,14 @@ public class ElectionController {
     private static List<Election> inActiveElectionsDB = new ArrayList<>();
     private static List<Election> activeElectionsDB = new ArrayList<>();
     public static List<Election> finishedElectionsDB = new ArrayList<>();
+    public static List<Election> presElectionsDB = new ArrayList<>();
 
+
+    public static List<Election> getParlElectiosnDB() {
+        List<Election> temp = new ArrayList<>();
+        temp = electionsDB.stream().filter(e -> e.getConstituencies() !=null).collect(Collectors.toList());
+        return  temp;
+    }
 
     public static List<Election> getElections() {
         return electionsDB;

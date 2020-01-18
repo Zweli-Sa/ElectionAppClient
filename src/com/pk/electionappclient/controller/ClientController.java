@@ -28,7 +28,6 @@ public class ClientController {
 
     private static List<Candidate> list;
     public static List<Candidate> candidateTempList = new ArrayList<>();
-    public static List<Candidate> candidateFinalList = new ArrayList<>();
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
 //    public static List<City> citiesDB = new ArrayList<>();
 //    public static List<City> citiesTempList = new ArrayList<>();
@@ -118,11 +117,6 @@ public class ClientController {
 
 
 
-    public static List<Candidate> setCandidateFinalList() {
-        candidateFinalList.addAll(candidateTempList);
-        return candidateFinalList;
-    }
-
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
         list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
         return list;
@@ -153,24 +147,6 @@ public class ClientController {
         candidateTempList = new ArrayList<>();
     }
 
-
-
-    public static User getUser(Long id) throws IOException {
-        return JsonMapper.mapToObject(HttpResponser.get("/v1/user/getUser/" + id));
-    }
-
-    public static boolean checkLoginData() {
-        return true;
-    }
-
-
-    public static List<VoteResult> getVoteResults() {
-        return new ArrayList<>();
-    }
-
-    public static List<VoteResult> getVoteResultByElection(Election election) {
-        return new ArrayList<>();
-    }
 
     public static List<Candidate> initCandidateList() {
         list = new ArrayList<>();
@@ -216,7 +192,7 @@ public class ClientController {
     }
 
     public static List<Candidate> getPresCandidates(Election election) {
-        ElectionList elist = election.getListElectionList().get(0);
+        ElectionList elist = election.getElectionList();
         List<Candidate> temp = elist.getCandidates();
         return temp;
 

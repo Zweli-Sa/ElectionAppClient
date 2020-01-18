@@ -20,6 +20,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Main.globalID;
@@ -100,13 +101,14 @@ public class PresidentialCandidatesListController extends AppController implemen
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
                 createElectionDay(globalID++, presElectionStartDate(), presElectionEndDate(),
                         prezydenckie, newPresElectionList(globalID++, candidateTempList), true, false);
+                clearCandidateTempList();
             }
         } catch (NullPointerException e) {
+        } finally {
+            candidateTempList = new ArrayList<>();
         }
-        System.out.println(electionList);
-        //System.out.println(getElections());
-//        clearCandidateTempList();
         show();
+
     }
 
 

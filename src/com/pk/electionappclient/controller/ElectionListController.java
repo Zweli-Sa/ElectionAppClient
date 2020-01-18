@@ -6,6 +6,7 @@ import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.AppController.popUpError;
 import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
 import static com.pk.electionappclient.controller.ElectionController.electionsDB;
@@ -15,16 +16,18 @@ public class ElectionListController {
 
     public static List<ElectionList> electionList = new ArrayList<>();
 
-    public static List<ElectionList> newPresElectionList(int id, List<Candidate> candidates) throws NullPointerException{
+    public static ElectionList newPresElectionList(int id, List<Candidate> candidates) throws NullPointerException{
+        ElectionList newElectionList = null;
         if (!candidates.isEmpty()) {
             System.out.println("newPresElectionList");
-            electionList.add(new ElectionList(id, candidates));
+            newElectionList = new ElectionList(id, candidates);
+            electionList.add(newElectionList);
         }
         else {
             popUpError("Dodaj kandydata do listy wyborzcej");
             throw new NullPointerException();
         }
-        return electionList;
+        return newElectionList;
     }
     public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
         //getConstituencyListsByElection(election);

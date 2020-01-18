@@ -55,11 +55,11 @@ public class ClientController {
 
 
 
-    public static Constituency getConstituencyListByUserCityId(Election election, int userId) {
+    public static Constituency getConstituencyListByUserCityId(Election election, int userCityId) {
         Constituency temp = null;
         for (Constituency c : election.getConstituencies()) {
             for (City city : c.getCityList()) {
-                if (city.getId() == userId) {
+                if (city.getId() == userCityId) {
                     temp = c;
                 }
             }

@@ -52,7 +52,7 @@
                      </font>
                   </Label>
                   <Button layoutX="283.0" layoutY="28.0" mnemonicParsing="false" onAction="#addCandidateElectionList" prefHeight="26.0" prefWidth="104.0" text="Dodaj" />
-                  <Button layoutX="702.0" layoutY="28.0" mnemonicParsing="false" onAction="#removeSelectedCityTempList" prefHeight="26.0" prefWidth="104.0" text="usuń" />
+                  <Button layoutX="702.0" layoutY="28.0" mnemonicParsing="false" onAction="#removeSelectedCity" prefHeight="26.0" prefWidth="104.0" text="usuń" />
                   <TableView fx:id="currentConstituency" layoutX="17.0" layoutY="457.0" prefHeight="300.0" prefWidth="789.0">
                     <columns>
                       <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />

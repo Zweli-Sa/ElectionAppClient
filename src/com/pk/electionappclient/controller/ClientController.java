@@ -1,144 +1,152 @@
 package com.pk.electionappclient.Controller;
 
-import com.pk.electionappclient.domain.Candidate;
-import com.pk.electionappclient.domain.Education;
-import com.pk.electionappclient.domain.ElectoralParty;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
+import com.pk.electionappclient.domain.*;
 import org.springframework.http.MediaType;
-import org.springframework.web.client.RestClientException;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.pk.electionappclient.Controller.AppController.popUpError;
+import static java.util.Optional.ofNullable;
 
 public class ClientController {
 
-    public static int id = 0;
-
-
-    private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
-    private static ElectoralParty pis = new ElectoralParty(1, "Prawo i Sprawiedliwość");
-    private static ElectoralParty none = new ElectoralParty(4, "Bezpartyjny");
-    private static ElectoralParty po = new ElectoralParty(2, "Platforma Obywatelska");
-
-
-
-
-    private static List<Candidate> list;
-    public static List<Candidate> candidateTempList = new ArrayList<>();
-    public static List<Candidate> candidateFinalList = new ArrayList<>();
-    private static List<ElectoralParty> electoralParties = new ArrayList<>();
+    private static final String URL = "http://localhost:8080/v1/election";
 
     public static void createCandidate(Candidate candidate) {
         RestTemplate restTemplate = new RestTemplate();
-
-        URI uri = null;
-        try {
-            uri = new URI("http://localhost:8080/v1/election/createCandidate");
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("X-COM-PERSIST", "true");
-        headers.set("X-COM-LOCATION", "PL");
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<Candidate> request = new HttpEntity<>(candidate,headers);
-        restTemplate.postForEntity(uri, request, String.class);
-
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createCandidate")
+                .queryParam("id", candidate.getId())
+                .queryParam("name", candidate.getName())
+                .queryParam("lastname", candidate.getLastname())
+                .queryParam("education", candidate.getEducation())
+                .queryParam("placeOfResidence", candidate.getPlaceOfResidence())
+                .queryParam("voteResults", Arrays.asList(new VoteResult()))
+                .queryParam("electionList", candidate.getElectionList())
+                .queryParam("electoralParty", candidate.getElectoralParty()).build().encode().toUri();
+        System.out.println(url.toString());
+        restTemplate.postForObject(url, null, Candidate.class);
     }
 
     public static List<Candidate> getCandidatesByParty(ElectoralParty party) {
-        List<Candidate> temp = new ArrayList<>();
-        temp = list.stream().filter(o -> o.getElectoralParty().getId().equals(party.getId()))
+        List<Candidate> candidates = getCandidates();
+        List<Candidate> filteredCandidates= candidates.stream().filter(o -> o.getElectoralParty().getId().equals(party.getId()))
                 .collect(Collectors.toList());
-        System.out.println(temp);
-        return temp;
+        System.out.println(filteredCandidates); //TODO: do usuniecia
+        return filteredCandidates;
+    }
+
+    public static void updateCandidate(Long candidateId, Candidate candidate) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/updateCandidate/" + candidateId)
+                .queryParam("id", candidate.getId())
+                .queryParam("name", candidate.getName())
+                .queryParam("lastname", candidate.getLastname())
+                .queryParam("education", candidate.getEducation())
+                .queryParam("placeOfResidence", candidate.getPlaceOfResidence())
+                .queryParam("voteResults", candidate.getVoteResults())
+                .queryParam("electionList", candidate.getElectionList())
+                .queryParam("electoralParty", candidate.getElectoralParty()).build().encode().toUri();
+        restTemplate.put(uri, Election.class);
     }
 
 
     public static List<Candidate> getCandidates() {
+
+//        List<Candidate> candidateList = new ArrayList<>();
+//        try {
+//            Candidate[] candidates = restTemplate.getForObject("http://localhost:8080/v1/election/getCandidates", Candidate[].class);
+//            candidateList = Arrays.asList(candidates);
+//        } catch (RestClientException e) {
+//            e.printStackTrace();
+//        }
+
         RestTemplate restTemplate = new RestTemplate();
-        List<Candidate> candidateList = new ArrayList<>();
-        try {
-            Candidate[] candidates = restTemplate.getForObject("http://localhost:8080/v1/election/getCandidates", Candidate[].class);
-            candidateList = Arrays.asList(candidates);
-        } catch (RestClientException e) {
-            e.printStackTrace();
-        }
-        return candidateList;
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getCandidates")
+                .build().encode().toUri();
+        Candidate[] boardResponse = restTemplate.getForObject(uri, Candidate[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new Candidate[0]));
     }
 
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
-        Candidate candidate = new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty);
-        list.add(candidate);
+        Candidate candidate = new Candidate(0L, name, lastName, education, placeOfResidence, null, null,  electoralParty);
         createCandidate(candidate);
-
-        return list;
+        List<Candidate> candidates = getCandidates();
+        return candidates;
     }
 
-    public static List<Candidate> removeCadidateFromList(Candidate candidate) {
-        list.remove(candidate);
+    public static List<Candidate> removeCadidate(Candidate candidate) {
 
-        Map<String, String> params = new HashMap<String, String>();
+//        Map<String, String> params = new HashMap<String, String>();
+//
+//        RestTemplate restTemplate = new RestTemplate();
+//        restTemplate.delete ("http://localhost:8080/v1/election/deleteCandidate/" + candidate.getId(),  params );
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.delete ("http://localhost:8080/v1/election/deleteCandidate/" + candidate.getId(),  params );
-        return list;
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/deleteCandidate/" + candidate.getId())
+                .build().encode().toUri();
+        restTemplate.delete(uri);
+        return getCandidates();
     }
 
+//    public static List<Candidate> addCandidateToTempList(Candidate candidate) {
+//        List<Candidate> candidateTempList = getCandidates();
+//         if (!candidateTempList.contains(candidate)) {
+//            candidateTempList.add(candidate);
+//        } else{
+//            popUpError("Kandydat jest już na liście");
+//        }
+//        return candidateTempList;
+//    }
 
-    public static List<Candidate> getTempCandidateList() {
-        return candidateTempList;
-    }
+    public static Candidate checkIfCandidateExists(Candidate candidate) { //TODO: metoda do poprawy
+        List<Candidate> candidates = getCandidates();
 
-    public static List<Candidate> addCandidateToTempList(Candidate candidate) {
-        if (!candidateTempList.contains(candidate)) {
-            candidateTempList.add(candidate);
-        } else{
-            popUpError("Kandydat jest już na liście");
+        if (candidates.contains(candidate)) {
+            return candidate;
+        } else {
+            return null;
         }
-        return candidateTempList;
     }
 
-    public static void clearCandidateTempList() {
-        candidateTempList = new ArrayList<>();
-    }
-
-    public static List<Candidate> initCandidateList() {
-        list = new ArrayList<>();
-        list.add(new Candidate(22222l, "Adam", "Nowak",Education.MAGISTER, "Kraków", sld));
-        list.add(new Candidate(33333l, "Jan", "Kowalski",Education.PODSTAWOWE, "Kraków", none));
-        list.add(new Candidate(44444l, "Jaroslaw", "Kaczynski", Education.SREDNIE, "Warszawa", pis));
-
-        return list;
-    }
-
-    public static List<ElectoralParty> getPartyDB() {
+    public static List<ElectoralParty> getParties() {
 
         RestTemplate restTemplate = new RestTemplate();
-        List<ElectoralParty> electoralPartyList = new ArrayList<>();
-        try {
-            ElectoralParty[] electoralParties = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", ElectoralParty[].class);
-            electoralPartyList = Arrays.asList(electoralParties);
-        } catch (RestClientException e) {
-            e.printStackTrace();
-        }
-        return electoralPartyList;
+        restTemplate.setMessageConverters(getMessageConverters());
+//        List<ElectoralParty> electoralPartyList = new ArrayList<>();
+//        try {
+//            ElectoralParty[] electoralParties = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", ElectoralParty[].class);
+//            electoralPartyList = Arrays.asList(electoralParties);
+//        } catch (RestClientException e) {
+//            e.printStackTrace();
+//        }
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getElectoralParties")
+                .build().encode().toUri();
+        ElectoralParty[] boardResponse = restTemplate.getForObject(uri, ElectoralParty[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new ElectoralParty[0]));
     }
 
-
-
-    public static List<ElectoralParty> initPartiesList() {
-        electoralParties.add(sld);
-        electoralParties.add(po);
-        electoralParties.add(pis);
-        electoralParties.add(none);
-        return electoralParties;
+    public static List<HttpMessageConverter<?>>  getMessageConverters() {
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        return messageConverters;
     }
 
+    public static User checkLoginData(String login , String password) {
+        return null;
+    }
 }

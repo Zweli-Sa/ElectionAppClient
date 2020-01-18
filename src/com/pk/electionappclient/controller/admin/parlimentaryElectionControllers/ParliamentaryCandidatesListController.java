@@ -22,7 +22,6 @@ import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.Controller.ClientController.*;
-import static com.pk.electionappclient.Controller.ConstituencyController.clearCityTempList;
 import static com.pk.electionappclient.Controller.ConstituencyController.getConstituencyByElectionID;
 import static com.pk.electionappclient.Controller.ElectionController.*;
 import static com.pk.electionappclient.Controller.ElectionListController.candidateInAnotherConstituency;
@@ -120,12 +119,12 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     public void addSelectedCandidateToTempList() {
         Candidate candidate = tableView.getSelectionModel().getSelectedItem();
-        addCandidateToTempList(candidate);
+        createCandidate(candidate);
         loadTempCandidates();
     }
 
     public void populatePartiesComboBox() {
-        populateComboBoxList(partyComboBox, getPartyDB());
+        populateComboBoxList(partyComboBox, getParties());
     }
     public void populateConstituencyComboBox() {
         Election election = (Election) electionComboBox.getSelectionModel().getSelectedItem();
@@ -165,7 +164,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         educationColumnTemp.setCellValueFactory(new PropertyValueFactory<>("education"));
         placeOfResidenceColumnTemp.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
         politicalPartyTemp.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        candidatesTempTableView.getItems().setAll(getTempCandidateList());
+        candidatesTempTableView.getItems().setAll(getCandidates());
     }
 
     public void loadElectionListDB(Election election, Constituency constituency, ElectoralParty electoralParty) {
@@ -185,13 +184,10 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         clearField();
         populatePartiesComboBox();
         populateElectionComboBox();
-        clearCandidateTempList();
     }
 
     public void actionOnPartyChange(ActionEvent actionEvent) {
         loadCandidates();
-        clearCityTempList();
-        clearCandidateTempList();
         loadTempCandidates();
     }
 
@@ -199,10 +195,10 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-            if (candidateInAnotherConstituency(constituency, candidateTempList)) {
+            if (candidateInAnotherConstituency(constituency, getCandidates())) {
                 popUpError("Kandydat jest już dodany do innego okregu wyborczego");
             } else{
-                newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+                newParlElectionList(globalID++, getCandidates(), electoralParty, constituency);
                 constituency.setElectionLists(getElectionIdByConstituencyID(constituency));
             }
     }
@@ -217,7 +213,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     public void deleteCandidateFromTempList(ActionEvent actionEvent) {
         Candidate candidate = candidatesTempTableView.getSelectionModel().getSelectedItem();
-        candidateTempList.remove(candidate);
+        removeCadidate(candidate); //TODO: check it
         loadTempCandidates();
     }
 }

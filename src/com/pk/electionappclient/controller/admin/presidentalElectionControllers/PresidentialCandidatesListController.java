@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Controller.ClientController.*;
 import static com.pk.electionappclient.Controller.ElectionController.*;
-import static com.pk.electionappclient.Controller.ElectionListController.electionList;
+import static com.pk.electionappclient.Controller.ElectionListController.getElectionLists;
 import static com.pk.electionappclient.Controller.ElectionListController.newPresElectionList;
 import static com.pk.electionappclient.Controller.ElectionTypeController.prezydenckie;
 
@@ -85,8 +85,7 @@ public class PresidentialCandidatesListController extends AppController implemen
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(id);
-        clearCandidateTempList(); //usuwa kandydatów z niezapisanej listy wyborczej
+        //clearCandidateTempList(); //usuwa kandydatów z niezapisanej listy wyborczej
         loadCandidates();
         loadTempList();
         System.out.println(getElections());
@@ -95,12 +94,12 @@ public class PresidentialCandidatesListController extends AppController implemen
     public void createPresElectionDay(ActionEvent actionEvent) throws IOException {
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
-                createElectionDay(id++, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newPresElectionList(id++, candidateTempList));
+                createElectionDay(0, presElectionStartDate(), presElectionEndDate(),
+                        prezydenckie, newPresElectionList(0, getCandidates()));
             }
         } catch (NullPointerException e) {
         }
-        System.out.println(electionList);
+        System.out.println(getElectionLists());
         //System.out.println(getElections());
 //        clearCandidateTempList();
         show();
@@ -110,8 +109,6 @@ public class PresidentialCandidatesListController extends AppController implemen
     public void addCandidateElectionList(ActionEvent actionEvent) {
         addSelectedCandidateToTempList();
         loadTempList();
-
-
     }
 
 
@@ -120,7 +117,8 @@ public class PresidentialCandidatesListController extends AppController implemen
         try {
             Candidate candidate = candidatesTable.getSelectionModel().getSelectedItem();
             if (!candidate.equals(null)) {
-                addCandidateToTempList(candidate);
+//                addCandidateToTempList(candidate);
+                createCandidate(candidate);
             }
         } catch (NullPointerException e) {
             popUpError("Zaznacz kadydata by dodać go do listy");
@@ -165,7 +163,7 @@ public class PresidentialCandidatesListController extends AppController implemen
         addedCandidateNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addedCandidateLastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         addedCandidatePoliticalPartyColumn.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        addedCandidatesTable.getItems().setAll(getTempCandidateList());
+        addedCandidatesTable.getItems().setAll(getCandidates());
     }
 
     public void loadAdminPanel(ActionEvent actionEvent) throws IOException {

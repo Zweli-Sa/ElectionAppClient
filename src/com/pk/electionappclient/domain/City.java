@@ -1,8 +1,6 @@
 package com.pk.electionappclient.domain;
 
 
-import sun.jvm.hotspot.oops.CellTypeState;
-
 import java.io.Serializable;
 import java.util.List;
 

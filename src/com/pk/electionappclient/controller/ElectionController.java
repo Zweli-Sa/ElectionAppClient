@@ -1,124 +1,96 @@
 package com.pk.electionappclient.Controller;
 
 import com.pk.electionappclient.domain.*;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import static com.pk.electionappclient.Controller.ClientController.*;
-import static com.pk.electionappclient.Controller.ConstituencyController.constituenciesDB;
-import static com.pk.electionappclient.Controller.ElectionListController.electionList;
+import static com.pk.electionappclient.Controller.ClientController.getMessageConverters;
+import static java.util.Optional.ofNullable;
 
 public class ElectionController {
 
-    private final static ElectionType presidential = new ElectionType(1, "Prezydenckie");
-    private final static ElectionType parliamentary = new ElectionType(2, "Parlamentarne");
-
-    private static List<Election> electionsDB = new ArrayList<>();
-    private static List<Election> inActiveElectionsDB = new ArrayList<>();
-    private static List<Election> activeElectionsDB = new ArrayList<>();
-
+    private static final String URL = "http://localhost:8080/v1/election";
 
     public static List<Election> getElections() {
         RestTemplate restTemplate = new RestTemplate();
-        List<Election> electionList = new ArrayList<>();
-        try {
-            Election[] elections = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", Election[].class);
-            electionList= Arrays.asList(elections);
-        } catch (RestClientException e) {
-            e.printStackTrace();
-        }
-        return electionList;
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getElections")
+                .build().encode().toUri();
+        Election[] boardResponse = restTemplate.getForObject(uri, Election[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new Election[0]));
     }
 
-
-    public static void clearInactiveElectionList() {
-        inActiveElectionsDB.clear();
+    public static void createElection(Election election) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createElection")
+                .queryParam("id", election.getId())
+                .queryParam("startDate", election.getStartDate())
+                .queryParam("finishDate", election.getFinishDate())
+                .queryParam("electionType", election.getElectionType())
+                .queryParam("listElectionList", election.getListElectionList())
+                .queryParam("isActive", election.getActive())
+                .queryParam("electionName", election.getElectionName())
+                .queryParam("constituencies", election.getConstituencies()).build().encode().toUri();
+        restTemplate.postForObject(url, null, Election.class);
     }
 
     public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list) {
-        clearCandidateTempList();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             Election election = new Election(id, startDate, finishDate, electionType, list);
-            electionsDB.add(election);
-
-            RestTemplate restTemplate = new RestTemplate();
-
-            URI uri = null;
-            try {
-                uri = new URI("http://localhost:8080/v1/election/createElection");
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("X-COM-PERSIST", "true");
-            headers.set("X-COM-LOCATION", "PL");
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<Election> request = new HttpEntity<>(election,headers);
-            restTemplate.postForEntity(uri, request, String.class);
+            createElection(election);
         }
-        return electionsDB;
+        return getElections();
     }
 
     public static List<Election> createElectionDayTest(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, String name) {
-        candidateFinalList = new ArrayList<>();
-        candidateTempList = new ArrayList<>();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             Election election = new Election(id, startDate, finishDate, electionType, list, isActive, name);
-            electionsDB.add(election);
-
-            RestTemplate restTemplate = new RestTemplate();
-
-            URI uri = null;
-            try {
-                uri = new URI("http://localhost:8080/v1/election/createElection");
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("X-COM-PERSIST", "true");
-            headers.set("X-COM-LOCATION", "PL");
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<Election> request = new HttpEntity<>(election,headers);
-            restTemplate.postForEntity(uri, request, String.class);
+            createElection(election);
         }
-        return electionsDB;
+        return getElections();
     }
 
     public static List<Election> getInActiveElections() {
-        inActiveElectionsDB = new ArrayList<>();
-        for (Election e : electionsDB) {
+        List<Election> temp = new ArrayList<>();
+        List<Election> elections = getElections();
+        for (Election e : elections) {
             if (!e.getActive()) {
-                inActiveElectionsDB.add(e);
+                temp.add(e);
             }
         }
-        return inActiveElectionsDB;
+        return temp;
     }
 
 
     public static List<Election> getActiveElections() {
-        activeElectionsDB = new ArrayList<>();
-        for (Election e : electionsDB) {
+        List<Election> temp = new ArrayList<>();
+        List<Election> elections = getElections();
+        for (Election e : elections) {
             if (e.getActive()) {
-                activeElectionsDB.add(e);
+                temp.add(e);
             }
         }
-        return activeElectionsDB;
+        return temp;
     }
 
     public static void removeInactiveElection(Election election) {
-        electionsDB.removeIf(e -> (e.getId() == election.getId()));
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/deleteElection/" + election.getId())
+                .build().encode().toUri();
+        restTemplate.delete(uri);
     }
 
     public static List<Constituency> getCurrentConstituency(Election election) {
-        for (Election e : electionsDB) {
+        List<Election> elections = getElections();
+        for (Election e : elections) {
             if (e.getId() == election.getId()) {
                 return e.getConstituencies();
             }
@@ -130,33 +102,34 @@ public class ElectionController {
         for (Election e : getElections()) {
             if (e.getId() == election.getId()) {
                 e.setConstituencies(list);
-
-                Map<String, String> params = new HashMap<>();
                 RestTemplate restTemplate = new RestTemplate();
-                restTemplate.put("http://localhost:8080/v1/election/updateElection/" + e.getId(), e, params); //TODO: do sprawdzenia
+                restTemplate.setMessageConverters(getMessageConverters());
+                URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/updateElection/" + e.getId())
+                        .queryParam("id", e.getId())
+                        .queryParam("startDate", e.getStartDate())
+                        .queryParam("finishDate", e.getFinishDate())
+                        .queryParam("electionType", e.getElectionType())
+                        .queryParam("listElectionList", e.getListElectionList())
+                        .queryParam("isActive", e.getActive())
+                        .queryParam("electionName", e.getElectionName())
+                        .queryParam("constituencies", e.getConstituencies()).build().encode().toUri();
+                restTemplate.put(uri, Election.class);
             }
             }
         }
 
 
     public static void show() {
-        for (Election e : electionsDB) {
+        for (Election e : getElections()) {
             System.out.println(e);
         }
     }
 
-    public static void initElectionsDB() {
-        electionsDB = new ArrayList<>();
-        electionsDB.add(new Election(1l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(4l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(5l, null, null, parliamentary, null, false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(2l, null, null, parliamentary, null, true, "Wybory parlamentaren 2014"));
-    }
-
     public static List<Candidate> getCandidatesElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
         List<Candidate> candidates = new ArrayList<>();
+        List<Constituency> constituencies = ConstituencyController.getConstituencies();
         try {
-            for (Constituency c : constituenciesDB) {
+            for (Constituency c : constituencies) {
                 if (c.getId() == constituency.getId()) {
                     for (ElectionList cc : c.getElectionLists()) {
                         if (cc.getElectoralParty().getId() == electoralParty.getId())
@@ -172,8 +145,9 @@ public class ElectionController {
 
     public static List<ElectionList> getElectionIdByConstituencyID(Constituency constituency) {
         List<ElectionList> elist = new ArrayList<>();
+        List<ElectionList> electionLists = ElectionListController.getElectionLists();
         try {
-            for (ElectionList el : electionList) {
+            for (ElectionList el : electionLists) {
                 if (el.getConstituency().getId() == constituency.getId()) {
                         elist.add(el);
                     }

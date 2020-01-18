@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Controller.ConstituencyController.*;
@@ -63,8 +64,9 @@ public class CreateConstituencyController extends AppController implements Initi
 
     public void newConstituency(ActionEvent actionEvent) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException, IOException {
         Election election = (Election) selectElectionComboBox.getSelectionModel().getSelectedItem();
-        if(!citiesTempList.isEmpty()){
-            createConstituency(getInputId(), createConstituencyName(), citiesTempList, election);
+        List<City> cities = getCities();
+        if(!cities.isEmpty()){
+            createConstituency(getInputId(), createConstituencyName(), cities, election);
             electionSetConstituency(election, getConstituencyByElectionID(election));
             show();
             loadCurrentConstituency();
@@ -78,12 +80,12 @@ public class CreateConstituencyController extends AppController implements Initi
 
     private void clearFields() {
         constituencyIdTextField.setText("");
-        clearCityTempList();
         loadCityNameTemp();
     }
 
     private String createConstituencyName() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        return "Lista nr: " + getInputId() + " - " + listToString(citiesTempList, "getName");
+        List<City> cities = getCities();
+        return "Lista nr: " + getInputId() + " - " + listToString(cities, "getName");
     }
 
 
@@ -98,7 +100,7 @@ public class CreateConstituencyController extends AppController implements Initi
         try {
             City city = cityDBTableView.getSelectionModel().getSelectedItem();
             if (!city.equals(null)) {
-                addCityToTempList(city);
+                createCity(city);
             }
         } catch (NullPointerException e) {
             popUpError("Zaznacz kadydata by dodać go do listy");
@@ -115,12 +117,12 @@ public class CreateConstituencyController extends AppController implements Initi
 
     private void loadCityName() {
         cityNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cityDBTableView.getItems().setAll(getCitiesDB());
+        cityDBTableView.getItems().setAll(getCities());
     }
 
     private void loadCityNameTemp() {
         cityNameTempColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cityTempTableView.getItems().setAll(getCitiesTempList());
+        cityTempTableView.getItems().setAll(getCities());
     }
 
     private void loadCurrentConstituency() {
@@ -132,16 +134,14 @@ public class CreateConstituencyController extends AppController implements Initi
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        clearCityTempList();
         populateElectionComboBox();
         loadCityName();
         validateInputFields(submitButton);
-        System.out.println();
     }
 
-    public void removeSelectedCityTempList(ActionEvent actionEvent) {
+    public void removeSelectedCity(ActionEvent actionEvent) {
         City city = cityTempTableView.getSelectionModel().getSelectedItem();
-        removeCityTempList(city);
+        removeCity(city);
         loadCityNameTemp();
     }
 

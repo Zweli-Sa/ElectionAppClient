@@ -108,7 +108,7 @@ public class NewCandidateController extends AppController implements Initializab
     }
 
     public void populatePartiesComboBox() {
-        populateComboBoxList(partyComboBox, getPartyDB());
+        populateComboBoxList(partyComboBox, getParties());
     }
 
 
@@ -116,8 +116,8 @@ public class NewCandidateController extends AppController implements Initializab
         addCandidate(getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
                 educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), partyComboBox.getValue());
         Candidate candidate = new Candidate(0L, getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
-                educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), null);
-        com.pk.electionappclient.Controller.ClientController.createCandidate(candidate);
+                educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), null, null, null);
+        //com.pk.electionappclient.Controller.ClientController.createCandidate(candidate);
         loadCandidates();
         if (editButton.getId().equals("acceptChanges")) {
             changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
@@ -134,7 +134,7 @@ public class NewCandidateController extends AppController implements Initializab
                     setFields(candidate);
                 } else if (editButton.getId().equals("acceptChanges")) {
                     changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
-                    removeCadidateFromList(candidate);
+                    removeCadidate(candidate);
                     createNewCandidate(actionEvent);
                     clearFields();
                 }
@@ -154,7 +154,7 @@ public class NewCandidateController extends AppController implements Initializab
         try {
             Candidate candidate = tableView.getSelectionModel().getSelectedItem();
             if (!candidate.equals(null)) {
-                removeCadidateFromList(candidate);
+                removeCadidate(candidate);
                 loadCandidates();
             }
         } catch (NullPointerException e) {

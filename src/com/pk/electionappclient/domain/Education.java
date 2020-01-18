@@ -5,7 +5,7 @@ public enum Education {
     ZAWODOWE,
     SREDNIE,
     LICENCJAT,
-    INŻYNIER,
+    INZYNIER,
     MAGISTER,
     DOKTOR,
     PROFESOR;

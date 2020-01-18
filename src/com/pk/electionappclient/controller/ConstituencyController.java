@@ -4,96 +4,91 @@ import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.City;
 import com.pk.electionappclient.domain.Constituency;
 import com.pk.electionappclient.domain.Election;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.pk.electionappclient.Controller.AppController.popUpError;
+import static com.pk.electionappclient.Controller.ClientController.getMessageConverters;
+import static java.util.Optional.ofNullable;
 
 public class ConstituencyController {
-    public static List<City> citiesDB = new ArrayList<>();
-    public static List<City> citiesTempList = new ArrayList<>();
-    public static List<Constituency> constituenciesDB = new ArrayList<>();
 
-    private static City krakow = new City(10l, "Kraków");
-    private static City warszawa = new City(20l, "Warszawa");
-    private static City wroclaw = new City(30l, "Wroclaw");
+    private static final String URL = "http://localhost:8080/v1/election";
 
-
-    public static List<City> getCitiesDB() {
+    public static List<City> getCities() {
         RestTemplate restTemplate = new RestTemplate();
-        List<City> cityList = new ArrayList<>();
-        try {
-            City[] cities = restTemplate.getForObject("http://localhost:8080/v1/election/getCities", City[].class);
-            cityList = Arrays.asList(cities);
-        } catch (RestClientException e) {
-            e.printStackTrace();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getCities")
+                .build().encode().toUri();
+        City[] boardResponse = restTemplate.getForObject(uri, City[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new City[0]));
+    }
+
+    public static void removeCity(City city) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/deleteCity/" + city.getId())
+                .build().encode().toUri();
+        restTemplate.delete(uri);
+    }
+
+    public static void createCity(City city) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createCity")
+                .queryParam("id", city.getId())
+                .queryParam("name", city.getName())
+                .queryParam("users", city.getUsers()).build().encode().toUri();
+        restTemplate.postForObject(url, null, City.class);
+    }
+
+    public static City checkIfCityExists(City city) { //TODO: metoda do poprawy
+        List<City> cities = getCities();
+
+        if (cities.contains(city)) {
+            return city;
+        } else {
+            return null;
         }
-        return cityList;
     }
 
-    public static List<City> getCitiesTempList() {
-        return citiesTempList;
+    public static List<Constituency> getConstituencies() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getConstituencies")
+                .build().encode().toUri();
+        Constituency[] boardResponse = restTemplate.getForObject(uri, Constituency[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new Constituency[0]));
     }
-
-    public static List<City> addCityToTempList(City city) {
-        //citiesTempList = new ArrayList<>();
-        if (!citiesTempList.contains(city)) {
-            citiesTempList.add(city);
-        } else{
-            popUpError("Miasto jest już na liście");
-        }
-        return citiesTempList;
-    }
-
-    public static List<City> clearCityTempList() {
-        citiesTempList = new ArrayList<>();
-        return citiesTempList;
-    }
-
-    public static List<City> removeCityTempList(City city) {
-        citiesTempList.remove(city);
-        return citiesTempList;
-    }
-
-
 
     public static List<Constituency> createConstituency(Long id, String name, List<City> cityList, Election election) {
         if (containsCity(cityList, election)) {
             popUpError("Błąd! Miasto zostało dodane do innego okręgu wyborczego");
         } else {
             Constituency constituency = new Constituency(id, name, cityList, election);
-            constituenciesDB.add(constituency);
-
             RestTemplate restTemplate = new RestTemplate();
-
-            URI uri = null;
-            try {
-                uri = new URI("http://localhost:8080/v1/election/createConstituency");
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
-            }
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("X-COM-PERSIST", "true");
-            headers.set("X-COM-LOCATION", "PL");
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            HttpEntity<Constituency> request = new HttpEntity<>(constituency,headers);
-            restTemplate.postForEntity(uri, request, String.class);
+            restTemplate.setMessageConverters(getMessageConverters());
+            URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createConstituency")
+                    .queryParam("id", constituency.getId())
+                    .queryParam("name", constituency.getName())
+                    .queryParam("description", constituency.getDescription())
+                    .queryParam("election", constituency.getElection())
+                    .queryParam("electionLists", constituency.getElectionLists())
+                    .queryParam("cityList", constituency.getCityList()).build().encode().toUri();
+            restTemplate.postForObject(url, null, Candidate.class);
         }
-        return constituenciesDB;
+        return getConstituencies();
     }
 
     public static boolean containsCity(List<City> cityList, Election election) {
+        List<Constituency> constituencies = getConstituencies();
         for (City city : cityList){
-            if(constituenciesDB.stream().filter(o -> o.getElection().getId()==(election.getId()) && o.getCityList().contains(city)).findAny().isPresent()) {
+            if(constituencies.stream().filter(o -> o.getElection().getId()==(election.getId()) && o.getCityList().contains(city)).findAny().isPresent()) {
                 return true;
             }
         }
@@ -102,7 +97,8 @@ public class ConstituencyController {
 
     public static List<Constituency> getConstituencyByElectionID(Election election) {
         List<Constituency> temp = new ArrayList<>();
-        for (Constituency c : constituenciesDB) {
+        List<Constituency> constituencies = getConstituencies();
+        for (Constituency c : constituencies) {
             if (c.getElection().getId() == election.getId()) {
                 temp.add(c);
             }
@@ -111,12 +107,6 @@ public class ConstituencyController {
         return temp;
 
 
-    }
-
-    public static void initCityDB() {
-        citiesDB.add(krakow);
-        citiesDB.add(warszawa);
-        citiesDB.add(wroclaw);
     }
 }
 

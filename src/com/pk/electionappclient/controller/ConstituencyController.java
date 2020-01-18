@@ -13,7 +13,7 @@ public class ConstituencyController {
     public static List<City> citiesTempList = new ArrayList<>();
     public static List<Constituency> constituenciesDB = new ArrayList<>();
 
-    private static City krakow = new City(10l, "Kraków");
+    public static City krakow = new City(10l, "Kraków");
     public static City warszawa = new City(20l, "Warszawa");
     private static City wroclaw = new City(30l, "Wroclaw");
 
@@ -26,7 +26,6 @@ public class ConstituencyController {
         return citiesTempList;
     }
     public static List<City> addCityToTempList(City city) {
-        //citiesTempList = new ArrayList<>();
         if (!citiesTempList.contains(city)) {
             citiesTempList.add(city);
         } else{

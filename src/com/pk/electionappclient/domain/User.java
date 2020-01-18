@@ -129,6 +129,14 @@ public class User {
         this.password = password;
     }
 
+    public User(Long id, City city, String password, Boolean isAdmin, String pesel) {
+        this.id = id;
+        this.city = city;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.pesel = pesel;
+    }
+
     public User(Long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, String idNumber, String email, String phoneNumber, City city, String password, Boolean isAdmin) {
         this.id = id;
         this.name = name;

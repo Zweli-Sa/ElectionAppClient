@@ -16,7 +16,7 @@ public class ElectionListController {
 
     public static List<ElectionList> electionList = new ArrayList<>();
 
-    public static ElectionList newPresElectionList(int id, List<Candidate> candidates) throws NullPointerException{
+    public static ElectionList newPresElectionList(long id, List<Candidate> candidates) throws NullPointerException{
         ElectionList newElectionList = null;
         if (!candidates.isEmpty()) {
             System.out.println("newPresElectionList");
@@ -47,7 +47,7 @@ public class ElectionListController {
         return false;
     }
 
-    public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException {
+    public static List<ElectionList> newParlElectionList(long id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException {
         if (electionList.isEmpty()) {
             electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
         } else {

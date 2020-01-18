@@ -37,7 +37,7 @@ public class ElectionController {
 
 
 
-    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList list, Boolean isActive, Boolean isFinished, String name) {
+    public static List<Election> createElectionDay(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList list, Boolean isActive, Boolean isFinished, String name) {
         candidateTempList = new ArrayList<>();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, isFinished, name));

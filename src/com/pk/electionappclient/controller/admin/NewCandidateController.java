@@ -1,6 +1,7 @@
 package com.pk.electionappclient.Controller.admin;
 
 import com.pk.electionappclient.Controller.AppController;
+import com.pk.electionappclient.Controller.ClientController;
 import com.pk.electionappclient.domain.Candidate;
 import com.pk.electionappclient.domain.Education;
 import com.pk.electionappclient.domain.ElectoralParty;
@@ -11,13 +12,18 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Controller.ClientController.*;
+import static java.util.Optional.ofNullable;
 
 public class NewCandidateController extends AppController implements Initializable {
 
@@ -70,7 +76,7 @@ public class NewCandidateController extends AppController implements Initializab
     @FXML
     AnchorPane newCandidatePane;
 
-
+    private static final String URL = "http://localhost:8080/v1/election";
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -116,7 +122,7 @@ public class NewCandidateController extends AppController implements Initializab
         addCandidate(getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
                 educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), partyComboBox.getValue());
         Candidate candidate = new Candidate(0L, getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
-                educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), null, null, null);
+                educationComboBox.getValue().toString(), getTextFromField(candidatePlaceOfResidenceTextField));
         //com.pk.electionappclient.Controller.ClientController.createCandidate(candidate);
         loadCandidates();
         if (editButton.getId().equals("acceptChanges")) {
@@ -134,7 +140,7 @@ public class NewCandidateController extends AppController implements Initializab
                     setFields(candidate);
                 } else if (editButton.getId().equals("acceptChanges")) {
                     changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
-                    removeCadidate(candidate);
+                    ClientController.removeCandidate(candidate);
                     createNewCandidate(actionEvent);
                     clearFields();
                 }
@@ -154,7 +160,7 @@ public class NewCandidateController extends AppController implements Initializab
         try {
             Candidate candidate = tableView.getSelectionModel().getSelectedItem();
             if (!candidate.equals(null)) {
-                removeCadidate(candidate);
+                ClientController.removeCandidate(candidate);
                 loadCandidates();
             }
         } catch (NullPointerException e) {
@@ -173,12 +179,21 @@ public class NewCandidateController extends AppController implements Initializab
         partyComboBox.getSelectionModel().clearSelection();
     }
 
+    private ElectoralParty getElectoralPartyByCandidateId(Candidate candidate) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getElectoralPartyByCandidateId/" + candidate.getId())
+                .build().encode().toUri();
+        ElectoralParty boardResponse = restTemplate.getForObject(uri, ElectoralParty.class);
+        return ofNullable(boardResponse).orElse(new ElectoralParty());
+    }
+
     private void setFields(Candidate candidate) {
         candidateNameTextField.setText(candidate.getName());
         candidateLastNameTextField.setText(candidate.getLastname());
         candidatePlaceOfResidenceTextField.setText(candidate.getPlaceOfResidence());
-        educationComboBox.getSelectionModel().select(candidate.getEducation());
-        partyComboBox.getSelectionModel().select(candidate.getElectoralParty());
+        educationComboBox.getSelectionModel().select(getEducationFromString(candidate.getEducation()));
+        partyComboBox.getSelectionModel().select(getElectoralPartyByCandidateId(candidate));
     }
 
     public void closePanel(ActionEvent actionEvent) {
@@ -187,6 +202,37 @@ public class NewCandidateController extends AppController implements Initializab
 
     public void loadAdminPanel(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(newCandidatePane, "admin/adminPanel.fxml");
+    }
+
+    public static Education getEducationFromString(String string) {
+        Education education = Education.PODSTAWOWE;
+        switch (string.toLowerCase()) {
+            case "podstawowe":
+                education = Education.PODSTAWOWE;
+                break;
+            case "zawodowe":
+                education = Education.ZAWODOWE;
+                break;
+            case "srednie":
+                education = Education.SREDNIE;
+                break;
+            case "licencjat":
+                education = Education.LICENCJAT;
+                break;
+            case "inzynier":
+                education = Education.INZYNIER;
+                break;
+            case "magister":
+                education = Education.MAGISTER;
+                break;
+            case "doktor":
+                education = Education.DOKTOR;
+                break;
+            case "profesor":
+                education = Education.PROFESOR;
+                break;
+        }
+        return education;
     }
 }
 

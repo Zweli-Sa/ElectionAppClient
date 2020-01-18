@@ -1,5 +1,6 @@
 package com.pk.electionappclient;
 
+import com.pk.electionappclient.domain.Candidate;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import static com.pk.electionappclient.Controller.ClientController.getCandidates;
+import static com.pk.electionappclient.Controller.ClientController.removeCandidate;
 
 public class Main extends Application {
 
@@ -20,6 +22,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         System.out.println(getCandidates());
+        Candidate candidate = new Candidate();
+        candidate.setId(3L);
+        removeCandidate(candidate);
         Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/admin/adminPanel.fxml"));
         primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.setTitle("Logowanie");

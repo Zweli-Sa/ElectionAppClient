@@ -213,7 +213,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
 
     public void deleteCandidateFromTempList(ActionEvent actionEvent) {
         Candidate candidate = candidatesTempTableView.getSelectionModel().getSelectedItem();
-        removeCadidate(candidate); //TODO: check it
+        removeCandidate(candidate); //TODO: check it
         loadTempCandidates();
     }
 }

@@ -22,27 +22,28 @@ public class ClientController {
     private static final String URL = "http://localhost:8080/v1/election";
 
     public static void createCandidate(Candidate candidate) {
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setMessageConverters(getMessageConverters());
-        URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createCandidate")
-                .queryParam("id", candidate.getId())
-                .queryParam("name", candidate.getName())
-                .queryParam("lastname", candidate.getLastname())
-                .queryParam("education", candidate.getEducation())
-                .queryParam("placeOfResidence", candidate.getPlaceOfResidence())
-                .queryParam("voteResults", Arrays.asList(new VoteResult()))
-                .queryParam("electionList", candidate.getElectionList())
-                .queryParam("electoralParty", candidate.getElectoralParty()).build().encode().toUri();
-        System.out.println(url.toString());
-        restTemplate.postForObject(url, null, Candidate.class);
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.setMessageConverters(getMessageConverters());
+            URI url = UriComponentsBuilder.fromHttpUrl(URL + "/createCandidate")
+                    .queryParam("id", candidate.getId())
+                    .queryParam("name", candidate.getName())
+                    .queryParam("lastname", candidate.getLastname())
+                    .queryParam("education", candidate.getEducation())
+                    .queryParam("placeOfResidence", candidate.getPlaceOfResidence()).build().encode().toUri();
+            restTemplate.postForObject(url, null, Candidate.class);
+        } catch (Exception ex) {
+
+        }
     }
 
     public static List<Candidate> getCandidatesByParty(ElectoralParty party) {
-        List<Candidate> candidates = getCandidates();
-        List<Candidate> filteredCandidates= candidates.stream().filter(o -> o.getElectoralParty().getId().equals(party.getId()))
-                .collect(Collectors.toList());
-        System.out.println(filteredCandidates); //TODO: do usuniecia
-        return filteredCandidates;
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getCandidatesByParty/" + party.getId())
+                .build().encode().toUri();
+        Candidate[] boardResponse = restTemplate.getForObject(uri, Candidate[].class);
+        return Arrays.asList(ofNullable(boardResponse).orElse(new Candidate[0]));
     }
 
     public static void updateCandidate(Long candidateId, Candidate candidate) {
@@ -53,24 +54,20 @@ public class ClientController {
                 .queryParam("name", candidate.getName())
                 .queryParam("lastname", candidate.getLastname())
                 .queryParam("education", candidate.getEducation())
-                .queryParam("placeOfResidence", candidate.getPlaceOfResidence())
-                .queryParam("voteResults", candidate.getVoteResults())
-                .queryParam("electionList", candidate.getElectionList())
-                .queryParam("electoralParty", candidate.getElectoralParty()).build().encode().toUri();
+                .queryParam("placeOfResidence", candidate.getPlaceOfResidence()).build().encode().toUri();
         restTemplate.put(uri, Election.class);
+    }
+
+    public static void setCandidateElectoralParty(Long candidateId, Long electoralPartyId) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
+        URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/setCandidateElectoralParty/" + candidateId + "/" + electoralPartyId)
+                .build().encode().toUri();
+        restTemplate.getForObject(uri, Candidate.class);
     }
 
 
     public static List<Candidate> getCandidates() {
-
-//        List<Candidate> candidateList = new ArrayList<>();
-//        try {
-//            Candidate[] candidates = restTemplate.getForObject("http://localhost:8080/v1/election/getCandidates", Candidate[].class);
-//            candidateList = Arrays.asList(candidates);
-//        } catch (RestClientException e) {
-//            e.printStackTrace();
-//        }
-
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(getMessageConverters());
         URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getCandidates")
@@ -79,20 +76,30 @@ public class ClientController {
         return Arrays.asList(ofNullable(boardResponse).orElse(new Candidate[0]));
     }
 
+    private static Long findCandidateIdByOtherData(List<Candidate> candidates, Candidate candidate) {
+        List<Candidate> foundCandidates = candidates.stream()
+                .filter(o ->  o.getName().equals(candidate.getName())
+                        && o.getLastname().equals(candidate.getLastname())
+                )
+                .collect(Collectors.toList());
+
+        List<Candidate> filteredCandidates = foundCandidates.stream()
+                .filter(o ->  o.getEducation().equals(candidate.getEducation())
+                        && o.getPlaceOfResidence().equals(candidate.getPlaceOfResidence())
+                )
+                .collect(Collectors.toList());
+        return filteredCandidates.get(0).getId();
+    }
+
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
-        Candidate candidate = new Candidate(0L, name, lastName, education, placeOfResidence, null, null,  electoralParty);
+        Candidate candidate = new Candidate(0L, name, lastName, education.toString(), placeOfResidence);
         createCandidate(candidate);
         List<Candidate> candidates = getCandidates();
+        setCandidateElectoralParty(findCandidateIdByOtherData(candidates, candidate), electoralParty.getId());
         return candidates;
     }
 
-    public static List<Candidate> removeCadidate(Candidate candidate) {
-
-//        Map<String, String> params = new HashMap<String, String>();
-//
-//        RestTemplate restTemplate = new RestTemplate();
-//        restTemplate.delete ("http://localhost:8080/v1/election/deleteCandidate/" + candidate.getId(),  params );
-
+    public static List<Candidate> removeCandidate(Candidate candidate) {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(getMessageConverters());
         URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/deleteCandidate/" + candidate.getId())
@@ -100,16 +107,6 @@ public class ClientController {
         restTemplate.delete(uri);
         return getCandidates();
     }
-
-//    public static List<Candidate> addCandidateToTempList(Candidate candidate) {
-//        List<Candidate> candidateTempList = getCandidates();
-//         if (!candidateTempList.contains(candidate)) {
-//            candidateTempList.add(candidate);
-//        } else{
-//            popUpError("Kandydat jest już na liście");
-//        }
-//        return candidateTempList;
-//    }
 
     public static Candidate checkIfCandidateExists(Candidate candidate) { //TODO: metoda do poprawy
         List<Candidate> candidates = getCandidates();
@@ -125,13 +122,6 @@ public class ClientController {
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setMessageConverters(getMessageConverters());
-//        List<ElectoralParty> electoralPartyList = new ArrayList<>();
-//        try {
-//            ElectoralParty[] electoralParties = restTemplate.getForObject("http://localhost:8080/v1/election/getElectoralParties", ElectoralParty[].class);
-//            electoralPartyList = Arrays.asList(electoralParties);
-//        } catch (RestClientException e) {
-//            e.printStackTrace();
-//        }
         URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/getElectoralParties")
                 .build().encode().toUri();
         ElectoralParty[] boardResponse = restTemplate.getForObject(uri, ElectoralParty[].class);

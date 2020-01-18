@@ -8,12 +8,8 @@ public class Candidate implements Serializable {
     private Long id;
     private String name;
     private String lastname;
-    private Education education;
-
+    private String education;
     private String placeOfResidence;
-    private List<VoteResult> voteResults;
-    private ElectionList electionList;
-    private ElectoralParty electoralParty;
 
     public Candidate() {
     }
@@ -52,15 +48,12 @@ public class Candidate implements Serializable {
 //    }
 
 
-    public Candidate(Long id, String name, String lastname, Education education, String placeOfResidence, List<VoteResult> voteResults, ElectionList electionList, ElectoralParty electoralParty) {
+    public Candidate(Long id, String name, String lastname, String education, String placeOfResidence) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.education = education;
         this.placeOfResidence = placeOfResidence;
-        this.voteResults = voteResults;
-        this.electionList = electionList;
-        this.electoralParty = electoralParty;
     }
 
     public Long getId() {
@@ -87,11 +80,11 @@ public class Candidate implements Serializable {
         this.lastname = lastname;
     }
 
-    public Education getEducation() {
+    public String getEducation() {
         return education;
     }
 
-    public void setEducation(Education education) {
+    public void setEducation(String education) {
         this.education = education;
     }
 
@@ -103,29 +96,6 @@ public class Candidate implements Serializable {
         this.placeOfResidence = placeOfResidence;
     }
 
-    public List<VoteResult> getVoteResults() {
-        return voteResults;
-    }
-
-    public void setVoteResults(List<VoteResult> voteResults) {
-        this.voteResults = voteResults;
-    }
-
-    public ElectionList getElectionList() {
-        return electionList;
-    }
-
-    public void setElectionList(ElectionList electionList) {
-        this.electionList = electionList;
-    }
-
-    public ElectoralParty getElectoralParty() {
-        return electoralParty;
-    }
-
-    public void setElectoralParty(ElectoralParty electoralParty) {
-        this.electoralParty = electoralParty;
-    }
 
     @Override
     public String toString() {
@@ -135,7 +105,6 @@ public class Candidate implements Serializable {
                 ", lastName='" + lastname + '\'' +
                 ", education=" + education +
                 ", placeOfResidence='" + placeOfResidence + '\'' +
-                ", electoralParty=" + electoralParty +
                 '}';
     }
 }

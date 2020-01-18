@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -23,6 +25,9 @@ public class VotePanelController extends AppController implements Initializable 
     public Election election;
 
     private int userCityId;
+
+    @FXML
+    AnchorPane voteAnchorPane;
 
     @FXML
     Button confirmButton;
@@ -109,5 +114,9 @@ public class VotePanelController extends AppController implements Initializable 
         }
 
         System.out.println(voteResultsDB);
+    }
+
+    public void loadUserPane(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(voteAnchorPane, "user/userPanel.fxml");
     }
 }

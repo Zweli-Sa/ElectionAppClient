@@ -90,9 +90,8 @@ public class CurrentElectionsController extends AppController implements Initial
         } else {
             votePanelController.initPres();
         }
-        Stage stage = new Stage();
-        stage.setScene(new Scene(root));
-        stage.show();
+        currentElectionsAnchorPane.getChildren().setAll(root);
+
 
     }
 

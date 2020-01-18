@@ -4,19 +4,16 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.Election;
-import com.sun.org.apache.xml.internal.security.Init;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -24,7 +21,6 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Main.globalID;
-import static com.pk.electionappclient.controller.ClientController.getCandidates;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
 public class NewParliamentaryElectionsController extends AppController implements Initializable {
@@ -88,7 +84,7 @@ public class NewParliamentaryElectionsController extends AppController implement
     public void addNewElectionDay(ActionEvent actionEvent) {
         try {
             if (validateDate(parliamentaryElectionStartDate(), parliamentaryElectionEndDate())) {
-                createElectionDayTest(globalID++, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false,false, createElectionName());
+                createElectionDay(globalID++, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false,false, createElectionName());
                 loadInactiveElections();
                 show();
             }
@@ -126,8 +122,8 @@ public class NewParliamentaryElectionsController extends AppController implement
     }
 
     private String createElectionName() {
-        return "Wybory parlamentarne " + parliamentaryElectionDateName(parliamentaryElectionStartDate())
-                + " - " + parliamentaryElectionDateName(parliamentaryElectionEndDate());
+        return "Wybory parlamentarne " + parseDateToString(parliamentaryElectionStartDate())
+                + " - " + parseDateToString(parliamentaryElectionEndDate());
     }
 
     @Override

@@ -20,9 +20,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.getPartyByConstituency;
+import static com.pk.electionappclient.controller.ClientController.getPresCandidates;
 import static com.pk.electionappclient.controller.ConstituencyController.getConstituencyByElectionID;
 import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.VoteResultsController.getParlResults;
+import static com.pk.electionappclient.controller.VoteResultsController.getPresResults;
 
 
 public class ElectionResultsController extends AppController implements Initializable {
@@ -82,7 +84,10 @@ public class ElectionResultsController extends AppController implements Initiali
             }
             initTable();
         } else {
-
+            for(Candidate c : getPresCandidates(election)) {
+                resultList.add(new VoteResultsCandidate(c, getPresResults(election, c)));
+            }
+            initTable();
         }
 
 

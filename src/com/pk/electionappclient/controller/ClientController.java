@@ -53,21 +53,11 @@ public class ClientController {
         return temp;
     }
 
-    public static Election getElectionByElection(Election election) {
-        Election temp = null;
-        for (Election e : getElections()) {
-            if (election.getId() == e.getId()) {
-                temp = e;
-            }
-        }
-        return temp;
-    }
 
 
     public static Constituency getConstituencyListByUserCityId(Election election, int userId) {
-        Election e = getElectionByElection(election);
         Constituency temp = null;
-        for (Constituency c : e.getConstituencies()) {
+        for (Constituency c : election.getConstituencies()) {
             for (City city : c.getCityList()) {
                 if (city.getId() == userId) {
                     temp = c;

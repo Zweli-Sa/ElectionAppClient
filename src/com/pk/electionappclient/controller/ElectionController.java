@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
 import static com.pk.electionappclient.controller.ElectionListController.electionList;
+import static com.pk.electionappclient.controller.ElectionListController.electionListWithConstituencies;
 
 public class ElectionController {
 
@@ -144,7 +145,7 @@ public class ElectionController {
     public static List<ElectionList> getElectionIdByConstituencyID(Constituency constituency) {
         List<ElectionList> elist = new ArrayList<>();
         try {
-            for (ElectionList el : electionList) {
+            for (ElectionList el : electionListWithConstituencies()) {
                 if (el.getConstituency().getId() == constituency.getId()) {
                         elist.add(el);
                     }

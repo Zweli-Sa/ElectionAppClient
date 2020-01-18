@@ -2,8 +2,6 @@ package com.pk.electionappclient.controller.User;
 
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.Election;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -86,7 +84,12 @@ public class CurrentElectionsController extends AppController implements Initial
         Parent root = loader.load();
         VotePanelController votePanelController = loader.getController();
         votePanelController.setElection(election);
-        votePanelController.init();
+        if (election.getConstituencies() != null) {
+            votePanelController.initParl();
+        } else {
+            votePanelController.initPres();
+        }
+
 
         Stage stage = new Stage();
         stage.setScene(new Scene(root));

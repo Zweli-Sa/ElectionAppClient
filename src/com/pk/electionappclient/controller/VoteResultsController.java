@@ -14,10 +14,20 @@ import static com.pk.electionappclient.controller.AppController.popUpError;
 public class VoteResultsController {
     public static List<VoteResult> voteResultsDB = new ArrayList<>();
 
-    public static void voteForCandidate(User user, Election election, Candidate candidate, Constituency constituency) {
+    public static void voteForParlCandidate(User user, Election election, Candidate candidate, Constituency constituency) {
         List<VoteResult> temp = new ArrayList<>();
         if (!voteResultsDB.stream().filter(o -> o.getElection().getId() == (election.getId()) && o.getUser().getId() == user.getId()).findFirst().isPresent()) {
             VoteResult voteResult = new VoteResult(user, globalID++, election, candidate, constituency, LocalDateTime.now());
+            voteResultsDB.add(voteResult);
+        } else {
+            popUpError("Glos zostal juz oddany");
+        }
+
+    }
+    public static void voteForPresCandidate(User user, Election election, Candidate candidate) {
+        List<VoteResult> temp = new ArrayList<>();
+        if (!voteResultsDB.stream().filter(o -> o.getElection().getId() == (election.getId()) && o.getUser().getId() == user.getId()).findFirst().isPresent()) {
+            VoteResult voteResult = new VoteResult(user, globalID++, election, candidate, null, LocalDateTime.now());
             voteResultsDB.add(voteResult);
         } else {
             popUpError("Glos zostal juz oddany");

@@ -80,7 +80,6 @@ public class ClientController {
     }
 
     public static List<ElectionList> getElectionListByConstituency(Constituency constituency) {
-        constituency.getElectionLists();
         List<ElectionList> electionLists = new ArrayList<>();
         electionLists = constituency.getElectionLists();
         return electionLists;
@@ -116,6 +115,7 @@ public class ClientController {
     public static List<Candidate> getCandidates() {
         return list;
     }
+
 
 
     public static List<Candidate> setCandidateFinalList() {
@@ -213,6 +213,13 @@ public class ClientController {
         electoralParties.add(pis);
         electoralParties.add(none);
         return electoralParties;
+    }
+
+    public static List<Candidate> getPresCandidates(Election election) {
+        ElectionList elist = election.getListElectionList().get(0);
+        List<Candidate> temp = elist.getCandidates();
+        return temp;
+
     }
 
 }

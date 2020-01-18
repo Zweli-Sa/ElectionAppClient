@@ -1,6 +1,7 @@
 package com.pk.electionappclient.controller;
 
 import com.pk.electionappclient.domain.*;
+import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +26,10 @@ public class ElectionListController {
         }
         return electionList;
     }
-    public static boolean containPartyElectionlist(List<ElectionList> electionlist, Constituency constituency, ElectoralParty electoralParty) {
+    public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
         //getConstituencyListsByElection(election);
-        if (electionlist.stream().filter(o -> o.getElectoralParty() != null && o.getElectoralParty().getId() == (electoralParty.getId()) && o.getConstituency().getId() != null && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
+        List<ElectionList> tempEL = electionListWithConstituencies();
+        if (tempEL.stream().filter(o -> o.getElectoralParty().getId() == (electoralParty.getId()) && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
             return true;
         }
         return false;
@@ -48,35 +50,27 @@ public class ElectionListController {
         return false;
     }
 
-    public static List<ElectionList> newParlElectionList(List<ElectionList> electionlist, int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException{
+    public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException {
+//        List<Constituency> constituencies = election.getConstituencies();
+//        for (Constituency c : constituencies) {
+//
+//        }
+//        }
         if (electionList.isEmpty()) {
             electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
         } else {
-            if (containPartyElectionlist(electionlist, constituency, electoralParty)) {
-                for (ElectionList el : electionlist) {
-                    if (el.getElectoralParty() != null && el.getConstituency() != null) {
-                        if (constituency.getId() == el.getConstituency().getId() && electoralParty.getId() == el.getElectoralParty().getId()) {
-                            System.out.println(electionlist.indexOf(el));
-                            electionlist.get(electionlist.indexOf(el)).getCandidates().addAll(candidates);
-                        }
+            if (containPartyElectionlist(constituency, electoralParty)) {
+                for (ElectionList el : electionList) {
+                    if (constituency.getId() == el.getConstituency().getId() && electoralParty.getId() == el.getElectoralParty().getId()) {
+                        System.out.println(electionList.indexOf(el));
+                        electionList.get(electionList.indexOf(el)).getCandidates().addAll(candidates);
                     }
-
                 }
             }else {
                 electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
             }
         }
         return electionList;
-    }
-    public static List<ElectionList> getParlElectionListByConstituencyID(Constituency constituency) {
-        List<ElectionList> temp = new ArrayList<>();
-        for (ElectionList e : electionList) {
-            if (e.getConstituency().getId() == constituency.getId()) {
-                temp.add(e);
-            }
-        }
-        System.out.println("temp: " + temp);
-        return temp;
     }
 
     public static void clearElectionList() {

@@ -21,10 +21,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        System.out.println(getCandidates());
-        Candidate candidate = new Candidate();
-        candidate.setId(3L);
-        removeCandidate(candidate);
         Parent root = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/admin/adminPanel.fxml"));
         primaryStage.setScene(new Scene(root, 1200, 900));
         primaryStage.setTitle("Logowanie");

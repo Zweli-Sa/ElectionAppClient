@@ -16,7 +16,6 @@ import static com.pk.electionappclient.controller.ElectionController.*;
 
 public class ClientController {
 
-    public static int id = 0;
 
 
     private static ElectoralParty sld = new ElectoralParty(3, "Sojusz Lewicy Demokratycznej");
@@ -149,6 +148,18 @@ public class ClientController {
 
     public static List<ElectoralParty> getPartyDB() {
         return electoralParties;
+    }
+
+    public static void addElectoralPartyToDatabase(ElectoralParty electoralParty) {
+        if(electoralParties.stream().filter(e -> e.getName().equals(electoralParty.getName())).findFirst().isPresent()){
+            popUpError("Partia o takiej nazwie juz istnieje!");
+        } else {
+            electoralParties.add(electoralParty);
+        }
+    }
+
+    public static void deleteElectoralParty(ElectoralParty electoralParty) {
+        electoralParties.remove(electoralParty);
     }
 
     public static List<ElectoralParty> getPartyByConstituency(Constituency constituency) {

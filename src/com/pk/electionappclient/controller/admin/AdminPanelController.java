@@ -39,4 +39,9 @@ public class AdminPanelController extends AppController {
     public void loadLoginPanelFXML(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(adminAnchorPane, "/login.fxml");
     }
+
+    public void loadNewElectoralPartyFXML(ActionEvent actionEvent) throws IOException {
+        loadAnchorPane(adminAnchorPane, "admin/newElectoralParty.fxml");
+    }
+
 }

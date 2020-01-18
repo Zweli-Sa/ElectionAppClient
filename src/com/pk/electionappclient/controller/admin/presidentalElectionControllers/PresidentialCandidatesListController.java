@@ -89,8 +89,7 @@ public class PresidentialCandidatesListController extends AppController implemen
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println(id);
-        clearCandidateTempList(); //usuwa kandydatów z niezapisanej listy wyborczej
+        clearCandidateTempList();
         loadCandidates();
         loadTempList();
         System.out.println(getElections());

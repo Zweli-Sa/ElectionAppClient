@@ -7,6 +7,7 @@ import java.util.List;
 
 import static com.pk.electionappclient.controller.AppController.popUpError;
 import static com.pk.electionappclient.controller.ClientController.clearCandidateTempList;
+import static com.pk.electionappclient.controller.ElectionController.electionsDB;
 import static com.pk.electionappclient.controller.ElectionController.getParlElectiosnDB;
 
 public class ElectionListController {
@@ -25,24 +26,28 @@ public class ElectionListController {
         return electionList;
     }
     public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
-        if(electionList.stream().filter(o -> o.getElectoralParty().getId()==(electoralParty.getId()) && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
+        //getConstituencyListsByElection(election);
+        if (electionList.stream().filter(o -> o.getElectoralParty() != null && o.getElectoralParty().getId() == (electoralParty.getId()) && o.getConstituency().getId() != null && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
             return true;
         }
         return false;
     }
+//     public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
+//        if(electionList.stream().filter(o -> o.getElectoralParty().getId()==(electoralParty.getId()) && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     public static boolean candidateInAnotherConstituency(Election election, Constituency constituency, List<Candidate> candidateList) {
-        List<Candidate> candidates = new ArrayList<>();
-        List<Constituency> constituencies = getConstituencyListsByElection(election);
-        for (Constituency c : constituencies) {
-            for (ElectionList el : c.getElectionLists()) {
-                for (Candidate cc : candidateList) {
-                    if (el.getCandidates().contains(cc)) {
-                        return true;
-                    }
+        try {
+            for (Candidate c : candidateList) {
+                if (getCandidatesByElection(election).contains(c)) {
+                    return true;
                 }
-
             }
+        } catch (NullPointerException e) {
+
         }
         return false;
     }
@@ -53,10 +58,13 @@ public class ElectionListController {
         } else {
             if (containPartyElectionlist(constituency, electoralParty)) {
                 for (ElectionList el : electionList) {
-                    if (constituency.getId() == el.getConstituency().getId() && electoralParty.getId() == el.getElectoralParty().getId()) {
-                        System.out.println(electionList.indexOf(el));
-                        electionList.get(electionList.indexOf(el)).getCandidates().addAll(candidates);
+                    if (el.getElectoralParty() != null && el.getConstituency() != null) {
+                        if (constituency.getId() == el.getConstituency().getId() && electoralParty.getId() == el.getElectoralParty().getId()) {
+                            System.out.println(electionList.indexOf(el));
+                            electionList.get(electionList.indexOf(el)).getCandidates().addAll(candidates);
+                        }
                     }
+
                 }
             }else {
                 electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
@@ -85,14 +93,23 @@ public class ElectionListController {
 
     public static List<Constituency> getConstituencyListsByElection(Election election) {
         List<Constituency> temp = new ArrayList<>();
-        for (Election e : getParlElectiosnDB()) {
+        for (Election e : electionsDB) {
             if(e.getId() == election.getId()) {
-                temp.add((Constituency) e.getConstituencies());
+                temp = e.getConstituencies();
             }
         }
         return temp;
     }
 
+    public static List<Candidate> getCandidatesByElection(Election election) {
+        List<Candidate> temp = new ArrayList<>();
+        for (Constituency c : getConstituencyListsByElection(election)) {
+            for (ElectionList el : c.getElectionLists()) {
+                temp.addAll(el.getCandidates());
+            }
+        }
+        return temp;
+    }
 
 
 }

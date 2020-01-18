@@ -16,7 +16,7 @@ public class ElectionController {
     private final static ElectionType presidential = new ElectionType(1, "Prezydenckie");
     private final static ElectionType parliamentary = new ElectionType(2, "Parlamentarne");
 
-    private static List<Election> electionsDB = new ArrayList<>();
+    public static List<Election> electionsDB = new ArrayList<>();
     private static List<Election> inActiveElectionsDB = new ArrayList<>();
     private static List<Election> activeElectionsDB = new ArrayList<>();
     public static List<Election> finishedElectionsDB = new ArrayList<>();

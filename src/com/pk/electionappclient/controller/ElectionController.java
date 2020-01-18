@@ -136,7 +136,7 @@ public class ElectionController {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("Null w getCandidatesElection");
+            e.getStackTrace();
         }
         return candidates;
     }
@@ -150,7 +150,7 @@ public class ElectionController {
                     }
                 }
             } catch (NullPointerException e) {
-            System.out.println("Null w getCandidatesElection");
+            e.getStackTrace();
         }
         return elist;
     }

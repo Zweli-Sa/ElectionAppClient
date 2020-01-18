@@ -80,6 +80,7 @@ public class CurrentElectionsController extends AppController implements Initial
     }
 
     public void loadVotePanel(Election election) throws IOException {
+        System.out.println(election);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/pk/electionappclient/GUI/user/votePanel.fxml"));
         Parent root = loader.load();
         VotePanelController votePanelController = loader.getController();
@@ -89,8 +90,6 @@ public class CurrentElectionsController extends AppController implements Initial
         } else {
             votePanelController.initPres();
         }
-
-
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
@@ -99,6 +98,7 @@ public class CurrentElectionsController extends AppController implements Initial
 
     public void getSelectedElection(ActionEvent actionEvent) throws IOException {
         Election election = currentElectionsTable.getSelectionModel().getSelectedItem();
+        System.out.println(election);
         loadVotePanel(election);
     }
 }

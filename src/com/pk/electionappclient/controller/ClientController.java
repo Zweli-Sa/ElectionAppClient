@@ -89,7 +89,6 @@ public class ClientController {
         for (ElectionList e : electionListList) {
             temp.add(e.getElectoralParty());
         }
-        System.out.println("ElectoralParty temp: "+temp);
         return temp;
     }
 

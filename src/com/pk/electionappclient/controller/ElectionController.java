@@ -124,7 +124,7 @@ public class ElectionController {
         electionsDB.add(new Election(2l, null, null, parliamentary, null, true,false, "Wybory parlamentaren 2014"));
     }
 
-    public static List<Candidate> getCandidatesElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
+    public static List<Candidate> getCandidatesByElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
         List<Candidate> candidates = new ArrayList<>();
         try {
             for (Constituency c : constituenciesDB) {
@@ -153,6 +153,15 @@ public class ElectionController {
             e.getStackTrace();
         }
         return elist;
+    }
+
+    public static List<Candidate> getCandidatesByPresElection(Election election) {
+        List<Candidate> temp = new ArrayList<>();
+        for (Candidate c : election.getElectionList().getCandidates()) {
+            temp.add(c);
+        }
+     return temp;
+
     }
 
 }

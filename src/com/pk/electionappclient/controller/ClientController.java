@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.AppController.popUpError;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
@@ -107,7 +108,7 @@ public class ClientController {
 
 
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
-        list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
+        list.add(new Candidate(globalID++, name, lastName, education,placeOfResidence, electoralParty));
         return list;
     }
 

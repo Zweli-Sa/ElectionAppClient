@@ -35,9 +35,16 @@ public class VoteResultsController {
 
     }
 
-    public static int getResults(Election election, Candidate candidate, Constituency constituency) {
+    public static int getParlResults(Election election, Candidate candidate, Constituency constituency) {
         List<VoteResult> temp = new ArrayList<>();
         temp = voteResultsDB.stream().filter(o -> o.getConstituency().getId()==(constituency.getId()) && o.getCandidate().getId()==candidate.getId()).collect(Collectors.toList());
+        System.out.println("Liczba oddanych glosow na :" + candidate.getId() +" " + temp.size());
+        return temp.size();
+    }
+
+    public static int getPresResults(Election election, Candidate candidate) {
+        List<VoteResult> temp = new ArrayList<>();
+        temp = voteResultsDB.stream().filter(o -> o.getElection().getId()==(election.getId()) && o.getCandidate().getId()==candidate.getId()).collect(Collectors.toList());
         System.out.println("Liczba oddanych glosow na :" + candidate.getId() +" " + temp.size());
         return temp.size();
     }

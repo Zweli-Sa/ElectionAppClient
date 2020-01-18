@@ -51,7 +51,7 @@
                               <Insets left="5.0" right="5.0" top="50.0" />
                            </HBox.margin>
                         </Button>
-                        <Button layoutX="50.0" mnemonicParsing="false" prefHeight="600.0" prefWidth="397.0" text="Wyloguj">
+                        <Button layoutX="50.0" mnemonicParsing="false" onAction="#closePanel" prefHeight="600.0" prefWidth="397.0" text="Wyloguj">
                            <font>
                               <Font size="24.0" />
                            </font>

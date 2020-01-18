@@ -154,7 +154,6 @@ public class ClientController {
     public static List<ElectoralParty> getPartyByConstituency(Constituency constituency) {
         List<ElectoralParty> electoralParties = new ArrayList<>();
         for (Election e : finishedElectionsDB) {
-
             System.out.println("Election e: " + e);
             for (Constituency c : e.getConstituencies()) {
                 if (c.getId() == constituency.getId()) {

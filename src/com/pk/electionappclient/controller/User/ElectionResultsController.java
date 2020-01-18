@@ -2,6 +2,9 @@ package com.pk.electionappclient.controller.User;
 
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.*;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,7 +23,7 @@ import static com.pk.electionappclient.controller.ClientController.getPartyByCon
 import static com.pk.electionappclient.controller.ConstituencyController.getConstituencyByElectionID;
 import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.VoteResultsController.getParlResults;
-import static com.pk.electionappclient.controller.VoteResultsController.getPresResults;
+
 
 public class ElectionResultsController extends AppController implements Initializable {
 
@@ -39,17 +42,19 @@ public class ElectionResultsController extends AppController implements Initiali
     @FXML
     TableView resultTableView;
     @FXML
-    TableColumn resultColumn;
+    TableColumn<VoteResultsCandidate, String> resultColumn;
     @FXML
-    TableColumn<Candidate, String> nameColumn;
+    TableColumn<VoteResultsCandidate, String> nameColumn;
     @FXML
-    TableColumn<Candidate, String> lastNameColumn;
+    TableColumn<VoteResultsCandidate, String> lastNameColumn;
     @FXML
-    TableColumn<Candidate, String> partyColumn;
+    TableColumn<VoteResultsCandidate, String> partyColumn;
+
 
     @FXML
     AnchorPane electionResultsAnchorPane;
 
+    ObservableList<VoteResultsCandidate> resultList = FXCollections.observableArrayList();
 
     public void closePanel(ActionEvent actionEvent) {
         closeLoginPanelOnAction(exitButton);
@@ -73,20 +78,41 @@ public class ElectionResultsController extends AppController implements Initiali
             Constituency constituency = (Constituency) constituencyComboBox.getSelectionModel().getSelectedItem();
             ElectoralParty electoralParty = (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem();
             for(Candidate c : getCandidatesByElection(election, constituency, electoralParty)) {
-                getParlResults(election, c, constituency);
+                resultList.add(new VoteResultsCandidate(c, getParlResults(election, c, constituency)));
             }
-            nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-            partyColumn.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-            resultTableView.getItems().setAll(getCandidatesByElection(election, constituency, electoralParty));
+            initTable();
         } else {
-            for (Candidate c : getCandidatesByPresElection(election)) {
-                getPresResults(election, c);
-            }
+
         }
 
 
 
+    }
+
+    public void initTable() {
+        resultColumn.setCellValueFactory(new PropertyValueFactory<>("sum"));
+        nameColumn.setCellValueFactory(
+                c -> {
+                    SimpleObjectProperty name = new SimpleObjectProperty();
+                    name.setValue(c.getValue().getCandidate().getName());
+                    return name;
+                }
+        );
+        lastNameColumn.setCellValueFactory(
+                c -> {
+                    SimpleObjectProperty lastname = new SimpleObjectProperty();
+                    lastname.setValue(c.getValue().getCandidate().getLastname());
+                    return lastname;
+                }
+        );
+        lastNameColumn.setCellValueFactory(
+                c -> {
+                    SimpleObjectProperty party = new SimpleObjectProperty();
+                    party.setValue(c.getValue().getCandidate().getElectoralParty().getName());
+                    return party;
+                }
+        );
+        resultTableView.setItems(resultList);
     }
 
     public void loadUserPanel(ActionEvent actionEvent) throws IOException {

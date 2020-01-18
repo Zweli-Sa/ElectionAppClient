@@ -1,7 +1,6 @@
 package com.pk.electionappclient.controller;
 
 import com.pk.electionappclient.domain.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.stream.Collectors;
 
 import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.AppController.popUpError;
+import static com.pk.electionappclient.controller.ElectionController.getCandidatesByElection;
 
 public class VoteResultsController {
     public static List<VoteResult> voteResultsDB = new ArrayList<>();
@@ -42,12 +42,15 @@ public class VoteResultsController {
         return temp.size();
     }
 
+
+
     public static int getPresResults(Election election, Candidate candidate) {
         List<VoteResult> temp = new ArrayList<>();
         temp = voteResultsDB.stream().filter(o -> o.getElection().getId()==(election.getId()) && o.getCandidate().getId()==candidate.getId()).collect(Collectors.toList());
         System.out.println("Liczba oddanych glosow na :" + candidate.getId() +" " + temp.size());
         return temp.size();
     }
+
 
 
 }

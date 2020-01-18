@@ -26,7 +26,6 @@ import java.util.ResourceBundle;
 import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ElectionController.*;
-import static com.pk.electionappclient.controller.ElectionListController.electionList;
 import static com.pk.electionappclient.controller.ElectionListController.newPresElectionList;
 import static com.pk.electionappclient.controller.ElectionTypeController.prezydenckie;
 import static java.sql.Date.valueOf;
@@ -99,7 +98,7 @@ public class PresidentialCandidatesListController extends AppController implemen
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
                 createElectionDay(globalID++, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newPresElectionList(globalID++, candidateTempList), true, false);
+                        prezydenckie, newPresElectionList(globalID++, candidateTempList), true, false,createElectionName());
                 clearCandidateTempList();
             }
         } catch (NullPointerException e) {
@@ -129,6 +128,11 @@ public class PresidentialCandidatesListController extends AppController implemen
         } catch (NullPointerException e) {
             popUpError("Zaznacz kadydata by dodać go do listy");
         }
+    }
+
+    private String createElectionName() {
+        return "Wybory prezydenckie " + parseDateToString(presElectionStartDate())
+                + " - " + parseDateToString(presElectionEndDate());
     }
 
 

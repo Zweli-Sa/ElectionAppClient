@@ -106,7 +106,7 @@ public abstract class AppController {
         return str;
     }
 
-    protected String parliamentaryElectionDateName(LocalDateTime date) {
+    protected String parseDateToString(LocalDateTime date) {
         return date.getDayOfMonth() + "/" + date.getMonthValue() + "/" + date.getYear()
                 + " " + date.getHour() + ":" + date.getMinute() +":" + date.getSecond();
     }

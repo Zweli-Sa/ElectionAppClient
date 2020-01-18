@@ -14,6 +14,7 @@ public class Election {
     private List<ElectionList> ListElectionList;
 
     private Boolean isActive;
+    private Boolean isFinished;
 
     private String electionName;
 
@@ -32,12 +33,13 @@ public class Election {
         this.finishDate = finishDate;
     }
 
-    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType,List<ElectionList> electionList, Boolean isActive, String electionName) {
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType,List<ElectionList> electionList, Boolean isActive, Boolean isFinished, String electionName) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.electionType = electionType;
         this.isActive = isActive;
+        this.isFinished = isFinished;
         this.ListElectionList = electionList;
         this.electionName = electionName;
     }
@@ -48,6 +50,16 @@ public class Election {
         this.finishDate = finishDate;
         this.electionType = electionType;
         this.ListElectionList = electionList;
+    }
+
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinish) {
+        this.id = id;
+        this.startDate = startDate;
+        this.finishDate = finishDate;
+        this.electionType = electionType;
+        this.ListElectionList = list;
+        this.isActive=isActive;
+        this.isFinished = isFinish;
     }
 
     public long getId() {
@@ -66,8 +78,12 @@ public class Election {
         return electionType;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
+    }
+
+    public Boolean getIsFinished() {
+        return isFinished;
     }
 
     public void setActive(Boolean active) {
@@ -96,6 +112,14 @@ public class Election {
 
     public void setConstituencies(List<Constituency> constituencies) {
         this.constituencies = constituencies;
+    }
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+    public void setFinished(Boolean finished) {
+        isFinished = finished;
     }
 
     @Override

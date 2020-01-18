@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.ClientController.getCandidates;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
@@ -72,11 +73,22 @@ public class NewParliamentaryElectionsController extends AppController implement
     @FXML
     TableColumn<Election, LocalDateTime> activeNameColumn;
 
+    @FXML
+    TableView finishedElectionDayTable;
+    @FXML
+    TableColumn<Election, Long> finishedIdColumn;
+    @FXML
+    TableColumn<Election, LocalDateTime> finishedStartDateColumn;
+    @FXML
+    TableColumn<Election, LocalDateTime> finishedEndDateColumn;
+    @FXML
+    TableColumn<Election, LocalDateTime> finishedNameColumn;
+
 
     public void addNewElectionDay(ActionEvent actionEvent) {
         try {
             if (validateDate(parliamentaryElectionStartDate(), parliamentaryElectionEndDate())) {
-                createElectionDayTest(3, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false, createElectionName());
+                createElectionDayTest(globalID++, parliamentaryElectionStartDate(), parliamentaryElectionEndDate(), null, null, false,false, createElectionName());
                 loadInactiveElections();
                 show();
             }
@@ -122,6 +134,7 @@ public class NewParliamentaryElectionsController extends AppController implement
     public void initialize(URL location, ResourceBundle resources) {
         loadInactiveElections();
         loadActiveElections();
+        loadFinishedElections();
 
 
     }
@@ -141,6 +154,14 @@ public class NewParliamentaryElectionsController extends AppController implement
         activeElectionDayTable.getItems().setAll(getActiveElections());
     }
 
+    private void loadFinishedElections() {
+        finishedIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        finishedStartDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        finishedEndDateColumn.setCellValueFactory(new PropertyValueFactory<>("finishDate"));
+        finishedNameColumn.setCellValueFactory(new PropertyValueFactory<>("electionName"));
+        finishedElectionDayTable.getItems().setAll(getFinishedElections());
+    }
+
 
     public void loadNewConstituencyFXML(ActionEvent actionEvent) throws IOException {
         loadAnchorPane(electionAnchorPane, "/admin/parliamentaryElection/createConstituency.fxml");
@@ -158,12 +179,29 @@ public class NewParliamentaryElectionsController extends AppController implement
     }
 
     public void activeSelectedElection(ActionEvent actionEvent) {
-        Election election;
-        election = (Election) inactiveElectionDayTable.getSelectionModel().getSelectedItem();
-        System.out.println(election);
-        election.setActive(true);
-        loadInactiveElections();
-        loadActiveElections();
+        try {
+            Election election;
+            election = (Election) inactiveElectionDayTable.getSelectionModel().getSelectedItem();
+            election.setActive(true);
+            loadInactiveElections();
+            loadActiveElections();
+        } catch (NullPointerException e) {
+            popUpError("Wybierz wybory by je aktywowac");
+        }
+
+    }
+
+    public void finishSelectedElection(ActionEvent actionEvent) {
+        try {
+            Election election;
+            election = (Election) activeElectionDayTable.getSelectionModel().getSelectedItem();
+            election.setFinished(true);
+            loadFinishedElections();
+            loadInactiveElections();
+            loadActiveElections();
+        } catch (NullPointerException e) {
+            popUpError("Wybierz wybory by je zakonczyc");
+        }
 
     }
 

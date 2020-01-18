@@ -98,7 +98,7 @@ public class PresidentialCandidatesListController extends AppController implemen
         try {
             if (validateDate(presElectionStartDate(), presElectionEndDate())) {
                 createElectionDay(id++, presElectionStartDate(), presElectionEndDate(),
-                        prezydenckie, newPresElectionList(id++, candidateTempList));
+                        prezydenckie, newPresElectionList(id++, candidateTempList), true, false);
             }
         } catch (NullPointerException e) {
         }

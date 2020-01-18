@@ -37,12 +37,6 @@ public class ElectionListController {
         }
         return false;
     }
-//     public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
-//        if(electionList.stream().filter(o -> o.getElectoralParty().getId()==(electoralParty.getId()) && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     public static boolean candidateInAnotherConstituency(List<ElectionList> electionlist, Election election, Constituency constituency, List<Candidate> candidateList) {
         for (Candidate c : candidateList) {
@@ -54,11 +48,6 @@ public class ElectionListController {
     }
 
     public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException {
-//        List<Constituency> constituencies = election.getConstituencies();
-//        for (Constituency c : constituencies) {
-//
-//        }
-//        }
         if (electionList.isEmpty()) {
             electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
         } else {
@@ -94,20 +83,10 @@ public class ElectionListController {
         return temp;
     }
 
-    public static List<Candidate> getCandidatesByElection(Election election) {
-        List<Candidate> temp = new ArrayList<>();
-        for (Constituency c : getConstituencyListsByElection(election)) {
-            for (ElectionList el : c.getElectionLists()) {
-                temp.addAll(el.getCandidates());
-            }
-        }
-        return temp;
-    }
 
     public static List<ElectionList> electionListWithConstituencies() {
         List<ElectionList> temp = new ArrayList<>();
         for (ElectionList el : electionList){
-            System.out.println("eLwC ElectionList controller: " + el);
             if (el.getConstituency() != null) {
                 temp.add(el);
             }

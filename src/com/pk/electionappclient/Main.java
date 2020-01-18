@@ -21,7 +21,7 @@ public class Main extends Application {
 
     private double xOffset = 0;
     private double yOffset = 0;
-    public static int globalID = 1;
+    public static int globalID = 100;
     public static User userTestowy = new User(11l, "Jan", "Kowalski", "ulica", 22553344,11, "11-11","99999999", "113221", "email@email.pl", "111444555", warszawa, "haslo", false);
 
     @Override

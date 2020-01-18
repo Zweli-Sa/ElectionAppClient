@@ -1,6 +1,7 @@
 package com.pk.electionappclient.controller.admin.parlimentaryElectionControllers;
 
 import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.controller.ElectionController;
 import com.pk.electionappclient.domain.*;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
@@ -15,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.Main.globalID;
@@ -171,7 +171,7 @@ public class ParliamentaryCandidatesListController extends AppController impleme
         educationColumnDB.setCellValueFactory(new PropertyValueFactory<>("education"));
         placeOfResidenceColumnDB.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
         politicalPartyDB.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        tableViewDB.getItems().setAll(getCandidatesElection(election, constituency, electoralParty));
+        tableViewDB.getItems().setAll(ElectionController.getCandidatesByElection(election, constituency, electoralParty));
     }
 
 

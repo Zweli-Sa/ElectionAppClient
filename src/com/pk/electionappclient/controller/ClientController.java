@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.pk.electionappclient.Main.globalID;
 import static com.pk.electionappclient.controller.AppController.popUpError;
 import static com.pk.electionappclient.controller.ElectionController.*;
 
@@ -57,11 +58,11 @@ public class ClientController {
 
 
 
-    public static Constituency getConstituencyListByUserCityId(Election election, int userId) {
+    public static Constituency getConstituencyListByUserCityId(Election election, int userCityId) {
         Constituency temp = null;
         for (Constituency c : election.getConstituencies()) {
             for (City city : c.getCityList()) {
-                if (city.getId() == userId) {
+                if (city.getId() == userCityId) {
                     temp = c;
                 }
             }
@@ -117,7 +118,7 @@ public class ClientController {
 
 
     public static List<Candidate> addCandidate(String name, String lastName, Education education, String placeOfResidence, ElectoralParty electoralParty) {
-        list.add(new Candidate(1l, name, lastName, education,placeOfResidence, electoralParty));
+        list.add(new Candidate(globalID++, name, lastName, education,placeOfResidence, electoralParty));
         return list;
     }
 
@@ -163,7 +164,6 @@ public class ClientController {
     public static List<ElectoralParty> getPartyByConstituency(Constituency constituency) {
         List<ElectoralParty> electoralParties = new ArrayList<>();
         for (Election e : finishedElectionsDB) {
-
             System.out.println("Election e: " + e);
             for (Constituency c : e.getConstituencies()) {
                 if (c.getId() == constituency.getId()) {

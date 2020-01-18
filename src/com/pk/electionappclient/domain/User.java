@@ -17,6 +17,10 @@ public class User {
     private String password;
     private Boolean isAdmin;
 
+    public User() {
+
+    }
+
     public Long getId() {
         return id;
     }

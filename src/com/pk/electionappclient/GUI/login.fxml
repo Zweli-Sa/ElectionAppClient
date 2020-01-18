@@ -44,7 +44,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="loginButton" layoutX="29.0" layoutY="258.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="357.0" style="-fx-background-color: #dc143c;" text="Zaloguj się" textFill="WHITE" />
+            <Button fx:id="loginButton" layoutX="29.0" layoutY="258.0" mnemonicParsing="false" onAction="#getLogin" prefHeight="60.0" prefWidth="357.0" style="-fx-background-color: #dc143c;" text="Zaloguj się" textFill="WHITE" />
          </children>
       </AnchorPane>
       <Label layoutX="235.0" layoutY="161.0" text="Zaloguj się za pomocą nazwy użytkownika" AnchorPane.leftAnchor="235.0" AnchorPane.rightAnchor="235.0">

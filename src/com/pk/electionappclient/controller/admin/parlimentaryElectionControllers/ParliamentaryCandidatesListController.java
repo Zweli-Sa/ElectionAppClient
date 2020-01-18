@@ -196,10 +196,10 @@ public class ParliamentaryCandidatesListController extends AppController impleme
             ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-            if (candidateInAnotherConstituency(election, constituency, candidateTempList)) {
+            if (candidateInAnotherConstituency(electionListWithConstituencies(), election, constituency, candidateTempList)) {
                 popUpError("Kandydat jest już dodany do innego okregu wyborczego");
             } else{
-                newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);
+                newParlElectionList(electionListWithConstituencies(), globalID++, candidateTempList, electoralParty, constituency);
                 constituency.setElectionLists(getElectionIdByConstituencyID(constituency));
             }
     }

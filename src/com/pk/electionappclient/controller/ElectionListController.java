@@ -25,9 +25,9 @@ public class ElectionListController {
         }
         return electionList;
     }
-    public static boolean containPartyElectionlist(Constituency constituency, ElectoralParty electoralParty) {
+    public static boolean containPartyElectionlist(List<ElectionList> electionlist, Constituency constituency, ElectoralParty electoralParty) {
         //getConstituencyListsByElection(election);
-        if (electionList.stream().filter(o -> o.getElectoralParty() != null && o.getElectoralParty().getId() == (electoralParty.getId()) && o.getConstituency().getId() != null && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
+        if (electionlist.stream().filter(o -> o.getElectoralParty() != null && o.getElectoralParty().getId() == (electoralParty.getId()) && o.getConstituency().getId() != null && o.getConstituency().getId() == constituency.getId()).findAny().isPresent()) {
             return true;
         }
         return false;
@@ -39,29 +39,25 @@ public class ElectionListController {
 //        return false;
 //    }
 
-    public static boolean candidateInAnotherConstituency(Election election, Constituency constituency, List<Candidate> candidateList) {
-        try {
-            for (Candidate c : candidateList) {
-                if (getCandidatesByElection(election).contains(c)) {
-                    return true;
-                }
+    public static boolean candidateInAnotherConstituency(List<ElectionList> electionlist, Election election, Constituency constituency, List<Candidate> candidateList) {
+        for (Candidate c : candidateList) {
+            if(electionlist.stream().filter(o -> o.getConstituency().getElection().getId() == constituency.getElection().getId() && o.getCandidates().contains(c)).findAny().isPresent()) {
+                return true;
             }
-        } catch (NullPointerException e) {
-
         }
         return false;
     }
 
-    public static List<ElectionList> newParlElectionList(int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException{
+    public static List<ElectionList> newParlElectionList(List<ElectionList> electionlist, int id, List<Candidate> candidates, ElectoralParty electoralParty, Constituency constituency) throws NullPointerException{
         if (electionList.isEmpty()) {
             electionList.add(new ElectionList(id, candidates, electoralParty, constituency));
         } else {
-            if (containPartyElectionlist(constituency, electoralParty)) {
-                for (ElectionList el : electionList) {
+            if (containPartyElectionlist(electionlist, constituency, electoralParty)) {
+                for (ElectionList el : electionlist) {
                     if (el.getElectoralParty() != null && el.getConstituency() != null) {
                         if (constituency.getId() == el.getConstituency().getId() && electoralParty.getId() == el.getElectoralParty().getId()) {
-                            System.out.println(electionList.indexOf(el));
-                            electionList.get(electionList.indexOf(el)).getCandidates().addAll(candidates);
+                            System.out.println(electionlist.indexOf(el));
+                            electionlist.get(electionlist.indexOf(el)).getCandidates().addAll(candidates);
                         }
                     }
 
@@ -106,6 +102,17 @@ public class ElectionListController {
         for (Constituency c : getConstituencyListsByElection(election)) {
             for (ElectionList el : c.getElectionLists()) {
                 temp.addAll(el.getCandidates());
+            }
+        }
+        return temp;
+    }
+
+    public static List<ElectionList> electionListWithConstituencies() {
+        List<ElectionList> temp = new ArrayList<>();
+        for (ElectionList el : electionList){
+            System.out.println("eLwC ElectionList controller: " + el);
+            if (el.getConstituency() != null) {
+                temp.add(el);
             }
         }
         return temp;

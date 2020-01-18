@@ -85,21 +85,21 @@ public class Constituency {
         this.cityList = cityList;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Constituency{" +
-//                "id=" + id +
-//                ", name='" + name + '\'' +
-//                ", description='" + description + '\'' +
-//                ", electionLists=" + electionLists +
-//                ", cityList=" + cityList +
-//                '}';
-//    }
-
     @Override
     public String toString() {
         return "Constituency{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", electionLists=" + electionLists +
+                ", cityList=" + cityList +
                 '}';
     }
+
+//    @Override
+//    public String toString() {
+//        return "Constituency{" +
+//                "id=" + id +
+//                '}';
+//    }
 }

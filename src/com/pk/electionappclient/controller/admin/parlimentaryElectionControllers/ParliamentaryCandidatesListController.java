@@ -2,7 +2,6 @@ package com.pk.electionappclient.controller.admin.parlimentaryElectionController
 
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -193,10 +192,11 @@ public class ParliamentaryCandidatesListController extends AppController impleme
     }
 
     public void createParlElectionList(ActionEvent actionEvent) {
+        System.out.println("getPresElectiosnDB: " + getParlElectiosnDB());
             ElectoralParty electoralParty = (ElectoralParty) getComboBoxValue(partyComboBox);
             Election election = (Election) getComboBoxValue(electionComboBox);
             Constituency constituency = (Constituency) getComboBoxValue(constituencyComboBox);
-            if (candidateInAnotherConstituency(constituency, candidateTempList)) {
+            if (candidateInAnotherConstituency(electionListWithConstituencies(), election, constituency, candidateTempList)) {
                 popUpError("Kandydat jest już dodany do innego okregu wyborczego");
             } else{
                 newParlElectionList(globalID++, candidateTempList, electoralParty, constituency);

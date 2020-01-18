@@ -14,7 +14,7 @@ public class ConstituencyController {
     public static List<Constituency> constituenciesDB = new ArrayList<>();
 
     private static City krakow = new City(10l, "Kraków");
-    private static City warszawa = new City(20l, "Warszawa");
+    public static City warszawa = new City(20l, "Warszawa");
     private static City wroclaw = new City(30l, "Wroclaw");
 
 

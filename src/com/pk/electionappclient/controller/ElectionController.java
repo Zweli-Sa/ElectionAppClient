@@ -5,21 +5,30 @@ import com.pk.electionappclient.domain.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.pk.electionappclient.controller.ClientController.*;
 import static com.pk.electionappclient.controller.ConstituencyController.constituenciesDB;
 import static com.pk.electionappclient.controller.ElectionListController.electionList;
+import static com.pk.electionappclient.controller.ElectionListController.electionListWithConstituencies;
 
 public class ElectionController {
 
     private final static ElectionType presidential = new ElectionType(1, "Prezydenckie");
     private final static ElectionType parliamentary = new ElectionType(2, "Parlamentarne");
 
-    private static List<Election> electionsDB = new ArrayList<>();
+    public static List<Election> electionsDB = new ArrayList<>();
     private static List<Election> inActiveElectionsDB = new ArrayList<>();
     private static List<Election> activeElectionsDB = new ArrayList<>();
     public static List<Election> finishedElectionsDB = new ArrayList<>();
+    public static List<Election> presElectionsDB = new ArrayList<>();
 
+
+    public static List<Election> getParlElectiosnDB() {
+        List<Election> temp = new ArrayList<>();
+        temp = electionsDB.stream().filter(e -> e.getConstituencies() !=null).collect(Collectors.toList());
+        return  temp;
+    }
 
     public static List<Election> getElections() {
         return electionsDB;
@@ -30,7 +39,7 @@ public class ElectionController {
         inActiveElectionsDB.clear();
     }
 
-    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinish) {
+    public static List<Election> createElectionDay(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList list, Boolean isActive, Boolean isFinish) {
         clearCandidateTempList();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, isFinish));
@@ -38,8 +47,7 @@ public class ElectionController {
         return electionsDB;
     }
 
-    public static List<Election> createElectionDayTest(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinished, String name) {
-        candidateFinalList = new ArrayList<>();
+    public static List<Election> createElectionDayTest(int id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList list, Boolean isActive, Boolean isFinished, String name) {
         candidateTempList = new ArrayList<>();
         if(!startDate.equals(null) || !finishDate.equals(null) || !electionType.equals(null) || !list.equals(null)) {
             electionsDB.add(new Election(id, startDate, finishDate, electionType, list, isActive, isFinished, name));
@@ -128,7 +136,7 @@ public class ElectionController {
                 }
             }
         } catch (NullPointerException e) {
-            System.out.println("Null w getCandidatesElection");
+            e.getStackTrace();
         }
         return candidates;
     }
@@ -136,13 +144,13 @@ public class ElectionController {
     public static List<ElectionList> getElectionIdByConstituencyID(Constituency constituency) {
         List<ElectionList> elist = new ArrayList<>();
         try {
-            for (ElectionList el : electionList) {
+            for (ElectionList el : electionListWithConstituencies()) {
                 if (el.getConstituency().getId() == constituency.getId()) {
                         elist.add(el);
                     }
                 }
             } catch (NullPointerException e) {
-            System.out.println("Null w getCandidatesElection");
+            e.getStackTrace();
         }
         return elist;
     }

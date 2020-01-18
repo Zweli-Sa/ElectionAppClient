@@ -11,7 +11,7 @@ public class Election {
 
     private ElectionType electionType;
 
-    private List<ElectionList> ListElectionList;
+    private ElectionList electionList;
 
     private Boolean isActive;
     private Boolean isFinished;
@@ -33,31 +33,31 @@ public class Election {
         this.finishDate = finishDate;
     }
 
-    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType,List<ElectionList> electionList, Boolean isActive, Boolean isFinished, String electionName) {
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType,ElectionList electionList, Boolean isActive, Boolean isFinished, String electionName) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.electionType = electionType;
         this.isActive = isActive;
         this.isFinished = isFinished;
-        this.ListElectionList = electionList;
+        this.electionList = electionList;
         this.electionName = electionName;
     }
 
-    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> electionList) {
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList electionList) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.electionType = electionType;
-        this.ListElectionList = electionList;
+        this.electionList = electionList;
     }
 
-    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, List<ElectionList> list, Boolean isActive, Boolean isFinish) {
+    public Election(long id, LocalDateTime startDate, LocalDateTime finishDate, ElectionType electionType, ElectionList list, Boolean isActive, Boolean isFinish) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.electionType = electionType;
-        this.ListElectionList = list;
+        this.electionList = list;
         this.isActive=isActive;
         this.isFinished = isFinish;
     }
@@ -98,12 +98,12 @@ public class Election {
         this.electionName = electionName;
     }
 
-    public List<ElectionList> getListElectionList() {
-        return ListElectionList;
+    public ElectionList getElectionList() {
+        return electionList;
     }
 
-    public void setListElectionList(List<ElectionList> listElectionList) {
-        ListElectionList = listElectionList;
+    public void setElectionList(ElectionList electionList) {
+        this.electionList = electionList;
     }
 
     public List<Constituency> getConstituencies() {
@@ -129,7 +129,7 @@ public class Election {
                 ", startDate=" + startDate +
                 ", finishDate=" + finishDate +
                 ", electionType=" + electionType +
-                ", ListElectionList=" + ListElectionList +
+                ", ListElectionList=" + electionList +
                 ", isActive=" + isActive +
                 ", electionName='" + electionName + '\'' +
                 ", constituencies=" + constituencies +

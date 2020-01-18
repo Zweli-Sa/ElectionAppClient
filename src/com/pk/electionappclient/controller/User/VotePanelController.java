@@ -9,13 +9,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import static com.pk.electionappclient.Main.userTestowy;
 import static com.pk.electionappclient.controller.ClientController.*;
-import static com.pk.electionappclient.controller.VoteResultsController.voteForCandidate;
-import static com.pk.electionappclient.controller.VoteResultsController.voteResultsDB;
+import static com.pk.electionappclient.controller.VoteResultsController.*;
 
 public class VotePanelController extends AppController implements Initializable {
+
+    private User user;
 
     public Election election;
 
@@ -51,14 +54,14 @@ public class VotePanelController extends AppController implements Initializable 
     @FXML
     ComboBox partyComboBox;
 
-    public void loadCandidateTable() {
+    public void loadCandidateTable(List<Candidate> candidates) {
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
         educationColumn.setCellValueFactory(new PropertyValueFactory<>("education"));
         placeOfResidenceColumn.setCellValueFactory(new PropertyValueFactory<>("placeOfResidence"));
         politicalParty.setCellValueFactory(new PropertyValueFactory<>("electoralParty"));
-        candidatesTableView.getItems().setAll(getCandidateByElectionListElectoralParty(getElectionListByConstituency(getConstituencyListByUserCityId(election, 20)), (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
+        candidatesTableView.getItems().setAll(candidates);
     }
 
     public void setElection(Election election) {
@@ -76,9 +79,14 @@ public class VotePanelController extends AppController implements Initializable 
         closeLoginPanelOnAction(exitButton);
     }
 
-    public void init() {
+    public void initParl() {
         System.out.println("INIT");
         populateComboBoxList(partyComboBox, getElectoralPartiesByElectionList(getElectionListByConstituency(getConstituencyListByUserCityId(election, 20))));
+    }
+    public void initPres() {
+        System.out.println("INIT PRES");
+        getPresCandidates(election);
+        loadCandidateTable(getPresCandidates(election));
     }
 
     @Override
@@ -88,13 +96,18 @@ public class VotePanelController extends AppController implements Initializable 
 
 
     public void loadCandidatesOnChange(ActionEvent actionEvent) {
-        loadCandidateTable();
+        loadCandidateTable(getCandidateByElectionListElectoralParty(getElectionListByConstituency(getConstituencyListByUserCityId(election, 20)), (ElectoralParty) partyComboBox.getSelectionModel().getSelectedItem()));
     }
 
     public void voteAction(ActionEvent actionEvent) {
         Candidate candidate = candidatesTableView.getSelectionModel().getSelectedItem();
-        Constituency constituency = getConstituencyListByUserCityId(election, 20);
-        voteForCandidate(election, candidate, constituency);
+        if (election.getConstituencies() != null) {
+            Constituency constituency = getConstituencyListByUserCityId(election, 20);
+            voteForParlCandidate(userTestowy, election, candidate, constituency);
+        } else {
+            voteForPresCandidate(userTestowy, election, candidate);
+        }
+
         System.out.println(voteResultsDB);
     }
 }

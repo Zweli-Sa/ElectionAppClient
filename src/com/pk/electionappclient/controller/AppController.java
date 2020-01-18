@@ -93,6 +93,10 @@ public abstract class AppController {
         AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/" + path));
         root.getChildren().setAll(pane);
     }
+    protected void loadView(AnchorPane root, String path) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("/com/pk/electionappclient/GUI/" + path));
+        root.getChildren().setAll(pane);
+    }
 
     protected <E> String listToString(List<E> list, String methodName) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         String str ="";

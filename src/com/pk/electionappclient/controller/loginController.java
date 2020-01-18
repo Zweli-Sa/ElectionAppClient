@@ -7,11 +7,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 import static java.util.Optional.ofNullable;
@@ -42,12 +48,12 @@ public class loginController extends AppController {
     Button userButton;
 
 
-    public TextField getPeselInput() {
-        return peselInput;
+    public String getPeselInput() {
+        return getTextFromField(peselInput);
     }
 
-    public TextField getPasswordInput() {
-        return passwordInput;
+    public String getPasswordInput() {
+        return getTextFromField(passwordInput);
     }
 
     public void loadUserPanel(ActionEvent actionEvent) throws IOException {
@@ -63,15 +69,41 @@ public class loginController extends AppController {
     }
 
 
-    public static User isLoginDataCorrect(String login, String password) {
+    public User isLoginDataCorrect(String login, String password) {
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(getMessageConverters());
         URI uri = UriComponentsBuilder.fromHttpUrl(URL + "/checkLoginData/" + login + "/" + password)
                 .build().encode().toUri();
         User boardResponse = restTemplate.getForObject(uri, User.class);
         return ofNullable(boardResponse).orElse(new User());
     }
 
-    public void getLogin(ActionEvent actionEvent) {
+    public User getLogin() {
         User user = null;
+        try {
+            user = isLoginDataCorrect(getPeselInput(), getPasswordInput());
+        } catch (NullPointerException e) {
+            popUpError("Login lub haslo jest bledne lub takiego uzytkownika nie ma w bazie");
+        }
+        return user;
+    }
+
+    public void getPanel(User user) throws IOException {
+        if (user.getAdmin()) {
+            loadAnchorPane(loginAnchorPane, "admin/adminPanel.fxml");
+        } else {
+            loadAnchorPane(loginAnchorPane, "user/userPanel.fxml");
+        }
+    }
+
+    public void getPanelAfterLogin(ActionEvent actionEvent) throws IOException {
+        getPanel(getLogin());
+    }
+    public static List<HttpMessageConverter<?>>  getMessageConverters() {
+        List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
+        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+        messageConverters.add(converter);
+        return messageConverters;
     }
 }

@@ -3,9 +3,9 @@ package com.pk.electionappclient.domain;
 public enum Education {
     PODSTAWOWE,
     ZAWODOWE,
-    ŚREDNIE,
+    SREDNIE,
     LICENCJAT,
-    INŻYNIER,
+    INZYNIER,
     MAGISTER,
     DOKTOR,
     PROFESOR;

@@ -16,7 +16,7 @@ public class User {
     private BigInteger idNumber;
     private String email;
     private String phoneNumber;
-    private City city;
+    private String city;
     private String password;
     private Boolean isAdmin;
 
@@ -108,12 +108,12 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public City getCity() {
+    public String getCity() {
         return city;
     }
 
     public void setCity(City city) {
-        this.city = city;
+        this.city = city.toString();
     }
 
     public Boolean getAdmin() {
@@ -132,6 +132,9 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+    }
+
     public User(Long id, String name, String lastname, String street, long number, long flatNumber, String postcode, String pesel, BigInteger idNumber, String email, String phoneNumber, City city, String password, Boolean isAdmin) {
         this.id = id;
         this.name = name;
@@ -144,7 +147,7 @@ public class User {
         this.idNumber = idNumber;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.city = city;
+        this.city = city.toString();
         this.password = password;
         this.isAdmin = isAdmin;
     }

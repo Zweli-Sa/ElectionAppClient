@@ -107,11 +107,11 @@ public class NewCandidateController extends AppController implements Initializab
     }
 
     public void populatePartiesComboBox() {
-        populateComboBoxList(partyComboBox, getPartyDB());
+        populateComboBoxList(partyComboBox, getParties());
     }
 
 
-    public void createNewCandidate(ActionEvent actionEvent) {
+    public void createNewCandidate(ActionEvent actionEvent) throws IOException {
         addCandidate(getTextFromField(candidateNameTextField), getTextFromField(candidateLastNameTextField),
                 educationComboBox.getValue(), getTextFromField(candidatePlaceOfResidenceTextField), partyComboBox.getValue());
         loadCandidates();
@@ -130,7 +130,7 @@ public class NewCandidateController extends AppController implements Initializab
                     setFields(candidate);
                 } else if (editButton.getId().equals("acceptChanges")) {
                     changeButtonStyle(editButton, "#cecece", "Edytuj", "editButton");
-                    removeCadidateFromList(candidate);
+                    removeCadidate(candidate);
                     createNewCandidate(actionEvent);
                     clearFields();
                 }
@@ -138,6 +138,8 @@ public class NewCandidateController extends AppController implements Initializab
         } catch (NullPointerException e) {
             editButton.setId("editButton");
             popUpError("Zaznacz kadydata by go zedytować");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
@@ -146,7 +148,7 @@ public class NewCandidateController extends AppController implements Initializab
         try {
             Candidate candidate = tableView.getSelectionModel().getSelectedItem();
             if (!candidate.equals(null)) {
-                removeCadidateFromList(candidate);
+                removeCadidate(candidate);
                 loadCandidates();
             }
         } catch (NullPointerException e) {
@@ -170,7 +172,7 @@ public class NewCandidateController extends AppController implements Initializab
         candidateLastNameTextField.setText(candidate.getLastname());
         candidatePlaceOfResidenceTextField.setText(candidate.getPlaceOfResidence());
         educationComboBox.getSelectionModel().select(candidate.getEducation());
-        partyComboBox.getSelectionModel().select(candidate.getElectoralParty());
+        partyComboBox.getSelectionModel().select(getElectoralPartyByCandidateId(candidate.getId()));
     }
 
     public void closePanel(ActionEvent actionEvent) {

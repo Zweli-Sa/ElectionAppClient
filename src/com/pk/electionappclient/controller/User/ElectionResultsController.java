@@ -2,7 +2,6 @@ package com.pk.electionappclient.controller.User;
 
 import com.pk.electionappclient.controller.AppController;
 import com.pk.electionappclient.domain.*;
-import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,15 +11,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
-import sun.plugin.javascript.navig4.Anchor;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 import static com.pk.electionappclient.controller.ClientController.getPartyByConstituency;
-import static com.pk.electionappclient.controller.ClientController.getPartyDB;
 import static com.pk.electionappclient.controller.ConstituencyController.getConstituencyByElectionID;
 import static com.pk.electionappclient.controller.ElectionController.*;
 import static com.pk.electionappclient.controller.VoteResultsController.getResults;

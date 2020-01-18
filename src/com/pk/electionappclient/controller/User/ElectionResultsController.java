@@ -121,7 +121,7 @@ public class ElectionResultsController extends AppController implements Initiali
     }
 
     public void loadUserPanel(ActionEvent actionEvent) throws IOException {
-        loadAnchorPane(electionResultsAnchorPane, "admin/adminPanel.fxml");
+        loadAnchorPane(electionResultsAnchorPane, "user/userPanel.fxml");
     }
 
     @Override

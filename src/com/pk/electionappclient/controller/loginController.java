@@ -3,6 +3,7 @@ package com.pk.electionappclient.controller;
 import com.pk.electionappclient.domain.User;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
@@ -25,7 +26,7 @@ public class loginController extends AppController {
     Button exitButton;
 
     @FXML
-    TextField passwordInput;
+    PasswordField passwordInput;
 
     @FXML
     TextField peselInput;
@@ -48,7 +49,7 @@ public class loginController extends AppController {
     }
 
     public String getPasswordInput() {
-        return getTextFromField(passwordInput);
+        return getPasswordFromField(passwordInput);
     }
 
     public void loadUserPanel(ActionEvent actionEvent) throws IOException {

@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -78,6 +79,11 @@ public abstract class AppController {
     protected String getTextFromField(TextField textField) {
         System.out.println(textField.getText());
         return textField.getText();
+    }
+
+    protected String getPasswordFromField(PasswordField passwordField) {
+        System.out.println(passwordField.getText());
+        return passwordField.getText();
     }
 
     protected Object getComboBoxValue(ComboBox comboBox) {

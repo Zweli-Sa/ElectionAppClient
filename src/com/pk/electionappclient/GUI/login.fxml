@@ -33,7 +33,7 @@
       <AnchorPane layoutX="392.0" layoutY="313.0" prefHeight="353.0" prefWidth="416.0" style="-fx-background-color: #f5f5f5;" AnchorPane.leftAnchor="392.0" AnchorPane.rightAnchor="392.0">
          <children>
             <TextField fx:id="peselInput" layoutX="26.0" layoutY="74.0" prefHeight="34.0" prefWidth="357.0" promptText="Wpisz numer PESEL" AnchorPane.leftAnchor="28.0" AnchorPane.rightAnchor="28.0" />
-            <TextField fx:id="passwordInput" layoutX="28.0" layoutY="160.0" prefHeight="34.0" prefWidth="357.0" promptText="Wpisz hasło" />
+            <PasswordField fx:id="passwordInput" layoutX="28.0" layoutY="160.0" prefHeight="34.0" prefWidth="357.0" promptText="Wpisz hasło" />
             <Label layoutX="28.0" layoutY="53.0" text="Nazwa użytkownika">
                <font>
                   <Font size="18.0" />

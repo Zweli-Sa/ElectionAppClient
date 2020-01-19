@@ -31,11 +31,6 @@ public class ClientController {
     public static List<Candidate> candidateTempList = new ArrayList<>();
     private static List<ElectoralParty> electoralParties = new ArrayList<>();
 
-    public static void createCandidate(Candidate candidate) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String jsonString = mapper.writeValueAsString(candidate);
-
-    }
 
     public static List<User> getUsersDB() {
         return usersDB;
@@ -59,14 +54,6 @@ public class ClientController {
     }
 
     //--------------------votepanel-----------------------------------------------------------------------------------------
-    public static List<Election> getElectionBySelectedElection(Election election) {
-        List<Election> temp = new ArrayList<>();
-        temp = getElections().stream().filter(o -> o.getId() == election.getId())
-                .collect(Collectors.toList());
-        return temp;
-    }
-
-
     public static Constituency getConstituencyListByUserCityId(Election election, int userCityId) {
         Constituency temp = null;
         for (Constituency c : election.getConstituencies()) {

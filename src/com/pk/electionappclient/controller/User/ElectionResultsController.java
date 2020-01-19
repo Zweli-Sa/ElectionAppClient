@@ -110,7 +110,7 @@ public class ElectionResultsController extends AppController implements Initiali
                     return lastname;
                 }
         );
-        lastNameColumn.setCellValueFactory(
+        partyColumn.setCellValueFactory(
                 c -> {
                     SimpleObjectProperty party = new SimpleObjectProperty();
                     party.setValue(c.getValue().getCandidate().getElectoralParty().getName());

@@ -43,8 +43,9 @@ public class ClientController {
 
     public static List<User> initUserList() {
         usersDB = new ArrayList<>();
-        usersDB.add(new User(globalID++, warszawa, "user", false,"112233"));
-        usersDB.add(new User(globalID++, krakow, "admin", true, "222222"));
+        usersDB.add(new User(1L, warszawa, "user", false,"112233"));
+        usersDB.add(new User(2L, krakow, "admin", true, "222222"));
+        usersDB.add(new User(3L, krakow, "user", false, "333333"));
 
         return usersDB;
     }

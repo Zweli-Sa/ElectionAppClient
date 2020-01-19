@@ -108,11 +108,7 @@ public class ElectionController {
 
     public static void initElectionsDB() {
         electionsDB = new ArrayList<>();
-        electionsDB.add(new Election(1l, null, null, parliamentary, null, false,false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(4l, null, null, parliamentary, null, false,false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(5l, null, null, parliamentary, null, false,false, "Wybory parlamentarne 2012"));
-        electionsDB.add(new Election(2l, null, null, parliamentary, null, true,false, "Wybory parlamentaren 2014"));
-    }
+  }
 
     public static List<Candidate> getCandidatesByElection(Election election, Constituency constituency, ElectoralParty electoralParty) {
         List<Candidate> candidates = new ArrayList<>();

@@ -36,6 +36,12 @@ public class loginController extends AppController {
     @FXML
     Button userButton;
 
+    private static User currentUser = null;
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
 
     public String getPeselInput() {
         return getTextFromField(peselInput);
@@ -68,6 +74,8 @@ public class loginController extends AppController {
         User user = null;
         try {
             user = isLoginDataCorrect(getPeselInput(), getPasswordInput()).get(0);
+            currentUser = user;
+            System.out.println(getCurrentUser().toString());
         } catch (NullPointerException e) {
             popUpError("Login lub haslo jest bledne lub takiego uzytkownika nie ma w bazie");
         }

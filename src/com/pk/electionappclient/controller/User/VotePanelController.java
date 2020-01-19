@@ -1,6 +1,7 @@
 package com.pk.electionappclient.controller.User;
 
 import com.pk.electionappclient.controller.AppController;
+import com.pk.electionappclient.controller.loginController;
 import com.pk.electionappclient.domain.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -108,9 +109,9 @@ public class VotePanelController extends AppController implements Initializable 
         Candidate candidate = candidatesTableView.getSelectionModel().getSelectedItem();
         if (election.getConstituencies() != null) {
             Constituency constituency = getConstituencyListByUserCityId(election, 20);
-            voteForParlCandidate(userTestowy, election, candidate, constituency);
+            voteForParlCandidate(loginController.getCurrentUser(), election, candidate, constituency);
         } else {
-            voteForPresCandidate(userTestowy, election, candidate);
+            voteForPresCandidate(loginController.getCurrentUser(), election, candidate);
         }
 
         System.out.println(voteResultsDB);

@@ -41,6 +41,8 @@ public class ClientController {
         usersDB.add(new User(1L, warszawa, "user", false,"112233"));
         usersDB.add(new User(2L, krakow, "admin", true, "222222"));
         usersDB.add(new User(3L, krakow, "user", false, "333333"));
+        usersDB.add(new User(4L, krakow, "user", false, "444444"));
+        usersDB.add(new User(5L, krakow, "user", false, "555555"));
 
         return usersDB;
     }
@@ -133,9 +135,15 @@ public class ClientController {
 
     public static List<Candidate> initCandidateList() {
         list = new ArrayList<>();
-        list.add(new Candidate(22222l, "Adam", "Nowak", Education.MAGISTER, "Kraków", sld));
-        list.add(new Candidate(33333l, "Jan", "Kowalski", Education.PODSTAWOWE, "Kraków", none));
-        list.add(new Candidate(44444l, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
+        list.add(new Candidate(1L, "Adam", "Nowak", Education.MAGISTER, "Kraków", sld));
+        list.add(new Candidate(2L, "Jan", "Kowalski", Education.PODSTAWOWE, "Kraków", none));
+        list.add(new Candidate(3L, "Jaroslaw", "Kaczynski", Education.ŚREDNIE, "Warszawa", pis));
+        list.add(new Candidate(4L, "Antoni", "Nowak", Education.ŚREDNIE, "Warszawa",sld));
+        list.add(new Candidate(5L, "Andrzej", "Duda", Education.ŚREDNIE, "Warszawa", none));
+        list.add(new Candidate(6L, "Zbigniew", "Stonoga", Education.ŚREDNIE, "Warszawa", pis));
+        list.add(new Candidate(7L, "Jakub", "Kowalski", Education.ŚREDNIE, "Berlin",sld));
+        list.add(new Candidate(8L, "Marcin", "Kowalczyk", Education.ŚREDNIE, "Warszawa", none));
+        list.add(new Candidate(9L, "Tomasz", "Tusk", Education.ŚREDNIE, "Warszawa", pis));
 
         return list;
     }
